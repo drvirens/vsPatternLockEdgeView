@@ -35,6 +35,25 @@ void IImage::hide()
   __image_display_enable(nativeimage, show, animated);
 }
 
+void IImage::decorate(EHotspotColor color)
+{TRACE
+  switch (color) {
+    case eRed:
+      {
+      DBG("Decorate [%s].... 🔴\n", filename_.c_str());
+      } break;
+    case eGreen:
+      {
+      DBG("Decorate [%s] .... 💚\n", filename_.c_str());
+      } break;
+    case eGray:
+      {
+      DBG("Decorate [%s] .... ⚫\n", filename_.c_str());
+      } break;
+  }
+  
+}
+
 IImage::IImage(Evas_Object* parent)
 : parent_(parent)
 , image_(0)
@@ -45,7 +64,7 @@ void IImage::construct()
 {TRACE
   pre();
   image_ = __create_image(parent_);
-  __set_up_image(image_, file_name_.c_str());
+  __set_up_image(image_, filename_.c_str());
   post();
 }
 

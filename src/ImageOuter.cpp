@@ -29,8 +29,8 @@ ImageOuter::ImageOuter(Evas_Object* parent)
 
 void ImageOuter::pre()
 {TRACE
-  file_name_ = kImageName;
-  DBG("ImageName: %s\n", file_name_.c_str());
+  filename_ = kImageName;
+  DBG("ImageName: %s\n", filename_.c_str());
 }
 
 void ImageOuter::post()

@@ -168,7 +168,7 @@ static int __pause_3_seconds(void* data)
   if (context)
   {
     context->show();
-    __sleep(3, &__pause_another_3_seconds, (void*)context);
+    __sleep(1, &__pause_another_3_seconds, (void*)context);
   }
   return 0;
 }
@@ -178,7 +178,7 @@ void testRedNodeViaContext(Evas_Object* parent)
   context->show();
   DBG("\n--------------------------- MOUSE DOWN\n");
 
-  __sleep(3, &__pause_3_seconds, (void*)context);
+  __sleep(1, &__pause_3_seconds, (void*)context);
 }
 
 void runAllTests(Evas_Object* parent)

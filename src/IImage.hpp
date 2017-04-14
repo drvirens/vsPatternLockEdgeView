@@ -11,6 +11,7 @@
 
 #include <string>
 #include "OS.h"
+#include "NodeColor.hpp"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ class IImage
  public:
   void show();
   void hide();
+  void decorate(EHotspotColor color);
   virtual void pre() = 0;
   virtual void post() = 0;
   virtual int animated() const = 0;
@@ -42,7 +44,7 @@ class IImage
  protected:
   Evas_Object* parent_;
   Evas_Object* image_;
-  string file_name_;
+  string filename_;
 };
 
 #endif /* IImage_hpp */

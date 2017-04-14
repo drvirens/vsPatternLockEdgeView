@@ -28,8 +28,8 @@ ImageMiddle::ImageMiddle(Evas_Object* parent)
 
 void ImageMiddle::pre()
 {TRACE
-  file_name_ = kImageName;
-  DBG("ImageName: %s\n", file_name_.c_str());
+  filename_ = kImageName;
+  DBG("ImageName: %s\n", filename_.c_str());
 }
 
 void ImageMiddle::post()

@@ -9,18 +9,12 @@
 #ifndef IHotspot_hpp
 #define IHotspot_hpp
 
-#include "IImage.hpp"
+//#include "IImage.hpp"
+#include "NodeColor.hpp"
 
 class CNodeContext;
 class IImage;
 class Table;
-
-enum EHotspotColor
-{
-  eRed,
-  eGreen,
-  eGray
-};
 
 class INodeView 
 {

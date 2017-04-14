@@ -7,6 +7,7 @@
 //
 
 #include "NodeColorDecorator.hpp"
+#include "IImage.hpp"
 #include "trace.hpp"
 
 
@@ -20,6 +21,17 @@ void NodeColorDecorator::decorate(EHotspotColor color)
 {TRACE
   INodeDecorator::decorate(color);
   DBG("set all image color to be RED here\n");
+  
+  //IImage& coreimage = core(); //don't decorate this guy
+  
+  IImage& innerimage = inner();
+  innerimage.decorate(color);
+  
+  IImage& middleimage = middle();
+  middleimage.decorate(color);
+  
+  IImage& outerimage = outer();
+  outerimage.decorate(color);
 }
 NodeColorDecorator::NodeColorDecorator(INodeView& nodeView, Table& parent, IImage*& images)
 : INodeDecorator(nodeView, parent, images)
