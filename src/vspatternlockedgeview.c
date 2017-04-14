@@ -55,8 +55,13 @@ create_base_gui(appdata_s *ad)
 
 	//runAllTests(ad->win);
 	Evas_Object* node_view = testNodeView(ad->win);
-	elm_win_resize_object_add(ad->win, node_view);
+
+	evas_object_move(node_view, 50, 200);
+	evas_object_resize(node_view, 200, 200);
+
 	evas_object_show(node_view);
+
+	//elm_win_resize_object_add(ad->win, node_view);
 
 	/* Show window after base gui is set up */
 	evas_object_show(ad->win);

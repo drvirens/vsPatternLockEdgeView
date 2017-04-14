@@ -1,3 +1,22 @@
-/Debug/
-/Release/
-/SA_Report/
+#junk shit
+*.DS_Store
+
+#tizen studio shit
+[Dd]ebug*/
+[Rr]elease*/
+SA_Report
+Debug
+.sign
+crash-info
+
+#fuck ninja
+*.ninja
+.ninja_*
+
+#fuck sign
+*.sign
+.sign*
+.sign*/
+.sign
+
+.sdk_delta.info
