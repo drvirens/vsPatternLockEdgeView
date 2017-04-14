@@ -13,6 +13,7 @@
 #include "ImageInner.hpp"
 #include "ImageMiddle.hpp"
 #include "ImageOuter.hpp"
+#include "NodeColorDecorator.hpp"
 #include "Table.hpp"
 #include "trace.hpp"
 
@@ -88,6 +89,8 @@ void CNodeContext::construct()
   active_ = StateActive::newL(*table_, *images_);
   passive_ = StatePassive::newL(*table_, *images_);
   state_ = passive_;
+  
+  colordecorator_ = new NodeColorDecorator(*active_, *table_, *images_);
 }
 
 CNodeContext::~CNodeContext()
@@ -98,6 +101,16 @@ void CNodeContext::show()
 {TRACE
   state_->now(*this);
 }
+
+void CNodeContext::ok()
+{TRACE
+  colordecorator_->decorate(eGreen);
+}
+void CNodeContext::error()
+{TRACE
+  colordecorator_->decorate(eRed);
+}
+  
 Evas_Object* CNodeContext::evasObject() const
 {TRACE
   Evas_Object* tbl = table_->nativeTable();

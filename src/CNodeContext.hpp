@@ -14,6 +14,7 @@
 
 class StatePassive;
 class StateActive;
+class NodeColorDecorator;
 class INodeView;
 class Table;
 
@@ -24,6 +25,8 @@ class CNodeContext
   ~CNodeContext();
   
   void show();
+  void ok();
+  void error();
   
   Evas_Object* evasObject() const;
 
@@ -45,6 +48,7 @@ class CNodeContext
   INodeView* state_; //current state
   StatePassive* passive_;
   StateActive* active_;
+  NodeColorDecorator* colordecorator_;
   Table* table_;
   
  friend 

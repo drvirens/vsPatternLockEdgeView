@@ -1,5 +1,5 @@
 //
-//  NodeRedDecorator.hpp
+//  NodeColorDecorator.hpp
 //  vsNodeView
 //
 //  Created by Virendra Shakya on 4/14/17.
@@ -11,16 +11,16 @@
 
 #include "INodeDecorator.hpp"
 
-class NodeRedDecorator: public INodeDecorator
+class NodeColorDecorator: public INodeDecorator
 {
  public:
-  virtual ~NodeRedDecorator();
+  virtual ~NodeColorDecorator();
   
   virtual void now(CNodeContext& context);
   virtual void decorate(EHotspotColor color);
   
  //protected:
-  NodeRedDecorator(INodeView& nodeView, Table& parent, IImage*& images);
+  NodeColorDecorator(INodeView& nodeView, Table& parent, IImage*& images);
   void construct();
 };
 

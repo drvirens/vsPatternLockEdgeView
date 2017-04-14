@@ -7,6 +7,8 @@
 //
 
 #include <iostream>
+#include <unistd.h>
+
 #include "OS.h"
 #include "tests.hpp"
 #include "CNodeContext.hpp"
@@ -16,10 +18,10 @@
 #include "ImageOuter.hpp"
 #include "Table.hpp"
 #include "trace.hpp"
-#include "NodeRedDecorator.hpp"
+#include "NodeColorDecorator.hpp"
 #include "StateActive.hpp"
 
-
+static void __sleep(unsigned int seconds, int (*sleep_call_back)(void*), void* data );
 
 static void testContextWithTable(Evas_Object* parent)
 {
@@ -106,16 +108,17 @@ Evas_Object* testPassiveNodeView(Evas_Object* parent)
   return handle;
 }
 
-#if defined __TIZEN__
-static Eina_Bool __wait_3_seconds(void* data)
+
+static int __wait_3_seconds(void* data)
 {
   CNodeContext* context = static_cast<CNodeContext*>(data);
   if (context)
   {
     context->show();
   }
-  return ECORE_CALLBACK_CANCEL;
+  return 0;
 }
+#if defined __TIZEN__
 Evas_Object* testTizenActiveNodeView(Evas_Object* parent)
 {
   CNodeContext* context = CNodeContext::newL(parent);
@@ -134,8 +137,48 @@ void testNodeRedDecorator()
   Table* tbl = Table::newL(0, 0, 0);
   IImage* images[1] = {0};
   StateActive* active = StateActive::newL(*tbl, *images);
-  NodeRedDecorator* red = new NodeRedDecorator(*active, *tbl, *images);
+  NodeColorDecorator* red = new NodeColorDecorator(*active, *tbl, *images);
   red->decorate(eRed);
+}
+
+static void __sleep(unsigned int seconds, int (*sleep_call_back)(void*), void* data ) 
+{
+#if defined __TIZEN__
+  Ecore_Timer* timer = ecore_timer_add(3, sleep_call_back, data);
+#else
+  sleep(seconds);
+  (*sleep_call_back)(data);
+#endif
+}
+
+static int __pause_another_3_seconds(void* data)
+{
+  CNodeContext* context = static_cast<CNodeContext*>(data);
+  if (context)
+  {
+    context->error();
+  }
+  return 0;
+}
+
+
+static int __pause_3_seconds(void* data)
+{
+  CNodeContext* context = static_cast<CNodeContext*>(data);
+  if (context)
+  {
+    context->show();
+    __sleep(3, &__pause_another_3_seconds, (void*)context);
+  }
+  return 0;
+}
+void testRedNodeViaContext(Evas_Object* parent)
+{
+  CNodeContext* context = CNodeContext::newL(parent);
+  context->show();
+  DBG("\n--------------------------- MOUSE DOWN\n");
+
+  __sleep(3, &__pause_3_seconds, (void*)context);
 }
 
 void runAllTests(Evas_Object* parent)
