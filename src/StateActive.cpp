@@ -28,7 +28,7 @@ void StateActive::decorate(EHotspotColor color)
 }
 
 StateActive::StateActive(Table& parent, IImage*& images)
-: INodeView(parent, images)
+: INodeView(&parent, images)
 {TRACE
 }
 

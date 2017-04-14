@@ -27,7 +27,7 @@ void StatePassive::decorate(EHotspotColor color)
 }
 
 StatePassive::StatePassive(Table& parent, IImage*& images)
-: INodeView(parent, images)
+: INodeView(&parent, images)
 {TRACE
 }
 

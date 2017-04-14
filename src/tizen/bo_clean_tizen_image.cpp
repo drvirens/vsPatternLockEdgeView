@@ -29,6 +29,8 @@ void __tizen_set_up_image(Evas_Object* image, const char* image_file_name)
   snprintf(path, sizeof(path), "%s%s", app_get_resource_path(), image_file_name);
   elm_image_file_set(image, path, NULL);
   evas_object_hide(image); //keep it hidden by default
+
+  evas_object_color_set(image, 255, 0, 0, 255);
 }
 
 static void __tizen_image_transit_zoom(Evas_Object* image)
@@ -48,18 +50,17 @@ static void __tizen_image_transit_zoom(Evas_Object* image)
 
 void __tizen_image_display_enable(Evas_Object* image, int enable, int animated)
 {TRACE
-  if (enable)
+  if (!enable)
   {
-    if (animated)
-      {
-      __tizen_image_transit_zoom(image);
-      }
-    evas_object_show(image);
+  evas_object_hide(image);
+  return;
   }
-  else 
-  {
-    evas_object_hide(image);
-  }
+  
+  if (animated)
+    {
+    __tizen_image_transit_zoom(image);
+    }
+  evas_object_show(image);
 }
   
 #endif //#if defined __TIZEN__

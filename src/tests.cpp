@@ -16,6 +16,8 @@
 #include "ImageOuter.hpp"
 #include "Table.hpp"
 #include "trace.hpp"
+#include "NodeRedDecorator.hpp"
+#include "StateActive.hpp"
 
 
 
@@ -126,6 +128,15 @@ Evas_Object* testTizenActiveNodeView(Evas_Object* parent)
   return handle;
 }
 #endif
+
+void testNodeRedDecorator()
+{
+  Table* tbl = Table::newL(0, 0, 0);
+  IImage* images[1] = {0};
+  StateActive* active = StateActive::newL(*tbl, *images);
+  NodeRedDecorator* red = new NodeRedDecorator(*active, *tbl, *images);
+  red->decorate(eRed);
+}
 
 void runAllTests(Evas_Object* parent)
 {

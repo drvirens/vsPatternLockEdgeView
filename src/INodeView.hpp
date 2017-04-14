@@ -30,7 +30,7 @@ class INodeView
   virtual ~INodeView();
   
  protected:
-  INodeView(Table& parent, IImage*& images);
+  INodeView(Table* parent, IImage*& images);
   IImage& core();
   IImage& inner();
   IImage& middle();
@@ -39,7 +39,7 @@ class INodeView
   void construct();
   
  protected:
-  Table& parent_;
+  Table* parent_;
   IImage** images_; //using
 };
 

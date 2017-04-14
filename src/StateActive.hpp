@@ -23,10 +23,6 @@ class StateActive: public INodeView
  private:
   StateActive(Table& parent, IImage*& images);
   void construct();
-  
- private:
-  //INodeView& next_;
-
 };
 
 #endif /* StateActive_hpp */

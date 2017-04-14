@@ -26,6 +26,8 @@ Evas_Object* testOuterImage(Evas_Object* parent);
 
 Evas_Object* testTable(Evas_Object* parent);
 
+void testNodeRedDecorator();
+
 #ifdef __cplusplus
 }
 #endif
