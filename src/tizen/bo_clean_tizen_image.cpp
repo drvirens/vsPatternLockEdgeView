@@ -50,11 +50,11 @@ void __tizen_image_display_enable(Evas_Object* image, int enable, int animated)
 {TRACE
   if (enable)
   {
-    evas_object_show(image);
     if (animated)
       {
       __tizen_image_transit_zoom(image);
       }
+    evas_object_show(image);
   }
   else 
   {
