@@ -11,6 +11,9 @@
 #include "tests.hpp"
 #include "CNodeContext.hpp"
 #include "ImageCore.hpp"
+#include "ImageInner.hpp"
+#include "ImageMiddle.hpp"
+#include "ImageOuter.hpp"
 #include "Table.hpp"
 #include "trace.hpp"
 
@@ -26,33 +29,65 @@ static void testContextWithTable(Evas_Object* parent)
 }
 
 
-static void testTable() 
+Evas_Object* testTable(Evas_Object* parent)
 {
-  Evas_Object* parent = NULL;
-  int bgRowSpan = 4;
-  int bgColSpan = 4;
+  int bgRowSpan = 14;
+  int bgColSpan = 14;
   Table* table = Table::newL(parent, bgColSpan, bgRowSpan);
   Evas_Object* tbl = table->nativeTable();
+//  IImage* img = ImageCore::newL(tbl);
   IImage* img = ImageCore::newL(tbl);
-  table->add(*img, 6, 6, 2, 2);
+//  table->add(*img, 6, 6, 2, 2);
+
+  table->add(*img, 0, 0, 14, 14);
+
+  return tbl;
 }
 
-static void testNodeView() 
+Evas_Object* testImage(Evas_Object* parent)
 {
+  IImage* img = ImageCore::newL(parent);
+  Evas_Object* nativeimage = img->nativeImage();
+  return nativeimage;
+}
+Evas_Object* testCoreImage(Evas_Object* parent)
+{
+  IImage* img = ImageCore::newL(parent);
+  Evas_Object* nativeimage = img->nativeImage();
+  return nativeimage;
+}
+Evas_Object* testInnerImage(Evas_Object* parent)
+{
+  IImage* img = ImageInner::newL(parent);
+  Evas_Object* nativeimage = img->nativeImage();
+  return nativeimage;
+}
+Evas_Object* testMiddleImage(Evas_Object* parent)
+{
+  IImage* img = ImageMiddle::newL(parent);
+  Evas_Object* nativeimage = img->nativeImage();
+  return nativeimage;
+}
+Evas_Object* testOuterImage(Evas_Object* parent)
+{
+  IImage* img = ImageOuter::newL(parent);
+  Evas_Object* nativeimage = img->nativeImage();
+  return nativeimage;
 }
 
-static void testContextShows() 
-{
-  Evas_Object* parent = NULL;
-  CNodeContext* context = CNodeContext::newL(parent);
-  context->show();
-  
-  //after sometime simulate mouse-down
-  DBG("\n--------------------------- MOUSE DOWN\n");
-  context->show();
-  DBG("\n--------------------------- Try again\n");
-  context->show();
-}
+//
+//static void testContextShows()
+//{
+//  Evas_Object* parent = NULL;
+//  CNodeContext* context = CNodeContext::newL(parent);
+//  context->show();
+//
+//  //after sometime simulate mouse-down
+//  DBG("\n--------------------------- MOUSE DOWN\n");
+//  context->show();
+//  DBG("\n--------------------------- Try again\n");
+//  context->show();
+//}
 
 Evas_Object* testNodeView(Evas_Object* parent)
 {

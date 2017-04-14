@@ -11,7 +11,7 @@
 #include "trace.hpp"
 #include "bo_clean_tizen_table.hpp"
 
-static void __add_image(Evas_Object* nativeTable, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan);
+static void __add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan);
 static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan);
 
 
@@ -32,10 +32,10 @@ Table* Table::newL(Evas_Object* parent, int bgColSpan, int bgRowSpan)
 void Table::add(IImage& image, int col, int row, int colSpan, int rowSpan)
 {TRACE
   Evas_Object* nativeImg = image.nativeImage();
-  Evas_Object* nativeTable = table_;
-  __add_image(nativeTable, nativeImg, col, row, colSpan, rowSpan);
+  Evas_Object* nativetable = nativeTable();
+  __add_image(nativetable, nativeImg, col, row, colSpan, rowSpan);
   
-  items_.push_back(&image);
+  //items_.push_back(&image);
 }
 
 Table::Table(Evas_Object* parent, int bgColSpan, int bgRowSpan)
@@ -57,13 +57,11 @@ Evas_Object* Table::nativeTable() const
 }
 
 // ----------------------- Tizen
-#if defined __TIZEN__
 
-#endif
-
-static void __add_image(Evas_Object* nativeTable, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan)
+static void __add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan)
 {TRACE
 #if defined __TIZEN__
+  __tizen_add_image(nativeTbl, nativeImg, col, row, colSpan, rowSpan);
 #endif
 }
 

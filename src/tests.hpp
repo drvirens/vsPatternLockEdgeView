@@ -16,6 +16,14 @@ extern "C" {
 void runAllTests(Evas_Object* parent);
 Evas_Object* testNodeView(Evas_Object* parent);
 
+Evas_Object* testImage(Evas_Object* parent);
+Evas_Object* testCoreImage(Evas_Object* parent);
+Evas_Object* testInnerImage(Evas_Object* parent);
+Evas_Object* testMiddleImage(Evas_Object* parent);
+Evas_Object* testOuterImage(Evas_Object* parent);
+
+Evas_Object* testTable(Evas_Object* parent);
+
 #ifdef __cplusplus
 }
 #endif

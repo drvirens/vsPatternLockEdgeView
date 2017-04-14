@@ -18,6 +18,7 @@ extern "C" {
 #include <evas.h>
 
 Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan);
+void __tizen_add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan);
 
 #endif //#if defined __TIZEN__
 

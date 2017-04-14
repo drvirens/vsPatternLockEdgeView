@@ -18,8 +18,8 @@ INodeView::~INodeView()
 }
 
 INodeView::INodeView(Table& parent, IImage*& images)
-: images_(&images)
-, parent_(parent)
+: parent_(parent)
+, images_(&images)
 {TRACE
 }
 

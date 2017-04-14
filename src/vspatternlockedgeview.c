@@ -38,32 +38,43 @@ create_base_gui(appdata_s *ad)
 	evas_object_smart_callback_add(ad->win, "delete,request", win_delete_request_cb, NULL);
 	eext_object_event_callback_add(ad->win, EEXT_CALLBACK_BACK, win_back_cb, ad);
 
-	/* Conformant */
-//	ad->conform = elm_conformant_add(ad->win);
-//	elm_win_indicator_mode_set(ad->win, ELM_WIN_INDICATOR_SHOW);
-//	elm_win_indicator_opacity_set(ad->win, ELM_WIN_INDICATOR_OPAQUE);
-//	evas_object_size_hint_weight_set(ad->conform, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-//	elm_win_resize_object_add(ad->win, ad->conform);
-//	evas_object_show(ad->conform);
 
-//	/* Label*/
-//	ad->label = elm_label_add(ad->conform);
-//	elm_object_text_set(ad->label, "Hello EFL");
-//	evas_object_size_hint_weight_set(ad->label, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-//	elm_object_content_set(ad->conform, ad->label);
-//	evas_object_show(ad->label);
+	Evas_Object* window = ad->win;
+	Evas_Object* target = NULL;
 
+//	{
+//	  target = testImage(window);
+//	}
+//	{
+//	  target = testOuterImage(window);
+//	}
+//  {
+//    target = testMiddleImage(window);
+//  }
+//  {
+//    target = testInnerImage(window);
+//  }
+//  {
+//    target = testCoreImage(window);
+//  }
+//	{
+//	  target = testTable(window);
+//	}
+	{
+	  target = testNodeView(window);
+	}
+
+	{
 	//runAllTests(ad->win);
-	Evas_Object* node_view = testNodeView(ad->win);
+	//target = testNodeView(window);
+	}
 
-	evas_object_move(node_view, 50, 200);
-	evas_object_resize(node_view, 200, 200);
+//  elm_win_resize_object_add(window, target);
 
-	evas_object_show(node_view);
+  evas_object_move(target, 50, 200);
+  evas_object_resize(target, 200, 200);
+  evas_object_show(target);
 
-	//elm_win_resize_object_add(ad->win, node_view);
-
-	/* Show window after base gui is set up */
 	evas_object_show(ad->win);
 
 
