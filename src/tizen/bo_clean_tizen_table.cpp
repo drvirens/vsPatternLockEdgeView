@@ -53,7 +53,7 @@ Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan)
   //table background
   //XXX - the below should be configurable
   const char* bg_image = NULL; //"images/tbl_pattern_view_bg.jpg";
-  int use_colors_only = 1;
+  int use_colors_only = 0;
   int use_color_and_image = 0;
   Evas_Object* bg = view_create_background(table, bg_image, use_colors_only, use_color_and_image, BO_COLOR_RED_ALPHA);
   evas_object_size_hint_align_set(bg, EVAS_HINT_FILL, EVAS_HINT_FILL);

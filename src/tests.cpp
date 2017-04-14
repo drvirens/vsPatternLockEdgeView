@@ -35,11 +35,9 @@ Evas_Object* testTable(Evas_Object* parent)
   int bgColSpan = 14;
   Table* table = Table::newL(parent, bgColSpan, bgRowSpan);
   Evas_Object* tbl = table->nativeTable();
-//  IImage* img = ImageCore::newL(tbl);
   IImage* img = ImageCore::newL(tbl);
-//  table->add(*img, 6, 6, 2, 2);
 
-  table->add(*img, 0, 0, 14, 14);
+  table->add(*img, 10, 10, 5, 5);
 
   return tbl;
 }
@@ -93,10 +91,8 @@ Evas_Object* testNodeView(Evas_Object* parent)
 {
   CNodeContext* context = CNodeContext::newL(parent);
   context->show();
-  //after sometime simulate mouse-down
   DBG("\n--------------------------- MOUSE DOWN\n");
   context->show();
-  
   Evas_Object* handle = context->evasObject();
   return handle;
 }

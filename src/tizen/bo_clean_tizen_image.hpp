@@ -19,6 +19,7 @@ extern "C" {
 
 Evas_Object* __tizen_create_image(Evas_Object* parent);
 void __tizen_set_up_image(Evas_Object* image, const char* image_file_name);
+void __tizen_image_display_enable(Evas_Object* image, int enable, int animated);
 
 #endif //#if defined __TIZEN__
 
