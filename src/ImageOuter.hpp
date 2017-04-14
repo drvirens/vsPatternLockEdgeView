@@ -19,6 +19,7 @@ class ImageOuter : public IImage
   virtual ~ImageOuter();
   virtual void pre();
   virtual void post();
+  virtual int animated() const;
   
  private:
   ImageOuter(Evas_Object* parent);

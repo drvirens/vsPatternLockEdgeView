@@ -36,6 +36,11 @@ void ImageMiddle::post()
 {TRACE
 }
 
+int ImageMiddle::animated() const
+{TRACE
+  return 1; 
+}
+
 void ImageMiddle::construct()
 {TRACE
   IImage::construct();

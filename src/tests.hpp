@@ -14,7 +14,9 @@ extern "C" {
 #endif
 
 void runAllTests(Evas_Object* parent);
-Evas_Object* testNodeView(Evas_Object* parent);
+Evas_Object* testPassiveNodeView(Evas_Object* parent);
+Evas_Object* testActiveNodeView(Evas_Object* parent);
+Evas_Object* testTizenActiveNodeView(Evas_Object* parent);
 
 Evas_Object* testImage(Evas_Object* parent);
 Evas_Object* testCoreImage(Evas_Object* parent);

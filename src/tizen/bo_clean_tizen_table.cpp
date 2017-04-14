@@ -23,8 +23,12 @@ static Evas_Object *view_create_background(Evas_Object *parent,
     const char* bg_image,
     int use_colors_only,
     int use_color_and_image,
-    int r, int g, int b, int a) {
-  TRACE
+    int r, int g, int b, int a) 
+{TRACE
+  if ( ( (!bg_image) && (!use_colors_only) && (!use_color_and_image)) ) {
+    return NULL;
+  }
+  
   Evas_Object *bg = elm_bg_add(parent);
   if (!bg) {
     return NULL;
@@ -51,15 +55,16 @@ Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan)
   elm_table_homogeneous_set(table, EINA_TRUE);
 
   //table background
-  //XXX - the below should be configurable
-  const char* bg_image = NULL; //"images/tbl_pattern_view_bg.jpg";
-  int use_colors_only = 0;
-  int use_color_and_image = 0;
-  Evas_Object* bg = view_create_background(table, bg_image, use_colors_only, use_color_and_image, BO_COLOR_RED_ALPHA);
-  evas_object_size_hint_align_set(bg, EVAS_HINT_FILL, EVAS_HINT_FILL);
-  evas_object_size_hint_weight_set(bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-  elm_table_pack(table, bg, 0, 0, colSpan, rowSpan);
-  evas_object_show(bg);
+  static const char* bg_image = NULL;
+  static const int use_colors_only = 1;
+  static const int use_color_and_image = 0;
+  Evas_Object* bg = view_create_background(table, bg_image, use_colors_only, use_color_and_image, BO_COLOR_BLACK_ALPHA);
+  if (bg) {
+    evas_object_size_hint_align_set(bg, EVAS_HINT_FILL, EVAS_HINT_FILL);
+    evas_object_size_hint_weight_set(bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+    elm_table_pack(table, bg, 0, 0, colSpan, rowSpan);
+    evas_object_show(bg);
+  }
 
   return table;
 }
@@ -67,9 +72,8 @@ Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan)
 void __tizen_add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan)
 {TRACE
   elm_table_pack(nativeTbl, nativeImg, col, row, colSpan, rowSpan);
-evas_object_size_hint_align_set(nativeImg, EVAS_HINT_FILL, EVAS_HINT_FILL);
-evas_object_size_hint_weight_set(nativeImg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-
+  evas_object_size_hint_align_set(nativeImg, EVAS_HINT_FILL, EVAS_HINT_FILL);
+  evas_object_size_hint_weight_set(nativeImg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
 }
 
 #endif

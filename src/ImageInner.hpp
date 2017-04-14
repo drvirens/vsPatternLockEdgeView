@@ -18,6 +18,7 @@ class ImageInner : public IImage
   virtual ~ImageInner();
   virtual void pre();
   virtual void post();
+  virtual int animated() const;
   
  private:
   ImageInner(Evas_Object* parent);

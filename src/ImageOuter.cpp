@@ -37,6 +37,11 @@ void ImageOuter::post()
 {TRACE
 }
 
+int ImageOuter::animated() const
+{TRACE
+  return 1; 
+}
+
 void ImageOuter::construct()
 {TRACE
   IImage::construct();

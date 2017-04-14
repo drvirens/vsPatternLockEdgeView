@@ -22,8 +22,8 @@ void IImage::show()
   DBG("Image ..... ✅ \n");
   Evas_Object* nativeimage = nativeImage();
   static const int show = 1;
-  static const int animated = 1;
-  __image_display_enable(nativeimage, show, animated);
+  int animate = animated();
+  __image_display_enable(nativeimage, show, animate);
 }
 
 void IImage::hide()
@@ -31,7 +31,7 @@ void IImage::hide()
   DBG("Image ..... ❌ \n");
   Evas_Object* nativeimage = nativeImage();
   static const int show = 0;
-  static const int animated = 1;
+  int animated = 1;
   __image_display_enable(nativeimage, show, animated);
 }
 

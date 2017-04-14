@@ -28,20 +28,19 @@ void __tizen_set_up_image(Evas_Object* image, const char* image_file_name)
   char path[100] = { 0 };
   snprintf(path, sizeof(path), "%s%s", app_get_resource_path(), image_file_name);
   elm_image_file_set(image, path, NULL);
-  //evas_object_show(image);
+  evas_object_hide(image); //keep it hidden by default
 }
 
 static void __tizen_image_transit_zoom(Evas_Object* image)
-{
+{TRACE
    Elm_Transit* trans = NULL;
 
    trans = elm_transit_add();
    elm_transit_object_add(trans, image);
 
-   //elm_transit_effect_zoom_add(trans, 1.0, 3.0);
-   elm_transit_effect_zoom_add(trans, 1.0, 1.5);
+   elm_transit_effect_zoom_add(trans, 1.0, 1.25);
 
-   elm_transit_duration_set(trans, 0.5);
+   elm_transit_duration_set(trans, 0.25);
    elm_transit_auto_reverse_set(trans, EINA_TRUE);
    elm_transit_objects_final_state_keep_set(trans, EINA_TRUE);
    elm_transit_go(trans);
@@ -52,8 +51,10 @@ void __tizen_image_display_enable(Evas_Object* image, int enable, int animated)
   if (enable)
   {
     evas_object_show(image);
-    //evas_object_ref(image); //dont delete it after aniation
-    __tizen_image_transit_zoom(image);
+    if (animated)
+      {
+      __tizen_image_transit_zoom(image);
+      }
   }
   else 
   {

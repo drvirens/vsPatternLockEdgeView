@@ -36,6 +36,11 @@ void ImageCore::post()
 {TRACE
 }
 
+int ImageCore::animated() const
+{TRACE
+  return 0; //never animate this guy
+}
+
 void ImageCore::construct()
 {TRACE
   IImage::construct();

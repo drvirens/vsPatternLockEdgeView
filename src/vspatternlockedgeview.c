@@ -60,8 +60,14 @@ create_base_gui(appdata_s *ad)
 //	{
 //	  target = testTable(window);
 //	}
+//	{
+//	  target = testActiveNodeView(window);
+//	}
+//  {
+//    target = testPassiveNodeView(window);
+//  }
 	{
-	  target = testNodeView(window);
+	  target = testTizenActiveNodeView(window);
 	}
 
 	{

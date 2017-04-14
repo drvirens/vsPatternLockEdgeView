@@ -30,6 +30,7 @@ class IImage
   void hide();
   virtual void pre() = 0;
   virtual void post() = 0;
+  virtual int animated() const = 0;
   virtual ~IImage();
   
   Evas_Object* nativeImage() const;

@@ -19,6 +19,7 @@ class ImageMiddle : public IImage
   virtual ~ImageMiddle();
   virtual void pre();
   virtual void post();
+  virtual int animated() const;
   
  private:
   ImageMiddle(Evas_Object* parent);

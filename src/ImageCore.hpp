@@ -18,6 +18,7 @@ class ImageCore : public IImage
   virtual ~ImageCore();
   virtual void pre();
   virtual void post();
+  virtual int animated() const;
   
  private:
   ImageCore(Evas_Object* parent);

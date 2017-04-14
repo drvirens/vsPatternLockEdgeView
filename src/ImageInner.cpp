@@ -36,6 +36,11 @@ void ImageInner::post()
 {TRACE
 }
 
+int ImageInner::animated() const
+{TRACE
+  return 1; 
+}
+
 void ImageInner::construct()
 {TRACE
   IImage::construct();
