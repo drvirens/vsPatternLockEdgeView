@@ -39,24 +39,29 @@ create_base_gui(appdata_s *ad)
 	eext_object_event_callback_add(ad->win, EEXT_CALLBACK_BACK, win_back_cb, ad);
 
 	/* Conformant */
-	ad->conform = elm_conformant_add(ad->win);
-	elm_win_indicator_mode_set(ad->win, ELM_WIN_INDICATOR_SHOW);
-	elm_win_indicator_opacity_set(ad->win, ELM_WIN_INDICATOR_OPAQUE);
-	evas_object_size_hint_weight_set(ad->conform, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-	elm_win_resize_object_add(ad->win, ad->conform);
-	evas_object_show(ad->conform);
+//	ad->conform = elm_conformant_add(ad->win);
+//	elm_win_indicator_mode_set(ad->win, ELM_WIN_INDICATOR_SHOW);
+//	elm_win_indicator_opacity_set(ad->win, ELM_WIN_INDICATOR_OPAQUE);
+//	evas_object_size_hint_weight_set(ad->conform, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+//	elm_win_resize_object_add(ad->win, ad->conform);
+//	evas_object_show(ad->conform);
 
-	/* Label*/
-	ad->label = elm_label_add(ad->conform);
-	elm_object_text_set(ad->label, "Hello EFL");
-	evas_object_size_hint_weight_set(ad->label, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-	elm_object_content_set(ad->conform, ad->label);
-	evas_object_show(ad->label);
+//	/* Label*/
+//	ad->label = elm_label_add(ad->conform);
+//	elm_object_text_set(ad->label, "Hello EFL");
+//	evas_object_size_hint_weight_set(ad->label, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+//	elm_object_content_set(ad->conform, ad->label);
+//	evas_object_show(ad->label);
+
+	//runAllTests(ad->win);
+	Evas_Object* node_view = testNodeView(ad->win);
+	elm_win_resize_object_add(ad->win, node_view);
+	evas_object_show(node_view);
 
 	/* Show window after base gui is set up */
 	evas_object_show(ad->win);
 
-	runAllTests();
+
 }
 
 static bool

@@ -46,8 +46,6 @@ static Evas_Object *view_create_background(Evas_Object *parent,
 
 Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan)
 {TRACE
-  Evas_Object* tbl = 0;
-
   Evas_Object* table = elm_table_add(parent);
   elm_table_padding_set(table, kTablePaddingHorizontal, kTablePaddingVertical);
   elm_table_homogeneous_set(table, EINA_TRUE);
@@ -63,7 +61,7 @@ Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan)
   elm_table_pack(table, bg, 0, 0, colSpan, rowSpan);
   evas_object_show(bg);
 
-return tbl;
+  return table;
 }
 
 #endif

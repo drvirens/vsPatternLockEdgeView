@@ -72,6 +72,7 @@ static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan
   Evas_Object* tbl = 0;
 #if defined __TIZEN__
   tbl = __tizen_create_table(parent, colSpan, rowSpan);
+  BO_ASSERT(tbl != 0);
 #endif
 return tbl;
 }

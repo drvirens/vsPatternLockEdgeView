@@ -12,18 +12,16 @@
 #include "CNodeContext.hpp"
 #include "ImageCore.hpp"
 #include "Table.hpp"
+#include "trace.hpp"
 
 
-static void testContextWithTable() 
+
+static void testContextWithTable(Evas_Object* parent)
 {
-  Evas_Object* parent = NULL;
   CNodeContext* context = CNodeContext::newL(parent);
   context->show();
-  
   //after sometime simulate mouse-down
-  
-  std::cout << "\n--------------------------- MOUSE DOWN\n" << std::endl;
-  
+  DBG("\n--------------------------- MOUSE DOWN\n");
   context->show();
 }
 
@@ -50,20 +48,26 @@ static void testContextShows()
   context->show();
   
   //after sometime simulate mouse-down
-  
-  std::cout << "\n--------------------------- MOUSE DOWN\n" << std::endl;
-  
+  DBG("\n--------------------------- MOUSE DOWN\n");
   context->show();
-  
-  
-  std::cout << "\n--------------------------- Try again\n" << std::endl;
-  
+  DBG("\n--------------------------- Try again\n");
   context->show();
 }
 
-void runAllTests()
+Evas_Object* testNodeView(Evas_Object* parent)
+{
+  CNodeContext* context = CNodeContext::newL(parent);
+  context->show();
+  //after sometime simulate mouse-down
+  DBG("\n--------------------------- MOUSE DOWN\n");
+  context->show();
+  
+  Evas_Object* handle = context->evasObject();
+  return handle;
+}
+void runAllTests(Evas_Object* parent)
 {
   //testContextShows();
   //testTable();
-  testContextWithTable();
+  testContextWithTable(parent);
 }

@@ -24,11 +24,10 @@ class CNodeContext
   ~CNodeContext();
   
   void show();
-
-  //void setState(INodeView& state);
-  void setPassive();
-  void setActive();
   
+  Evas_Object* evasObject() const;
+
+//only for internal state classes
 
  private:
   CNodeContext(Evas_Object* parent);
@@ -36,7 +35,10 @@ class CNodeContext
   void createTable();
   void createImages();
   void addImagesInTable();
-  
+
+  void setPassive();
+  void setActive();
+
  private:
   Evas_Object* parent_;
   IImage* images_[EImageMaxSize];
@@ -44,6 +46,11 @@ class CNodeContext
   StatePassive* passive_;
   StateActive* active_;
   Table* table_;
+  
+ friend 
+  class StatePassive;
+ friend 
+  class StateActive;
 };
 
 #endif /* CNodeContext_hpp */

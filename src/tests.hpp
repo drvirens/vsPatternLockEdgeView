@@ -13,7 +13,8 @@
 extern "C" {
 #endif
 
-void runAllTests();
+void runAllTests(Evas_Object* parent);
+Evas_Object* testNodeView(Evas_Object* parent);
 
 #ifdef __cplusplus
 }

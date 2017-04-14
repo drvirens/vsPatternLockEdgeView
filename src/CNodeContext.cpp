@@ -98,6 +98,11 @@ void CNodeContext::show()
 {TRACE
   state_->now(*this);
 }
+Evas_Object* CNodeContext::evasObject() const
+{TRACE
+  Evas_Object* tbl = table_->nativeTable();
+  return tbl;
+}
 void CNodeContext::setPassive()
 {TRACE
   state_ = passive_;
