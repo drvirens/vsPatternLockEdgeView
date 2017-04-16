@@ -54,7 +54,6 @@ void IImage::decorate(EHotspotColor color)
   } //end switch
 
   Evas_Object* nativeimage = nativeImage();
-  static const int show = 1;
   int animate = animated();
   __decorate_image(nativeimage, color, animate);
 }
