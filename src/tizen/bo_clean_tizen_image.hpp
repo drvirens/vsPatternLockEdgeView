@@ -16,10 +16,12 @@ extern "C" {
 #if defined __TIZEN__
 
 #include <evas.h>
+#include "NodeColor.hpp"
 
-Evas_Object* __tizen_create_image(Evas_Object* parent);
-void __tizen_set_up_image(Evas_Object* image, const char* image_file_name);
-void __tizen_image_display_enable(Evas_Object* image, int enable, int animated);
+extern Evas_Object* __tizen_create_image(Evas_Object* parent);
+extern void __tizen_set_up_image(Evas_Object* image, const char* image_file_name);
+extern void __tizen_image_display_enable(Evas_Object* image, int enable, int animated);
+extern void __tizen_decorate_image(Evas_Object* image, EHotspotColor color, int animated);
 
 #endif //#if defined __TIZEN__
 

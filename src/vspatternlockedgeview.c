@@ -66,8 +66,11 @@ create_base_gui(appdata_s *ad)
 //  {
 //    target = testPassiveNodeView(window);
 //  }
+//	{
+//	  target = testTizenActiveNodeView(window);
+//	}
 	{
-	  target = testTizenActiveNodeView(window);
+	  target = testRedNodeViaContext(window);
 	}
 
 	{

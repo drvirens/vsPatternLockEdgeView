@@ -12,6 +12,7 @@
 static Evas_Object* __create_image(Evas_Object* parent);
 static void __set_up_image(Evas_Object* image, const char* image_file_name);
 static void __image_display_enable(Evas_Object* image, int enable, int animated);
+static void __decorate_image(Evas_Object* image, EHotspotColor color, int animated);
 
 IImage::~IImage()
 {TRACE
@@ -50,8 +51,12 @@ void IImage::decorate(EHotspotColor color)
       {
       DBG("Decorate [%s] .... ⚫\n", filename_.c_str());
       } break;
-  }
-  
+  } //end switch
+
+  Evas_Object* nativeimage = nativeImage();
+  static const int show = 1;
+  int animate = animated();
+  __decorate_image(nativeimage, color, animate);
 }
 
 IImage::IImage(Evas_Object* parent)
@@ -102,4 +107,13 @@ static void __image_display_enable(Evas_Object* image, int enable, int animated)
   __tizen_image_display_enable(image, enable, animated);
 #endif
 }
+
+static void __decorate_image(Evas_Object* image, EHotspotColor color, int animated) 
+{TRACE
+#if defined __TIZEN__
+  __tizen_decorate_image(image, color, animated);
+#endif
+
+}
+
   

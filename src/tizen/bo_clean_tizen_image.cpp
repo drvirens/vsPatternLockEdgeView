@@ -14,7 +14,26 @@
 #include "bo_colors.h"
 #include "bo_file_utils.h"
 #include "logger.h"
+#include "trace.hpp"
 
+
+typedef enum bo_color_index
+{
+  bo_color_index_red,
+  bo_color_index_red_transparent,
+} bo_color_index;
+
+static struct bo_color
+{
+  int r;
+  int g;
+  int b;
+  int a;
+} k_bo_color[] =
+{
+  {255, 0, 0, 255}, //red opaque
+  {255, 0, 0, 122} //red transparent
+};
 
 Evas_Object* __tizen_create_image(Evas_Object* parent) 
 {TRACE
@@ -29,8 +48,6 @@ void __tizen_set_up_image(Evas_Object* image, const char* image_file_name)
   snprintf(path, sizeof(path), "%s%s", app_get_resource_path(), image_file_name);
   elm_image_file_set(image, path, NULL);
   evas_object_hide(image); //keep it hidden by default
-
-  evas_object_color_set(image, 255, 0, 0, 255);
 }
 
 static void __tizen_image_transit_zoom(Evas_Object* image)
@@ -47,7 +64,6 @@ static void __tizen_image_transit_zoom(Evas_Object* image)
    elm_transit_objects_final_state_keep_set(trans, EINA_TRUE);
    elm_transit_go(trans);
 }
-
 void __tizen_image_display_enable(Evas_Object* image, int enable, int animated)
 {TRACE
   if (!enable)
@@ -61,6 +77,22 @@ void __tizen_image_display_enable(Evas_Object* image, int enable, int animated)
     __tizen_image_transit_zoom(image);
     }
   evas_object_show(image);
+}
+
+void __tizen_decorate_image(Evas_Object* image, EHotspotColor color, int animated)
+{TRACE
+  BO_ASSERT(image != NULL);
+  if (!image) 
+    {
+    return;
+    }
+  bo_color_index index;
+  if (eRed == color) {
+    index = bo_color_index_red;
+  }
+  
+  bo_color c = k_bo_color[index];
+  evas_object_color_set(image, c.r, c.g, c.b, c.a);
 }
   
 #endif //#if defined __TIZEN__
