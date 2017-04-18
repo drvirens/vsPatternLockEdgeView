@@ -23,10 +23,7 @@ static struct ImagePosition
   } 
 kImagePositions[EImageMaxSize + 1] =
    {
-      {6, 6, 2, 2}, //core
-      {5, 5, 4, 4}, //inner
-      {2, 2, 10, 10}, //middle
-      {1, 1, 12, 12}, //outer
+      {2, 2, 8, 8}, //edge
       {0, 0, 14, 14}, //bg
    };
 

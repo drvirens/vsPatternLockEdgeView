@@ -28,7 +28,8 @@ EdgeStateThin::~EdgeStateThin()
 
 void EdgeStateThin::now(CEdgeContext& context)
 {TRACE
-  edge().show();
+//  edge().show();
+  DBG("This is going to render a line using graphics. No image should be displayed here.");
   
   context.setActive();
 }

@@ -83,10 +83,10 @@ create_base_gui(appdata_s *ad)
 	//target = testNodeView(window);
 	}
 
-  elm_win_resize_object_add(window, target);
+//  elm_win_resize_object_add(window, target);
 
-//  evas_object_move(target, 50, 200);
-//  evas_object_resize(target, 200, 200);
+  evas_object_move(target, 50, 200);
+  evas_object_resize(target, 200, 200);
 
   evas_object_show(target);
 	evas_object_show(ad->win);

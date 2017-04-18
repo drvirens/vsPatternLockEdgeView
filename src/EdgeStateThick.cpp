@@ -7,6 +7,9 @@
 //
 
 #include "EdgeStateThick.hpp"
+#include "CEdgeContext.hpp"
+#include "EdgeStateThin.hpp"
+#include "IImage.hpp"
 #include "trace.hpp"
 
 EdgeStateThick* EdgeStateThick::newL(Table& table, IImage*& images)
@@ -25,6 +28,7 @@ EdgeStateThick::~EdgeStateThick()
 
 void EdgeStateThick::now(CEdgeContext& context)
 {TRACE
+  edge().show();
 }
 
 void EdgeStateThick::decorate(EHotspotColor color)
