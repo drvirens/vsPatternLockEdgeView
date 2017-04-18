@@ -1,28 +1,28 @@
 //
-//  CNodeContext.hpp
-//  vsNodeView
+//  CEdgeContext.hpp
+//  vsEdgeView
 //
-//  Created by Virendra Shakya on 4/13/17.
+//  Created by Virendra Shakya on 4/16/17.
 //  Copyright © 2017 Virendra Shakya. All rights reserved.
 //
 
-#ifndef CNodeContext_hpp
-#define CNodeContext_hpp
+#ifndef CEdgeContext_hpp
+#define CEdgeContext_hpp
 
 #include "OS.h"
 #include "IImage.hpp"
 
-class StatePassive;
-class StateActive;
-class NodeColorDecorator;
-class INodeView;
+class EdgeStateThin;
+class EdgeStateThick;
+class EdgeColorDecorator;
+class IEdgeView;
 class Table;
 
-class CNodeContext
+class IEdgeContext
 {
  public:
-  static CNodeContext* newL(Evas_Object* parent);
-  ~CNodeContext();
+  static IEdgeContext* newL(Evas_Object* parent);
+  ~IEdgeContext();
   
   void show();
   void ok();
@@ -31,7 +31,7 @@ class CNodeContext
   Evas_Object* evasObject() const;
 
  private:
-  CNodeContext(Evas_Object* parent);
+  IEdgeContext(Evas_Object* parent);
   void construct();
   void createTable();
   void createImages();
@@ -43,10 +43,10 @@ class CNodeContext
  private:
   Evas_Object* parent_;
   IImage* images_[EImageMaxSize];
-  INodeView* state_; //current state
-  StatePassive* passive_;
-  StateActive* active_;
-  NodeColorDecorator* colordecorator_;
+  IEdgeView* state_; //current state
+  EdgeStateThin* passive_;
+  EdgeStateThick* active_;
+  EdgeColorDecorator* colordecorator_;
   Table* table_;
   
  friend 
@@ -55,4 +55,4 @@ class CNodeContext
   class StateActive;
 };
 
-#endif /* CNodeContext_hpp */
+#endif /* CEdgeContext_hpp */

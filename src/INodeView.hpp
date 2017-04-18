@@ -9,7 +9,6 @@
 #ifndef IHotspot_hpp
 #define IHotspot_hpp
 
-//#include "IImage.hpp"
 #include "NodeColor.hpp"
 
 class CNodeContext;

@@ -22,10 +22,7 @@ class StatePassive: public INodeView
   
  private:
   StatePassive(Table&, IImage*& images);
-  void construct();
-  
- private:
-  
+  void construct();  
 };
 
 #endif /* StatePassive_hpp */
