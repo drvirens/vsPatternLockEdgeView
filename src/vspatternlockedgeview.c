@@ -73,10 +73,15 @@ create_base_gui(appdata_s *ad)
 //	{
 //	  target = testRedNodeViaContext(window);
 //	}
-	{
-	    target = testThinEdgeView(parent);
-	    BO_ASSERT(target != 0);
-	}
+//	{
+//	    target = testThinEdgeView(parent);
+//	    BO_ASSERT(target != 0);
+//	}
+//  {
+//      target = testThickEdgeView(parent);
+//      BO_ASSERT(target != 0);
+//  }
+
 
 	{
 	//runAllTests(ad->win);

@@ -31,6 +31,7 @@ Evas_Object* testRedNodeViaContext(Evas_Object* parent);
 
 void testEdgeViewThin();
 Evas_Object* testThinEdgeView(Evas_Object* parent);
+Evas_Object* testThickEdgeView(Evas_Object* parent);
 
 #ifdef __cplusplus
 }

@@ -193,6 +193,16 @@ Evas_Object* testThinEdgeView(Evas_Object* parent)
   Evas_Object* handle = context->evasObject();
   return handle;
 }
+Evas_Object* testThickEdgeView(Evas_Object* parent)
+{
+  CEdgeContext* context = CEdgeContext::newL(parent);
+  context->show();
+  Evas_Object* handle = context->evasObject();
+  
+  context->show();
+  handle = context->evasObject();
+  return handle;
+}
 
 void runAllTests(Evas_Object* parent)
 {
