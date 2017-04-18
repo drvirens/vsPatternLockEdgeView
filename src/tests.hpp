@@ -29,6 +29,9 @@ Evas_Object* testTable(Evas_Object* parent);
 void testNodeRedDecorator();
 Evas_Object* testRedNodeViaContext(Evas_Object* parent);
 
+void testEdgeViewThin();
+Evas_Object* testThinEdgeView(Evas_Object* parent);
+
 #ifdef __cplusplus
 }
 #endif

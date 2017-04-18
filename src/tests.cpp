@@ -40,19 +40,19 @@ extern "C" {
 #include "NodeColorDecorator.hpp"
 #include "StateActive.hpp"
 #include "NodeColor.hpp"
+#include "EdgeStateThin.hpp"
+#include "EdgeStateThick.hpp"
+#include "EdgeColorDecorator.hpp"
+#include "CEdgeContext.hpp"
 
-static void __sleep(unsigned int seconds, int (*sleep_call_back)(void*), void* data );
-
+static void __sleep(unsigned int seconds, Eina_Bool (*sleep_call_back)(void*), void* data );
 static void testContextWithTable(Evas_Object* parent)
 {
   CNodeContext* context = CNodeContext::newL(parent);
   context->show();
-  //after sometime simulate mouse-down
   DBG("\n--------------------------- MOUSE DOWN\n");
   context->show();
 }
-
-
 Evas_Object* testTable(Evas_Object* parent)
 {
   int bgRowSpan = 14;
@@ -65,7 +65,6 @@ Evas_Object* testTable(Evas_Object* parent)
 
   return tbl;
 }
-
 Evas_Object* testImage(Evas_Object* parent)
 {
   IImage* img = ImageCore::newL(parent);
@@ -97,20 +96,6 @@ Evas_Object* testOuterImage(Evas_Object* parent)
   return nativeimage;
 }
 
-//
-//static void testContextShows()
-//{
-//  Evas_Object* parent = NULL;
-//  CNodeContext* context = CNodeContext::newL(parent);
-//  context->show();
-//
-//  //after sometime simulate mouse-down
-//  DBG("\n--------------------------- MOUSE DOWN\n");
-//  context->show();
-//  DBG("\n--------------------------- Try again\n");
-//  context->show();
-//}
-
 Evas_Object* testActiveNodeView(Evas_Object* parent)
 {
   CNodeContext* context = CNodeContext::newL(parent);
@@ -127,8 +112,6 @@ Evas_Object* testPassiveNodeView(Evas_Object* parent)
   Evas_Object* handle = context->evasObject();
   return handle;
 }
-
-
 static Eina_Bool __wait_3_seconds(void* data)
 {
   CNodeContext* context = static_cast<CNodeContext*>(data);
@@ -138,24 +121,17 @@ static Eina_Bool __wait_3_seconds(void* data)
   }
   return 0;
 }
-#if defined __TIZEN__
 Evas_Object* testTizenActiveNodeView(Evas_Object* parent)
 {
   CNodeContext* context = CNodeContext::newL(parent);
   context->show();
   DBG("\n--------------------------- MOUSE DOWN\n");
   double in = 3;
-  Ecore_Task_Cb func = &__wait_3_seconds;
-  const void *data = context;
-
-  ecore_timer_add( in,  func, data);
-//  ecore_timer_add(3., &__wait_3_seconds, (const void *)context);
-
+  void* data = static_cast<void*>(context);
+  __sleep(in, &__wait_3_seconds, data);
   Evas_Object* handle = context->evasObject();
   return handle;
 }
-#endif
-
 void testNodeRedDecorator()
 {
   Table* tbl = Table::newL(0, 0, 0);
@@ -164,7 +140,6 @@ void testNodeRedDecorator()
   NodeColorDecorator* red = new NodeColorDecorator(*active, *tbl, *images);
   red->decorate(eRed);
 }
-
 static void __sleep(unsigned int seconds, Eina_Bool (*sleep_call_back)(void*), void* data )
 {
 #if defined __TIZEN__
@@ -174,7 +149,6 @@ static void __sleep(unsigned int seconds, Eina_Bool (*sleep_call_back)(void*), v
   (*sleep_call_back)(data);
 #endif
 }
-
 static Eina_Bool __pause_another_3_seconds(void* data)
 {
   CNodeContext* context = static_cast<CNodeContext*>(data);
@@ -184,8 +158,6 @@ static Eina_Bool __pause_another_3_seconds(void* data)
   }
   return 0;
 }
-
-
 static Eina_Bool __pause_3_seconds(void* data)
 {
   CNodeContext* context = static_cast<CNodeContext*>(data);
@@ -204,6 +176,20 @@ Evas_Object* testRedNodeViaContext(Evas_Object* parent)
 
   __sleep(3, &__pause_3_seconds, (void*)context);
 
+  Evas_Object* handle = context->evasObject();
+  return handle;
+}
+void testEdgeViewThin()
+{
+  Table* tbl = Table::newL(0, 0, 0);
+  IImage* images[1] = {};
+  EdgeStateThin* thin = EdgeStateThin::newL(*tbl, *images);
+  BO_ASSERT(thin != NULL);
+}
+Evas_Object* testThinEdgeView(Evas_Object* parent)
+{
+  CEdgeContext* context = CEdgeContext::newL(parent);
+  context->show();
   Evas_Object* handle = context->evasObject();
   return handle;
 }

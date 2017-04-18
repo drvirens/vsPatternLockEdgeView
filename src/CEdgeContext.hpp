@@ -18,11 +18,11 @@ class EdgeColorDecorator;
 class IEdgeView;
 class Table;
 
-class IEdgeContext
+class CEdgeContext
 {
  public:
-  static IEdgeContext* newL(Evas_Object* parent);
-  ~IEdgeContext();
+  static CEdgeContext* newL(Evas_Object* parent);
+  ~CEdgeContext();
   
   void show();
   void ok();
@@ -31,7 +31,7 @@ class IEdgeContext
   Evas_Object* evasObject() const;
 
  private:
-  IEdgeContext(Evas_Object* parent);
+  CEdgeContext(Evas_Object* parent);
   void construct();
   void createTable();
   void createImages();
@@ -50,9 +50,9 @@ class IEdgeContext
   Table* table_;
   
  friend 
-  class StatePassive;
+  class EdgeStateThin;
  friend 
-  class StateActive;
+  class EdgeStateThick;
 };
 
 #endif /* CEdgeContext_hpp */

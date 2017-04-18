@@ -1,6 +1,6 @@
 #include <tizen.h>
 #include "vspatternlockedgeview.h"
-
+#include "trace.hpp"
 #include "tests.hpp"
 
 typedef struct appdata {
@@ -40,6 +40,7 @@ create_base_gui(appdata_s *ad)
 
 
 	Evas_Object* window = ad->win;
+	Evas_Object* parent = ad->win;
 	Evas_Object* target = NULL;
 
 //	{
@@ -69,8 +70,12 @@ create_base_gui(appdata_s *ad)
 //	{
 //	  target = testTizenActiveNodeView(window);
 //	}
+//	{
+//	  target = testRedNodeViaContext(window);
+//	}
 	{
-	  target = testRedNodeViaContext(window);
+	    target = testThinEdgeView(parent);
+	    BO_ASSERT(target != 0);
 	}
 
 	{
@@ -78,28 +83,18 @@ create_base_gui(appdata_s *ad)
 	//target = testNodeView(window);
 	}
 
-//  elm_win_resize_object_add(window, target);
+  elm_win_resize_object_add(window, target);
 
-  evas_object_move(target, 50, 200);
-  evas_object_resize(target, 200, 200);
+//  evas_object_move(target, 50, 200);
+//  evas_object_resize(target, 200, 200);
+
   evas_object_show(target);
-
 	evas_object_show(ad->win);
-
-
 }
 
-static bool
-app_create(void *data)
-{
-	/* Hook to take necessary actions before main event loop starts
-		Initialize UI resources and application's data
-		If this function returns true, the main loop of application starts
-		If this function returns false, the application is terminated */
+static bool app_create(void *data) {
 	appdata_s *ad = data;
-
 	create_base_gui(ad);
-
 	return true;
 }
 

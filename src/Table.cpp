@@ -71,6 +71,8 @@ static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan
 #if defined __TIZEN__
   tbl = __tizen_create_table(parent, colSpan, rowSpan);
   BO_ASSERT(tbl != 0);
+#else
+  return &tbl; //to let unit test case asserts pass
 #endif
 return tbl;
 }

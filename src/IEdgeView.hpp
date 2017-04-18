@@ -24,10 +24,7 @@ class IEdgeView
   
  protected:
   IEdgeView(Table* parent, IImage*& images);
-  IImage& core();
-//  IImage& inner();
-//  IImage& middle();
-//  IImage& outer();
+  IImage& edge();
   
   void construct();
   

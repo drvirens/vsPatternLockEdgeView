@@ -9,10 +9,7 @@
 #include "CEdgeContext.hpp"
 #include "EdgeStateThin.hpp"
 #include "EdgeStateThick.hpp"
-#include "ImageCore.hpp"
-#include "ImageInner.hpp"
-#include "ImageMiddle.hpp"
-#include "ImageOuter.hpp"
+#include "ImageEdge.hpp"
 #include "EdgeColorDecorator.hpp"
 #include "Table.hpp"
 #include "trace.hpp"
@@ -33,9 +30,9 @@ kImagePositions[EImageMaxSize + 1] =
       {0, 0, 14, 14}, //bg
    };
 
-IEdgeContext* IEdgeContext::newL(Evas_Object* parent)
+CEdgeContext* CEdgeContext::newL(Evas_Object* parent)
 {TRACE
-  IEdgeContext* obj = new IEdgeContext(parent);
+  CEdgeContext* obj = new CEdgeContext(parent);
   if (obj) 
     {
     obj->construct();
@@ -43,7 +40,7 @@ IEdgeContext* IEdgeContext::newL(Evas_Object* parent)
   return obj;
 }
 
-IEdgeContext::IEdgeContext(Evas_Object* parent) 
+CEdgeContext::CEdgeContext(Evas_Object* parent) 
 : parent_(parent)
 , state_(0)
 , passive_(0)
@@ -52,25 +49,21 @@ IEdgeContext::IEdgeContext(Evas_Object* parent)
 {TRACE
 }
 
-void IEdgeContext::createTable()
+void CEdgeContext::createTable()
 {TRACE
   ImagePosition bgImagePosition = kImagePositions[EImageMaxSize];
   table_ = Table::newL(parent_, bgImagePosition.colSpan, bgImagePosition.rowSpan);
 }
 
-void IEdgeContext::createImages()
+void CEdgeContext::createImages()
 {TRACE
   Evas_Object* tbl = table_->nativeTable();
-  images_[EImageCore] = ImageCore::newL(tbl);
-  images_[EImageInner] = ImageInner::newL(tbl);
-  images_[EImageMiddle] = ImageMiddle::newL(tbl);
-  images_[EImageOuter] = ImageOuter::newL(tbl);
-}
+  images_[EImageCore] = ImageEdge::newL(tbl);
+ }
 
-void IEdgeContext::addImagesInTable()
+void CEdgeContext::addImagesInTable()
 {TRACE
-  //add them in reverse order so that core is always at the top
-  for (int i = EImageOuter; i >= 0; i--)
+  for (int i = EImageCore; i >= 0; i--)//only one image
   {
     BO_ASSERT(images_[i] != 0);
     IImage& img = *(images_[i]);
@@ -78,7 +71,7 @@ void IEdgeContext::addImagesInTable()
   } 
 }
 
-void IEdgeContext::construct()
+void CEdgeContext::construct()
 {TRACE
   createTable();
   createImages();
@@ -91,35 +84,35 @@ void IEdgeContext::construct()
   colordecorator_ = new EdgeColorDecorator(*active_, *table_, *images_);
 }
 
-IEdgeContext::~IEdgeContext()
+CEdgeContext::~CEdgeContext()
 {TRACE
 }
 
-void IEdgeContext::show()
+void CEdgeContext::show()
 {TRACE
-  //state_->now(*this);
+  state_->now(*this);
 }
 
-void IEdgeContext::ok()
+void CEdgeContext::ok()
 {TRACE
   colordecorator_->decorate(eGreen);
 }
-void IEdgeContext::error()
+void CEdgeContext::error()
 {TRACE
   colordecorator_->decorate(eRed);
 }
   
-Evas_Object* IEdgeContext::evasObject() const
+Evas_Object* CEdgeContext::evasObject() const
 {TRACE
   Evas_Object* tbl = table_->nativeTable();
   return tbl;
 }
-void IEdgeContext::setPassive()
+void CEdgeContext::setPassive()
 {TRACE
   state_ = passive_;
 }
 
-void IEdgeContext::setActive()
+void CEdgeContext::setActive()
 {TRACE
   state_ = active_;
 }

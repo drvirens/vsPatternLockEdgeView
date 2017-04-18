@@ -27,28 +27,9 @@ void IEdgeView::construct()
 {TRACE
 }
 
-IImage& IEdgeView::core()
+IImage& IEdgeView::edge()
 {TRACE
   IImage* i = images_[EImageCore];
   BO_ASSERT(i);
   return *i;
 }
-//IImage& IEdgeView::inner()
-//{TRACE
-//  IImage* i = images_[EImageInner];
-//  BO_ASSERT(i);
-//  return *i;
-//}
-//IImage& IEdgeView::middle()
-//{TRACE
-//  IImage* i = images_[EImageMiddle];
-//  BO_ASSERT(i);
-//  return *i;
-//}
-//IImage& IEdgeView::outer()
-//{TRACE
-//  IImage* i = images_[EImageOuter];
-//  BO_ASSERT(i);
-//  return *i;
-//}
-
