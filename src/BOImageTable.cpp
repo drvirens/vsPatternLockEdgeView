@@ -38,7 +38,6 @@ void BOImageTable::add(IImage& image, int col, int row, int colSpan, int rowSpan
 
 void BOImageTable::addEvasObject(Evas_Object* nativeEvasObject, int col, int row, int colSpan, int rowSpan)
 {TRACE
-  //Evas_Object* nativeImg = nativeEvasObject;
   Evas_Object* nativetable = nativeTable();
   __add_image(nativetable, nativeEvasObject, col, row, colSpan, rowSpan);
 }

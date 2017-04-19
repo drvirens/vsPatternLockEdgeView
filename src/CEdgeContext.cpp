@@ -36,6 +36,7 @@ CEdgeContext::CEdgeContext(Evas_Object* parent)
 , state_(0)
 , passive_(0)
 , active_(0)
+, colordecorator_(0)
 , table_(0)
 {TRACE
 }

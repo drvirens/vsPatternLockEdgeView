@@ -14,14 +14,23 @@
 #include "CEdgeContext.hpp"
 #include "trace.hpp"
 
-static const int kTotalCells = 9;
-static const BOImageTablePosition kBOImageTablePositions[kTotalCells] =
+static const int kTotalCells = 9 + 1; // +1 = bg
+static const BOImageTablePosition kNodesTablePositions[kTotalCells] =
      {
-        {6, 6, 2, 2}, //core
-        {5, 5, 4, 4}, //inner
-        {2, 2, 10, 10}, //middle
-        {1, 1, 12, 12}, //outer
-        {0, 0, 14, 14}, //bg
+        //row 1
+        {3, 3, 1, 1}, 
+        {6, 3, 1, 1},
+        {9, 3, 1, 1},
+        //row 2
+        {3, 6, 1, 1},
+        {6, 6, 1, 1},
+        {9, 6, 1, 1},
+        //row 3
+        {3, 9, 1, 1},
+        {6, 9, 1, 1},
+        {9, 9, 1, 1},
+        //bg
+        {0, 0, 13, 13}
      };
 
 
@@ -34,8 +43,8 @@ PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig&
 }
 void PatternLockViewController::createTable()
 {TRACE
-  BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[kTotalCells-1];
-  table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan);
+  BOImageTablePosition bgNodesTablePosition = kNodesTablePositions[kTotalCells-1];
+  table_ = BOImageTable::newL(parent_, bgNodesTablePosition.colSpan, bgNodesTablePosition.rowSpan);
   container_ = table_->nativeTable();
 }
 void PatternLockViewController::construct()
@@ -79,7 +88,7 @@ void PatternLockViewController::addImagesInTable()
     if (c) 
       {
       Evas_Object* evasObj = c->evasObject();
-      table_->addEvasObject(evasObj, kBOImageTablePositions[i].col, kBOImageTablePositions[i].row, kBOImageTablePositions[i].colSpan, kBOImageTablePositions[i].rowSpan);
+      table_->addEvasObject(evasObj, kNodesTablePositions[i].col, kNodesTablePositions[i].row, kNodesTablePositions[i].colSpan, kNodesTablePositions[i].rowSpan);
       i++;
       }
   } //end for

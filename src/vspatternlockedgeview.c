@@ -40,63 +40,27 @@ create_base_gui(appdata_s *ad)
 
 
 	Evas_Object* window = ad->win;
-//	Evas_Object* parent = ad->win;
-//	Evas_Object* target = NULL;
-//
-//	{
-//	  target = testImage(window);
-//	}
-//	{
-//	  target = testOuterImage(window);
-//	}
-//  {
-//    target = testMiddleImage(window);
-//  }
-//  {
-//    target = testInnerImage(window);
-//  }
-//  {
-//    target = testCoreImage(window);
-//  }
-//	{
-//	  target = testTable(window);
-//	}
-//	{
-//	  target = testActiveNodeView(window);
-//	}
-//  {
-//    target = testPassiveNodeView(window);
-//  }
-//	{
-//	  target = testTizenActiveNodeView(window);
-//	}
-//	{
-//	  target = testRedNodeViaContext(window);
-//	}
-//	{
-//	    target = testThinEdgeView(parent);
-//	    BO_ASSERT(target != 0);
-//	}
-//  {
-//      target = testThickEdgeView(parent);
-//      BO_ASSERT(target != 0);
-//  }
-//
-//
-//	{
-//	//runAllTests(ad->win);
-//	//target = testNodeView(window);
-//	}
-//
-//  elm_win_resize_object_add(window, target);
-//
+
+#if !defined __RUN_ALL_TIZEN_TESTS__
+
+	{
+	Evas_Object* target = NULL;
+
+	target = testPatterLockVCShowAll_PassiveState(window);
+	BO_ASSERT(target != NULL);
+
 //  evas_object_move(target, 50, 200);
 //  evas_object_resize(target, 200, 200);
-//
-//  evas_object_show(target);
-//	evas_object_show(ad->win);
 
+	elm_win_resize_object_add(window, target);
+
+  evas_object_show(target);
+	evas_object_show(window);
+	}
+#else
 	runAllTizenTests(window);
+#endif
+
 }
 
 static bool app_create(void *data) {

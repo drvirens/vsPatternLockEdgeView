@@ -42,6 +42,7 @@ CNodeContext::CNodeContext(Evas_Object* parent)
 , state_(0)
 , passive_(0)
 , active_(0)
+, colordecorator_(0)
 , table_(0)
 {TRACE
 }
@@ -56,9 +57,16 @@ void CNodeContext::createImages()
 {TRACE
   Evas_Object* tbl = table_->nativeTable();
   images_[EImageCore] = ImageCore::newL(tbl);
+  BO_ASSERT(images_[EImageCore] != NULL);
+
   images_[EImageInner] = ImageInner::newL(tbl);
+  BO_ASSERT(images_[EImageInner] != NULL);
+
   images_[EImageMiddle] = ImageMiddle::newL(tbl);
+  BO_ASSERT(images_[EImageMiddle] != NULL);
+
   images_[EImageOuter] = ImageOuter::newL(tbl);
+  BO_ASSERT(images_[EImageOuter] != NULL);
 }
 
 void CNodeContext::addImagesInTable()

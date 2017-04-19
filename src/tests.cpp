@@ -290,8 +290,11 @@ void runAllTizenTests(Evas_Object* window)
     BO_ASSERT(target != 0);
     __halt(window, target);
   }
+  {
+    target = testPatterLockVCShowAll_PassiveState(window);
+  }
 #if defined __TIZEN__
-  //  elm_win_resize_object_add(window, target);
+    elm_win_resize_object_add(window, target);
 
     evas_object_move(target, 50, 200);
     evas_object_resize(target, 200, 200);

@@ -74,6 +74,7 @@ void __tizen_add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, 
   elm_table_pack(nativeTbl, nativeImg, col, row, colSpan, rowSpan);
   evas_object_size_hint_align_set(nativeImg, EVAS_HINT_FILL, EVAS_HINT_FILL);
   evas_object_size_hint_weight_set(nativeImg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+  evas_object_show(nativeImg); //XXX: for testing
 }
 
 #endif
