@@ -37,8 +37,13 @@ BOImageTablePosition kNodesTablePositions[kTotalTableCells] =
 
 BOImageTablePosition kEdgesTablePositions[kTotalEdgeCells] =
      {
-        //row 1
-        {3, 2, 4, 3}, 
+        //vertical edges 
+        {3, 3, 4, 1}, 
+        {6, 3, 4, 1}, 
+        {3, 6, 4, 1}, 
+        {6, 6, 4, 1}, 
+        {3, 9, 4, 1}, 
+        {6, 9, 4, 1}, 
 //        {5, 2, 3, 3},
 //        {8, 2, 3, 3},
 //        //row 2
