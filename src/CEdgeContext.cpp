@@ -12,19 +12,13 @@
 #include "ImageEdge.hpp"
 #include "EdgeColorDecorator.hpp"
 #include "BOImageTable.hpp"
+#include "BOImageTablePosition.hpp"
 #include "trace.hpp"
 
-static struct ImagePosition
-  {
-    int col;
-    int row;
-    int colSpan;
-    int rowSpan;
-  } 
-kImagePositions[EImageMaxSize + 1] =
+static const BOImageTablePosition kBOImageTablePositions[EImageMiddle] =
    {
-      {2, 2, 8, 8}, //edge
-      {0, 0, 14, 14}, //bg
+      {2, 2, 8, 8}, //edge = 0
+      {0, 0, 14, 14}, //bg = 1
    };
 
 CEdgeContext* CEdgeContext::newL(Evas_Object* parent)
@@ -48,8 +42,8 @@ CEdgeContext::CEdgeContext(Evas_Object* parent)
 
 void CEdgeContext::createTable()
 {TRACE
-  ImagePosition bgImagePosition = kImagePositions[EImageMaxSize];
-  table_ = BOImageTable::newL(parent_, bgImagePosition.colSpan, bgImagePosition.rowSpan);
+  BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[EImageInner];
+  table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan);
 }
 
 void CEdgeContext::createImages()
@@ -64,7 +58,7 @@ void CEdgeContext::addImagesInTable()
   {
     BO_ASSERT(images_[i] != 0);
     IImage& img = *(images_[i]);
-    table_->add(img, kImagePositions[i].col, kImagePositions[i].row, kImagePositions[i].colSpan, kImagePositions[i].rowSpan);
+    table_->add(img, kBOImageTablePositions[i].col, kBOImageTablePositions[i].row, kBOImageTablePositions[i].colSpan, kBOImageTablePositions[i].rowSpan);
   } 
 }
 

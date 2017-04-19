@@ -15,16 +15,10 @@
 #include "ImageOuter.hpp"
 #include "NodeColorDecorator.hpp"
 #include "BOImageTable.hpp"
+#include "BOImageTablePosition.hpp"
 #include "trace.hpp"
 
-static struct ImagePosition
-  {
-    int col;
-    int row;
-    int colSpan;
-    int rowSpan;
-  } 
-  kImagePositions[EImageMaxSize + 1] =
+static const BOImageTablePosition kBOImageTablePositions[EImageMaxSize + 1] =
      {
         {6, 6, 2, 2}, //core
         {5, 5, 4, 4}, //inner
@@ -32,9 +26,7 @@ static struct ImagePosition
         {1, 1, 12, 12}, //outer
         {0, 0, 14, 14}, //bg
      };
-                     
-
-
+       
 CNodeContext* CNodeContext::newL(Evas_Object* parent)
 {TRACE
   CNodeContext* obj = new CNodeContext(parent);
@@ -56,8 +48,8 @@ CNodeContext::CNodeContext(Evas_Object* parent)
 
 void CNodeContext::createTable()
 {TRACE
-  ImagePosition bgImagePosition = kImagePositions[EImageMaxSize];
-  table_ = BOImageTable::newL(parent_, bgImagePosition.colSpan, bgImagePosition.rowSpan);
+  BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[EImageMaxSize];
+  table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan);
 }
 
 void CNodeContext::createImages()
@@ -76,7 +68,7 @@ void CNodeContext::addImagesInTable()
   {
     BO_ASSERT(images_[i] != 0);
     IImage& img = *(images_[i]);
-    table_->add(img, kImagePositions[i].col, kImagePositions[i].row, kImagePositions[i].colSpan, kImagePositions[i].rowSpan);
+    table_->add(img, kBOImageTablePositions[i].col, kBOImageTablePositions[i].row, kBOImageTablePositions[i].colSpan, kBOImageTablePositions[i].rowSpan);
   } 
 }
 

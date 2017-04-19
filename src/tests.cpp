@@ -45,6 +45,7 @@ extern "C" {
 #include "EdgeColorDecorator.hpp"
 #include "CEdgeContext.hpp"
 #include "PatternLockViewController.hpp"
+#include "BOPatternbLockConfig.hpp"
 
 static void __sleep(unsigned int seconds, Eina_Bool (*sleep_call_back)(void*), void* data );
 static void testContextWithTable(Evas_Object* parent)
@@ -206,15 +207,15 @@ Evas_Object* testThickEdgeView(Evas_Object* parent)
 }
 Evas_Object* testPatterLockVC(Evas_Object* parent)
 {
-  int columns = 3;
-  int rows = 3;
-  PatternLockViewController* pl = PatternLockViewController::newL(parent, columns,rows);
+  const BOPatternbLockConfig config = {};
+  
+  PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
   Evas_Object* view = pl->evasObject();
   return view;
 }
 void runAllTests(Evas_Object* parent)
 {
-  //testContextShows();
-  //testTable();
+  testContextWithTable(parent);
+  testTable(parent);
   testContextWithTable(parent);
 }

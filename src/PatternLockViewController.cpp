@@ -7,22 +7,43 @@
 //
 
 #include "PatternLockViewController.hpp"
+#include "BOImageTable.hpp"
+#include "BOImageTablePosition.hpp"
+#include "BOPatternbLockConfig.hpp"
 #include "trace.hpp"
 
+// 9 == BOPatternbLockConfig::kTotalCells
+static const BOImageTablePosition kBOImageTablePositions[9] =
+     {
+        {6, 6, 2, 2}, //core
+        {5, 5, 4, 4}, //inner
+        {2, 2, 10, 10}, //middle
+        {1, 1, 12, 12}, //outer
+        {0, 0, 14, 14}, //bg
+     };
 
-PatternLockViewController::PatternLockViewController(Evas_Object* parent, int columns, int rows)
+
+PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig& config, Evas_Object* parent)
 : parent_(parent)
 , container_(0)
-, columns_(columns)
-, rows_(rows)
+, table_(0)
+, config_(config)
 {TRACE
+}
+void PatternLockViewController::createTable()
+{TRACE
+  BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[8];
+  table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan);
 }
 void PatternLockViewController::construct()
 {TRACE
+  createTable();
+  createImages();
+  addImagesInTable();
 }
-PatternLockViewController* PatternLockViewController::newL(Evas_Object* parent, int columns, int rows)
+PatternLockViewController* PatternLockViewController::newL(const BOPatternbLockConfig& config, Evas_Object* parent)
 {TRACE
-  PatternLockViewController* obj = new PatternLockViewController(parent, columns, rows);
+  PatternLockViewController* obj = new PatternLockViewController(config, parent);
   if (obj)
     {
     obj->construct();
@@ -32,8 +53,26 @@ PatternLockViewController* PatternLockViewController::newL(Evas_Object* parent, 
 PatternLockViewController::~PatternLockViewController()
 {TRACE
   parent_ = NULL;
-  columns_ = 0;
-  rows_ = 0;
+}
+
+void PatternLockViewController::createImages()
+{TRACE
+  Evas_Object* tbl = table_->nativeTable();
+//  images_[EImageCore] = ImageCore::newL(tbl);
+//  images_[EImageInner] = ImageInner::newL(tbl);
+//  images_[EImageMiddle] = ImageMiddle::newL(tbl);
+//  images_[EImageOuter] = ImageOuter::newL(tbl);
+}
+
+void PatternLockViewController::addImagesInTable()
+{TRACE
+//  //add them in reverse order so that core is always at the top
+//  for (int i = EImageOuter; i >= 0; i--)
+//  {
+//    BO_ASSERT(images_[i] != 0);
+//    IImage& img = *(images_[i]);
+//    table_->add(img, kBOImageTablePositions[i].col, kBOImageTablePositions[i].row, kBOImageTablePositions[i].colSpan, kBOImageTablePositions[i].rowSpan);
+//  } 
 }
 
 Evas_Object* PatternLockViewController::evasObject() const

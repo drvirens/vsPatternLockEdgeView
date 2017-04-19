@@ -12,10 +12,13 @@
 #include "IPatternLockViewController.hpp"
 #include "OS.h"
 
+class BOImageTable;
+class BOPatternbLockConfig;
+
 class PatternLockViewController : public IPatternLockViewController
   {
  public:
-  static PatternLockViewController* newL(Evas_Object* parent, int columns, int rows);
+  static PatternLockViewController* newL(const BOPatternbLockConfig& config, Evas_Object* parent);
   virtual ~PatternLockViewController();
   void show();
   
@@ -28,14 +31,17 @@ class PatternLockViewController : public IPatternLockViewController
   virtual void viewDidDisappear(int animated);
   
  private:
-  PatternLockViewController(Evas_Object* parent, int columns, int rows);
+  PatternLockViewController(const BOPatternbLockConfig& config, Evas_Object* parent);
   void construct();
+  void createTable();
+  void createImages();
+  void addImagesInTable();
   
  private:
   Evas_Object* parent_;
   Evas_Object* container_;
-  int columns_;
-  int rows_;
+  BOImageTable* table_;
+  const BOPatternbLockConfig& config_;
   };
 
 #endif /* PatternLockViewController_hpp */
