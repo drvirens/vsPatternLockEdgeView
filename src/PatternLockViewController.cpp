@@ -107,6 +107,32 @@ void PatternLockViewController::show()
       }
   } //end for
 }
+void PatternLockViewController::error()
+{TRACE
+  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
+        it != nodecontexts_.end();
+        ++it) {
+    CNodeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (c) 
+      {
+      c->error();
+      }
+  } //end for
+}
+void PatternLockViewController::ok()
+{TRACE
+  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
+        it != nodecontexts_.end();
+        ++it) {
+    CNodeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (c) 
+      {
+      c->ok();
+      }
+  } //end for
+}
 
 void PatternLockViewController::viewWillAppear(int animated)
 {TRACE

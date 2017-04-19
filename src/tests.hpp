@@ -39,6 +39,7 @@ Evas_Object* testPatterLockVC(Evas_Object* parent);
 Evas_Object* testPatterLockVCShowAll_PassiveState(Evas_Object* parent);
 Evas_Object* testPatterLockVCShowAll_ActiveState(Evas_Object* parent);
 Evas_Object* testPatterLockVCShowAll_ActiveState_WithTimer(Evas_Object* parent);
+Evas_Object* testPatterLockVCShowAll_ActiveState_WithTimer_DecorateError(Evas_Object* parent);
 
 #ifdef __cplusplus
 }

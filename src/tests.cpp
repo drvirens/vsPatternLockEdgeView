@@ -231,7 +231,7 @@ Evas_Object* testPatterLockVCShowAll_ActiveState(Evas_Object* parent)
   Evas_Object* view = pl->evasObject();
   return view;
 }
-static Eina_Bool __go_active(void* data)
+static Eina_Bool __go_ActiveState_WithTimer(void* data)
 {
   PatternLockViewController* pl = (PatternLockViewController*)data;
   pl->show();
@@ -242,7 +242,30 @@ Evas_Object* testPatterLockVCShowAll_ActiveState_WithTimer(Evas_Object* parent)
   const BOPatternbLockConfig config;
   PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
   pl->show();
-  __sleep(3, &__go_active, (void*)pl);
+  __sleep(3, &__go_ActiveState_WithTimer, (void*)pl);
+  Evas_Object* view = pl->evasObject();
+  return view;
+}
+
+static Eina_Bool __go_decorate_WithTimer_DecorateError(void* data)
+{
+  PatternLockViewController* pl = (PatternLockViewController*)data;
+  pl->error();
+  return false;
+}
+static Eina_Bool __go_Show_WithTimer_DecorateError(void* data)
+{
+  PatternLockViewController* pl = (PatternLockViewController*)data;
+  pl->show();
+  __sleep(3, &__go_decorate_WithTimer_DecorateError, (void*)pl);
+  return false;
+}
+Evas_Object* testPatterLockVCShowAll_ActiveState_WithTimer_DecorateError(Evas_Object* parent)
+{
+  const BOPatternbLockConfig config;
+  PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
+  pl->show();
+  __sleep(3, &__go_Show_WithTimer_DecorateError, (void*)pl);
   Evas_Object* view = pl->evasObject();
   return view;
 }

@@ -26,6 +26,8 @@ class PatternLockViewController : public IPatternLockViewController
   static PatternLockViewController* newL(const BOPatternbLockConfig& config, Evas_Object* parent);
   virtual ~PatternLockViewController();
   void show();
+  void error();
+  void ok();
   
   Evas_Object* evasObject() const;
   
