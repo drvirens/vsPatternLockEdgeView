@@ -269,6 +269,30 @@ Evas_Object* testPatterLockVCShowAll_ActiveState_WithTimer_DecorateError(Evas_Ob
   Evas_Object* view = pl->evasObject();
   return view;
 }
+
+static Eina_Bool __go_decorate_WithTimer_DecorateOkay(void* data)
+{
+  PatternLockViewController* pl = (PatternLockViewController*)data;
+  pl->ok();
+  return false;
+}
+static Eina_Bool __go_Show_WithTimer_DecorateOkay(void* data)
+{
+  PatternLockViewController* pl = (PatternLockViewController*)data;
+  pl->show();
+  __sleep(3, &__go_decorate_WithTimer_DecorateOkay, (void*)pl);
+  return false;
+}
+Evas_Object* testPatterLockVCShowAll_ActiveState_WithTimer_DecorateOkay(Evas_Object* parent)
+{
+  const BOPatternbLockConfig config;
+  PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
+  pl->show();
+  __sleep(3, &__go_Show_WithTimer_DecorateOkay, (void*)pl);
+  Evas_Object* view = pl->evasObject();
+  return view;
+}
+
 static void __halt(Evas_Object* window, Evas_Object* target)
 {
   int sleepSecs = 1000;

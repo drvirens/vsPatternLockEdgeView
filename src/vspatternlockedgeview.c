@@ -49,7 +49,9 @@ create_base_gui(appdata_s *ad)
 //	target = testPatterLockVCShowAll_PassiveState(window);
 //	target = testPatterLockVCShowAll_ActiveState(window);
 //	target = testPatterLockVCShowAll_ActiveState_WithTimer(window);
-	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateError(window);
+//	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateError(window);
+	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateOkay(window);
+
 
 
 	BO_ASSERT(target != NULL);

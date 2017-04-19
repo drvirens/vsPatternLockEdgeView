@@ -21,6 +21,9 @@ typedef enum bo_color_index
 {
   bo_color_index_red,
   bo_color_index_red_transparent,
+  bo_color_index_green,
+  bo_color_index_green_transparent,
+
 } bo_color_index;
 
 static struct bo_color
@@ -32,7 +35,10 @@ static struct bo_color
 } k_bo_color[] =
 {
   {255, 0, 0, 255}, //red opaque
-  {255, 0, 0, 122} //red transparent
+  {255, 0, 0, 122}, //red transparent
+  {0, 255, 0, 255}, //green opaque
+  {0, 255, 0, 122}, //green transparent
+
 };
 
 Evas_Object* __tizen_create_image(Evas_Object* parent) 
@@ -87,9 +93,11 @@ void __tizen_decorate_image(Evas_Object* image, EHotspotColor color, int animate
     {
     return;
     }
-  bo_color_index index;
+  bo_color_index index = bo_color_index_red;
   if (eRed == color) {
     index = bo_color_index_red;
+  } else if (eGreen == color) {
+    index = bo_color_index_green;
   }
   
   bo_color c = k_bo_color[index];
