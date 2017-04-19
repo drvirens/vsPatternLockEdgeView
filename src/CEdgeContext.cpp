@@ -89,13 +89,6 @@ void CEdgeContext::addImagesInTable()
     return;
   }
   table_->add(img, kBOImageTablePositions[i].col, kBOImageTablePositions[i].row, kBOImageTablePositions[i].colSpan, kBOImageTablePositions[i].rowSpan);
-  
-//  for (int i = EImageCore; i >= 0; i--)//only one image
-//  {
-//    BO_ASSERT(images_[i] != 0);
-//    IImage& img = *(images_[i]);
-//    table_->add(img, kBOImageTablePositions[i].col, kBOImageTablePositions[i].row, kBOImageTablePositions[i].colSpan, kBOImageTablePositions[i].rowSpan);
-//  } 
 }
 
 void CEdgeContext::construct()

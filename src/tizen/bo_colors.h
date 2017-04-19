@@ -24,6 +24,7 @@
 #define BO_COLOR_WHITE_ALPHA      0xff, 0xff, 0xff, 0xff
 
 #define BO_COLOR_BLACK_ALPHA       0, 0, 0, 55
+#define BO_COLOR_BLACK_ALPHA_FULLY_TRANSPARENT 0,0,0,0
 
 //use for download area background
 #define BO_COLOR_DARK_GRAY      74, 74, 74, 255

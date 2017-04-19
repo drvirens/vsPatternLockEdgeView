@@ -57,14 +57,20 @@ Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan)
   static const char* bg_image = NULL;
   static const int use_colors_only = 1;
   static const int use_color_and_image = 0;
+
+#if defined ENABLE_TABLE_BACKGROUND_FOR_DEBUG
   Evas_Object* bg = view_create_background(table, bg_image, use_colors_only, use_color_and_image, BO_COLOR_BLACK_ALPHA);
+#else
+  Evas_Object* bg = view_create_background(table, bg_image, use_colors_only, use_color_and_image, BO_COLOR_BLACK_ALPHA_FULLY_TRANSPARENT);
+#endif
+
   if (bg) {
     evas_object_size_hint_align_set(bg, EVAS_HINT_FILL, EVAS_HINT_FILL);
     evas_object_size_hint_weight_set(bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
     elm_table_pack(table, bg, 0, 0, colSpan, rowSpan);
     evas_object_show(bg);
   }
-  evas_object_show(table); //TODO: testing XXX
+  evas_object_show(table);
   return table;
 }
 
@@ -73,8 +79,6 @@ void __tizen_add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, 
   elm_table_pack(nativeTbl, nativeImg, col, row, colSpan, rowSpan);
   evas_object_size_hint_align_set(nativeImg, EVAS_HINT_FILL, EVAS_HINT_FILL);
   evas_object_size_hint_weight_set(nativeImg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-  //evas_object_show(nativeImg); //XXX: for testing
-  //evas_object_resize(nativeTbl, 80, 80);
 }
 
 void __tizen_addMouseDownEventHandler(Evas_Object* nativeTbl, Evas_Object_Event_Cb cb, void* data)
