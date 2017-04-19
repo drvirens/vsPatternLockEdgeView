@@ -14,8 +14,14 @@
 #include "CEdgeContext.hpp"
 #include "trace.hpp"
 
-static const int kTotalCells = 9 + 1; // +1 = bg
-static const BOImageTablePosition kNodesTablePositions[kTotalCells] =
+
+static const int kBackgroundCell = 1; 
+static const int kTotalNodeCells = 9; 
+static const int kTotalTableCells = kTotalNodeCells + kBackgroundCell;
+
+static const int kBackgroundCellIndex = kTotalTableCells - 1;
+
+static const BOImageTablePosition kNodesTablePositions[kTotalTableCells] =
      {
         //row 1
         {3, 3, 1, 1}, 
@@ -30,7 +36,7 @@ static const BOImageTablePosition kNodesTablePositions[kTotalCells] =
         {6, 9, 1, 1},
         {9, 9, 1, 1},
         //bg
-        {0, 0, 13, 13}
+        {0, 0, 13, 13} //always kBackgroundCellIndex
      };
 
 
@@ -43,7 +49,7 @@ PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig&
 }
 void PatternLockViewController::createTable()
 {TRACE
-  BOImageTablePosition bgNodesTablePosition = kNodesTablePositions[kTotalCells-1];
+  BOImageTablePosition bgNodesTablePosition = kNodesTablePositions[kBackgroundCellIndex];
   table_ = BOImageTable::newL(parent_, bgNodesTablePosition.colSpan, bgNodesTablePosition.rowSpan);
   container_ = table_->nativeTable();
 }
@@ -69,8 +75,8 @@ PatternLockViewController::~PatternLockViewController()
 
 void PatternLockViewController::createNodeContexts()
 {TRACE
-  nodecontexts_.reserve(kTotalCells);
-  for (int i = 0; i < kTotalCells; i++)
+  nodecontexts_.reserve(kTotalNodeCells);
+  for (int i = 0; i < kTotalNodeCells; i++)
   {
     CNodeContext* context = CNodeContext::newL(container_);
     nodecontexts_.push_back(context);
@@ -97,6 +103,22 @@ void PatternLockViewController::addImagesInTable()
 Evas_Object* PatternLockViewController::evasObject() const
 {TRACE
   return container_;
+}
+
+
+void PatternLockViewController::resize()
+{TRACE
+  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
+        it != nodecontexts_.end();
+        ++it) {
+    CNodeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (c) 
+      {
+      //Evas_Object* evasobj = c->evasObject();
+      c->resize();
+      }
+  } //end for
 }
 
 void PatternLockViewController::show()

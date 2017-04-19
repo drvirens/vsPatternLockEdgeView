@@ -41,6 +41,7 @@ class PatternLockViewController : public IPatternLockViewController
   void createTable();
   void createNodeContexts();
   void addImagesInTable();
+  void resize();
   
  private:
   Evas_Object* parent_;

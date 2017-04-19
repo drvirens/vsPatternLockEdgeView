@@ -45,6 +45,7 @@ static Evas_Object *view_create_background(Evas_Object *parent,
     bg = evas_object_rectangle_add(evas_canvas);
     evas_object_color_set(bg, r, g, b, a); // opaque white background
   }
+  evas_object_show(bg);
   return bg;
 }
 
@@ -65,7 +66,7 @@ Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan)
     elm_table_pack(table, bg, 0, 0, colSpan, rowSpan);
     evas_object_show(bg);
   }
-
+  evas_object_show(table); //TODO: testing XXX
   return table;
 }
 
@@ -74,7 +75,8 @@ void __tizen_add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, 
   elm_table_pack(nativeTbl, nativeImg, col, row, colSpan, rowSpan);
   evas_object_size_hint_align_set(nativeImg, EVAS_HINT_FILL, EVAS_HINT_FILL);
   evas_object_size_hint_weight_set(nativeImg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-  evas_object_show(nativeImg); //XXX: for testing
+  //evas_object_show(nativeImg); //XXX: for testing
+  //evas_object_resize(nativeTbl, 80, 80);
 }
 
 #endif

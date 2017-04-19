@@ -97,6 +97,11 @@ CNodeContext::~CNodeContext()
 {TRACE
 }
 
+void CNodeContext::resize()
+{TRACE
+  TODO("resize needs to be implemented");
+  //table_->resize();
+}
 void CNodeContext::show()
 {TRACE
   state_->now(*this);

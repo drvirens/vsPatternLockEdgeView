@@ -11,6 +11,8 @@
 
 #include <assert.h>
 
+#define SHOW_TODOS 1
+
 #if defined __TIZEN__
 #include "logger.h"
 #else
@@ -27,6 +29,7 @@ using namespace std;
     
 // trace
 #if defined SHOW_TRACE
+
 #define TRACE printf("%s: %s (%d)\n", MODULE_INFO, __func__, __LINE__);
 #else
 #define TRACE
@@ -34,6 +37,12 @@ using namespace std;
 
 #endif
 
+//todo
+#if defined SHOW_TODOS
+#define TODO printf("=======>>> %s: %s (%d)\n", MODULE_INFO, __func__, __LINE__);
+#else
+#define TODO
+#endif
 
 //assert
 #define BO_ASSERT assert

@@ -24,6 +24,7 @@ class CNodeContext
   static CNodeContext* newL(Evas_Object* parent);
   ~CNodeContext();
   
+  void resize();
   void show();
   void ok();
   void error();
