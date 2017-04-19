@@ -208,7 +208,7 @@ Evas_Object* testThickEdgeView(Evas_Object* parent)
 }
 Evas_Object* testPatterLockVC(Evas_Object* parent)
 {
-  const BOPatternbLockConfig config = {};
+  const BOPatternbLockConfig config;
   
   PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
   Evas_Object* view = pl->evasObject();
@@ -216,11 +216,89 @@ Evas_Object* testPatterLockVC(Evas_Object* parent)
 }
 Evas_Object* testPatterLockVCShowAll_PassiveState(Evas_Object* parent)
 {
-  const BOPatternbLockConfig config = {};
+  const BOPatternbLockConfig config;
   PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
   pl->show();
   Evas_Object* view = pl->evasObject();
   return view;
+}
+static void __halt(Evas_Object* window, Evas_Object* target)
+{
+  int sleepSecs = 1000;
+  usleep(sleepSecs);
+#if defined __TIZEN__
+  //  elm_win_resize_object_add(window, target);
+
+    evas_object_move(target, 50, 200);
+    evas_object_resize(target, 200, 200);
+
+    evas_object_show(target);
+    evas_object_show(window);
+#endif
+}
+void runAllTizenTests(Evas_Object* window)
+{
+  Evas_Object* target = NULL;
+
+  {
+    target = testImage(window);
+    __halt(window, target);
+  }
+  {
+    target = testOuterImage(window);
+    __halt(window, target);
+  }
+  {
+    target = testMiddleImage(window);
+    __halt(window, target);
+  }
+  {
+    target = testInnerImage(window);
+    __halt(window, target);
+  }
+  {
+    target = testCoreImage(window);
+    __halt(window, target);
+  }
+  {
+    target = testTable(window);
+    __halt(window, target);
+  }
+  {
+    target = testActiveNodeView(window);
+    __halt(window, target);
+  }
+  {
+    target = testPassiveNodeView(window);
+    __halt(window, target);
+  }
+  {
+    target = testTizenActiveNodeView(window);
+    __halt(window, target);
+  }
+  {
+    target = testRedNodeViaContext(window);
+    __halt(window, target);
+  }
+  {
+    target = testThinEdgeView(window);
+    BO_ASSERT(target != 0);
+    __halt(window, target);
+  }
+  {
+    target = testThickEdgeView(window);
+    BO_ASSERT(target != 0);
+    __halt(window, target);
+  }
+#if defined __TIZEN__
+  //  elm_win_resize_object_add(window, target);
+
+    evas_object_move(target, 50, 200);
+    evas_object_resize(target, 200, 200);
+
+    evas_object_show(target);
+    evas_object_show(window);
+#endif
 }
 void runAllTests(Evas_Object* parent)
 {

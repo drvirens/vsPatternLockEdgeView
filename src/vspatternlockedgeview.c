@@ -40,9 +40,9 @@ create_base_gui(appdata_s *ad)
 
 
 	Evas_Object* window = ad->win;
-	Evas_Object* parent = ad->win;
-	Evas_Object* target = NULL;
-
+//	Evas_Object* parent = ad->win;
+//	Evas_Object* target = NULL;
+//
 //	{
 //	  target = testImage(window);
 //	}
@@ -81,20 +81,22 @@ create_base_gui(appdata_s *ad)
 //      target = testThickEdgeView(parent);
 //      BO_ASSERT(target != 0);
 //  }
-
-
-	{
-	//runAllTests(ad->win);
-	//target = testNodeView(window);
-	}
-
+//
+//
+//	{
+//	//runAllTests(ad->win);
+//	//target = testNodeView(window);
+//	}
+//
 //  elm_win_resize_object_add(window, target);
+//
+//  evas_object_move(target, 50, 200);
+//  evas_object_resize(target, 200, 200);
+//
+//  evas_object_show(target);
+//	evas_object_show(ad->win);
 
-  evas_object_move(target, 50, 200);
-  evas_object_resize(target, 200, 200);
-
-  evas_object_show(target);
-	evas_object_show(ad->win);
+	runAllTizenTests(window);
 }
 
 static bool app_create(void *data) {

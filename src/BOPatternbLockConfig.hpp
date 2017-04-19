@@ -17,6 +17,8 @@ class BOPatternbLockConfig
   int columnspan() const { return columnspan_; }
   int rowspan() const { return rowspan_; }
   
+  BOPatternbLockConfig();
+  
  public:
   static const int kTotalRows;
   static const int kTotalColumns;

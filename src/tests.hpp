@@ -14,6 +14,8 @@ extern "C" {
 #endif
 
 void runAllTests(Evas_Object* parent);
+void runAllTizenTests(Evas_Object* window);
+
 Evas_Object* testPassiveNodeView(Evas_Object* parent);
 Evas_Object* testActiveNodeView(Evas_Object* parent);
 Evas_Object* testTizenActiveNodeView(Evas_Object* parent);
