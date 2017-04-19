@@ -98,7 +98,7 @@ void PatternLockViewController::addNodesInTable()
 void PatternLockViewController::createEdgeContexts()
 {TRACE
   edgecontexts_.reserve(kTotalEdgeCells);
-  for (int i = 0; i < kTotalNodeCells; i++)
+  for (int i = 0; i < kTotalEdgeCells; i++)
   {
     CEdgeContext* context = CEdgeContext::newL(container_);
     edgecontexts_.push_back(context);

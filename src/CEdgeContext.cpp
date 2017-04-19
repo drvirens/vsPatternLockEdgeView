@@ -52,6 +52,8 @@ void CEdgeContext::createImages()
 {TRACE
   Evas_Object* tbl = table_->nativeTable();
   images_[EImageCore] = ImageEdge::newL(tbl);
+
+  //XXX: create vertical and diagonal images too - or just use background ?
  }
 
 void CEdgeContext::addImagesInTable()
