@@ -50,7 +50,9 @@ void PatternLockViewController::construct()
 {TRACE
   createTable();
   createNodeContexts();
-  addImagesInTable();
+  addNodesInTable();
+  createEdgeContexts();
+  addEdgesInTable();
 }
 PatternLockViewController* PatternLockViewController::newL(const BOPatternbLockConfig& config, Evas_Object* parent)
 {TRACE
@@ -76,7 +78,7 @@ void PatternLockViewController::createNodeContexts()
   } //end for
 }
 
-void PatternLockViewController::addImagesInTable()
+void PatternLockViewController::addNodesInTable()
 {TRACE
   int i = 0;
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
@@ -93,6 +95,32 @@ void PatternLockViewController::addImagesInTable()
   } //end for
 }
 
+void PatternLockViewController::createEdgeContexts()
+{TRACE
+  edgecontexts_.reserve(kTotalEdgeCells);
+  for (int i = 0; i < kTotalNodeCells; i++)
+  {
+    CEdgeContext* context = CEdgeContext::newL(container_);
+    edgecontexts_.push_back(context);
+  } //end for
+}
+void PatternLockViewController::addEdgesInTable()
+{TRACE
+  int i = 0;
+  for (vector<CEdgeContext*>::iterator it = edgecontexts_.begin();
+        it != edgecontexts_.end();
+        ++it) {
+    CEdgeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (c) 
+      {
+      Evas_Object* evasObj = c->evasObject();
+      table_->addEvasObject(evasObj, kEdgesTablePositions[i].col, kEdgesTablePositions[i].row, kEdgesTablePositions[i].colSpan, kEdgesTablePositions[i].rowSpan);
+      i++;
+      }
+  } //end for
+}
+  
 Evas_Object* PatternLockViewController::evasObject() const
 {TRACE
   return container_;
@@ -112,7 +140,7 @@ void PatternLockViewController::resize()
   } //end for
 }
 
-void PatternLockViewController::show()
+void PatternLockViewController::showNodes()
 {TRACE
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
         it != nodecontexts_.end();
@@ -124,6 +152,25 @@ void PatternLockViewController::show()
       c->show();
       }
   } //end for
+}
+void PatternLockViewController::showEdges()
+{TRACE
+  for (vector<CEdgeContext*>::iterator it = edgecontexts_.begin();
+        it != edgecontexts_.end();
+        ++it) {
+    CEdgeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (c) 
+      {
+      c->show();
+      }
+  } //end for
+}
+void PatternLockViewController::show()
+{TRACE
+  showNodes();
+  //test
+  showEdges(); //XXX
 }
 void PatternLockViewController::error()
 {TRACE

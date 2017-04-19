@@ -15,6 +15,9 @@ extern const int kTotalNodeCells;
 extern const int kTotalTableCells;
 extern const int kBackgroundCellIndex;
 
+extern const int kTotalEdgeCells;
+
 extern BOImageTablePosition kNodesTablePositions[];
+extern BOImageTablePosition kEdgesTablePositions[];
 
 #endif /* PatterLockLayout_hpp */

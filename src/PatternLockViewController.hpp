@@ -42,7 +42,14 @@ class PatternLockViewController : public IPatternLockViewController
   void construct();
   void createTable();
   void createNodeContexts();
-  void addImagesInTable();
+  void addNodesInTable();
+  
+  void createEdgeContexts();
+  void addEdgesInTable();
+  
+  void showNodes();
+  void showEdges();
+
   void resize();
   
  private:

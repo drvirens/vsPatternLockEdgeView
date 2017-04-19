@@ -103,7 +103,7 @@ void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_info) {
     }
   if (thiz->mousedowncb_)
   {
-    (*(thiz->mousedowncb_))(thiz->mousedowncb_data_, mouse);
+    (*(thiz->mousedowncb_))(mouse, thiz->mousedowncb_data_);
   }
 }
 #endif

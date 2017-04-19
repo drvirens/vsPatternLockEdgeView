@@ -17,7 +17,8 @@
 
 static const BOImageTablePosition kBOImageTablePositions[EImageMiddle] =
    {
-      {2, 2, 8, 8}, //edge = 0
+      //{2, 2, 8, 8}, //edge = 0
+      {0, 0, 14, 14}, //edge = 0
       {0, 0, 14, 14}, //bg = 1
    };
 
