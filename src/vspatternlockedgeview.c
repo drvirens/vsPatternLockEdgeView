@@ -1,3 +1,6 @@
+
+#if defined __TIZEN__
+
 #include <tizen.h>
 #include "vspatternlockedgeview.h"
 #include "trace.hpp"
@@ -45,14 +48,18 @@ create_base_gui(appdata_s *ad)
 
 	{
 	Evas_Object* target = NULL;
-
+  
+  target = testThinEdgeView_Vertical(window); //nothing except table background should be displayed
+//  target = testThickEdgeView_Vertical(window);
+//  target = testThickEdgeView_Horizontal(window);
+//  target = testThickEdgeView_ForwardSlashed(window);
+//  target = testThickEdgeView_BackwardSlashed(window);
+  
 //	target = testPatterLockVCShowAll_PassiveState(window);
 //	target = testPatterLockVCShowAll_ActiveState(window);
 //	target = testPatterLockVCShowAll_ActiveState_WithTimer(window);
 //	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateError(window);
-	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateOkay(window);
-
-
+//	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateOkay(window);
 
 	BO_ASSERT(target != NULL);
 
@@ -165,3 +172,5 @@ main(int argc, char *argv[])
 
 	return ret;
 }
+
+#endif //__TIZEN__

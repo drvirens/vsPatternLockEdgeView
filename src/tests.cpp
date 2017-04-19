@@ -189,16 +189,46 @@ void testEdgeViewThin()
   EdgeStateThin* thin = EdgeStateThin::newL(*tbl, *image);
   BO_ASSERT(thin != NULL);
 }
-Evas_Object* testThinEdgeView(Evas_Object* parent)
+Evas_Object* testThinEdgeView_Vertical(Evas_Object* parent)
 {
   CEdgeContext* context = CEdgeContext::newL(parent, BOEdgeType_Vertical);
   context->show();
   Evas_Object* handle = context->evasObject();
   return handle;
 }
-Evas_Object* testThickEdgeView(Evas_Object* parent)
+Evas_Object* testThickEdgeView_Vertical(Evas_Object* parent)
 {
   CEdgeContext* context = CEdgeContext::newL(parent, BOEdgeType_Vertical);
+  context->show();
+  Evas_Object* handle = context->evasObject();
+  
+  context->show();
+  handle = context->evasObject();
+  return handle;
+}
+Evas_Object* testThickEdgeView_Horizontal(Evas_Object* parent)
+{
+  CEdgeContext* context = CEdgeContext::newL(parent, BOEdgeType_Horizontal);
+  context->show();
+  Evas_Object* handle = context->evasObject();
+  
+  context->show();
+  handle = context->evasObject();
+  return handle;
+}
+Evas_Object* testThickEdgeView_ForwardSlashed(Evas_Object* parent)
+{
+  CEdgeContext* context = CEdgeContext::newL(parent, BOEdgeType_ForwardSlashed);
+  context->show();
+  Evas_Object* handle = context->evasObject();
+  
+  context->show();
+  handle = context->evasObject();
+  return handle;
+}
+Evas_Object* testThickEdgeView_BackwardSlashed(Evas_Object* parent)
+{
+  CEdgeContext* context = CEdgeContext::newL(parent, BOEdgeType_BackwardSlashed);
   context->show();
   Evas_Object* handle = context->evasObject();
   
@@ -352,12 +382,12 @@ void runAllTizenTests(Evas_Object* window)
     __halt(window, target);
   }
   {
-    target = testThinEdgeView(window);
+    target = testThinEdgeView_Vertical(window);
     BO_ASSERT(target != 0);
     __halt(window, target);
   }
   {
-    target = testThickEdgeView(window);
+    target = testThickEdgeView_Vertical(window);
     BO_ASSERT(target != 0);
     __halt(window, target);
   }

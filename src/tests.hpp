@@ -32,8 +32,11 @@ void testNodeRedDecorator();
 Evas_Object* testRedNodeViaContext(Evas_Object* parent);
 
 void testEdgeViewThin();
-Evas_Object* testThinEdgeView(Evas_Object* parent);
-Evas_Object* testThickEdgeView(Evas_Object* parent);
+Evas_Object* testThinEdgeView_Vertical(Evas_Object* parent);
+Evas_Object* testThickEdgeView_Vertical(Evas_Object* parent);
+Evas_Object* testThickEdgeView_Horizontal(Evas_Object* parent);
+Evas_Object* testThickEdgeView_ForwardSlashed(Evas_Object* parent);
+Evas_Object* testThickEdgeView_BackwardSlashed(Evas_Object* parent);
 
 Evas_Object* testPatterLockVC(Evas_Object* parent);
 Evas_Object* testPatterLockVCShowAll_PassiveState(Evas_Object* parent);
