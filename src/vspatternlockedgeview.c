@@ -61,6 +61,7 @@ create_base_gui(appdata_s *ad)
 //	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateError(window);
 	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateOkay(window);
 
+
 	BO_ASSERT(target != NULL);
 
 //  evas_object_move(target, 50, 200);

@@ -83,7 +83,8 @@ void PatternLockViewController::addNodesInTable()
   int i = 0;
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
         it != nodecontexts_.end();
-        ++it) {
+        ++it) 
+  {
     CNodeContext* c = *it;
     BO_ASSERT(c != NULL);
     if (c) 
@@ -143,7 +144,8 @@ void PatternLockViewController::addEdgesInTable()
   int i = 0;
   for (vector<CEdgeContext*>::iterator it = edgecontexts_.begin();
         it != edgecontexts_.end();
-        ++it) {
+        ++it) 
+  {
     CEdgeContext* c = *it;
     BO_ASSERT(c != NULL);
     if (c) 
@@ -164,7 +166,8 @@ void PatternLockViewController::resize()
 {TRACE
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
         it != nodecontexts_.end();
-        ++it) {
+        ++it) 
+  {
     CNodeContext* c = *it;
     BO_ASSERT(c != NULL);
     if (c) 
@@ -178,7 +181,8 @@ void PatternLockViewController::showNodes()
 {TRACE
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
         it != nodecontexts_.end();
-        ++it) {
+        ++it) 
+  {
     CNodeContext* c = *it;
     BO_ASSERT(c != NULL);
     if (c) 
@@ -191,7 +195,8 @@ void PatternLockViewController::showEdges()
 {TRACE
   for (vector<CEdgeContext*>::iterator it = edgecontexts_.begin();
         it != edgecontexts_.end();
-        ++it) {
+        ++it) 
+  {
     CEdgeContext* c = *it;
     BO_ASSERT(c != NULL);
     if (c) 
@@ -203,14 +208,14 @@ void PatternLockViewController::showEdges()
 void PatternLockViewController::show()
 {TRACE
   showNodes();
-  //test
-  showEdges(); //XXX
+  showEdges(); //this call is needed to put all edges in thick mode so they get shown later.
 }
 void PatternLockViewController::error()
 {TRACE
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
         it != nodecontexts_.end();
-        ++it) {
+        ++it) 
+  {
     CNodeContext* c = *it;
     BO_ASSERT(c != NULL);
     if (c) 
@@ -223,7 +228,8 @@ void PatternLockViewController::ok()
 {TRACE
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
         it != nodecontexts_.end();
-        ++it) {
+        ++it) 
+  {
     CNodeContext* c = *it;
     BO_ASSERT(c != NULL);
     if (c) 

@@ -318,6 +318,7 @@ Evas_Object* testPatterLockVCShowAll_ActiveState_WithTimer_DecorateOkay(Evas_Obj
   const BOPatternbLockConfig config;
   PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
   pl->show();
+  //pl->showEdges();
   __sleep(3, &__go_Show_WithTimer_DecorateOkay, (void*)pl);
   Evas_Object* view = pl->evasObject();
   return view;
