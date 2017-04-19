@@ -16,7 +16,7 @@ class StatePassive;
 class StateActive;
 class NodeColorDecorator;
 class INodeView;
-class Table;
+class BOImageTable;
 
 class CNodeContext
 {
@@ -47,7 +47,7 @@ class CNodeContext
   StatePassive* passive_;
   StateActive* active_;
   NodeColorDecorator* colordecorator_;
-  Table* table_;
+  BOImageTable* table_;
   
  friend 
   class StatePassive;

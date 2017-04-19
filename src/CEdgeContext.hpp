@@ -16,7 +16,7 @@ class EdgeStateThin;
 class EdgeStateThick;
 class EdgeColorDecorator;
 class IEdgeView;
-class Table;
+class BOImageTable;
 
 class CEdgeContext
 {
@@ -47,7 +47,7 @@ class CEdgeContext
   EdgeStateThin* passive_;
   EdgeStateThick* active_;
   EdgeColorDecorator* colordecorator_;
-  Table* table_;
+  BOImageTable* table_;
   
  friend 
   class EdgeStateThin;

@@ -33,7 +33,7 @@ void NodeColorDecorator::decorate(EHotspotColor color)
   IImage& outerimage = outer();
   outerimage.decorate(color);
 }
-NodeColorDecorator::NodeColorDecorator(INodeView& nodeView, Table& parent, IImage*& images)
+NodeColorDecorator::NodeColorDecorator(INodeView& nodeView, BOImageTable& parent, IImage*& images)
 : INodeDecorator(nodeView, parent, images)
 {TRACE
 }

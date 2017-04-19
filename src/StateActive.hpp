@@ -14,14 +14,14 @@
 class StateActive: public INodeView
 {
  public:
-  static StateActive* newL(Table& parent, IImage*& images);
+  static StateActive* newL(BOImageTable& parent, IImage*& images);
   virtual ~StateActive();
   
   virtual void now(CNodeContext& context);
   virtual void decorate(EHotspotColor color);
   
  private:
-  StateActive(Table& parent, IImage*& images);
+  StateActive(BOImageTable& parent, IImage*& images);
   void construct();
 };
 

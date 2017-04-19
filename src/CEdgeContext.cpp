@@ -11,7 +11,7 @@
 #include "EdgeStateThick.hpp"
 #include "ImageEdge.hpp"
 #include "EdgeColorDecorator.hpp"
-#include "Table.hpp"
+#include "BOImageTable.hpp"
 #include "trace.hpp"
 
 static struct ImagePosition
@@ -49,7 +49,7 @@ CEdgeContext::CEdgeContext(Evas_Object* parent)
 void CEdgeContext::createTable()
 {TRACE
   ImagePosition bgImagePosition = kImagePositions[EImageMaxSize];
-  table_ = Table::newL(parent_, bgImagePosition.colSpan, bgImagePosition.rowSpan);
+  table_ = BOImageTable::newL(parent_, bgImagePosition.colSpan, bgImagePosition.rowSpan);
 }
 
 void CEdgeContext::createImages()

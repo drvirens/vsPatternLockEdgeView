@@ -35,7 +35,7 @@ extern "C" {
 #include "ImageInner.hpp"
 #include "ImageMiddle.hpp"
 #include "ImageOuter.hpp"
-#include "Table.hpp"
+#include "BOImageTable.hpp"
 #include "trace.hpp"
 #include "NodeColorDecorator.hpp"
 #include "StateActive.hpp"
@@ -58,7 +58,7 @@ Evas_Object* testTable(Evas_Object* parent)
 {
   int bgRowSpan = 14;
   int bgColSpan = 14;
-  Table* table = Table::newL(parent, bgColSpan, bgRowSpan);
+  BOImageTable* table = BOImageTable::newL(parent, bgColSpan, bgRowSpan);
   Evas_Object* tbl = table->nativeTable();
   IImage* img = ImageCore::newL(tbl);
 
@@ -135,7 +135,7 @@ Evas_Object* testTizenActiveNodeView(Evas_Object* parent)
 }
 void testNodeRedDecorator()
 {
-  Table* tbl = Table::newL(0, 0, 0);
+  BOImageTable* tbl = BOImageTable::newL(0, 0, 0);
   IImage* images[1] = {0};
   StateActive* active = StateActive::newL(*tbl, *images);
   NodeColorDecorator* red = new NodeColorDecorator(*active, *tbl, *images);
@@ -182,7 +182,7 @@ Evas_Object* testRedNodeViaContext(Evas_Object* parent)
 }
 void testEdgeViewThin()
 {
-  Table* tbl = Table::newL(0, 0, 0);
+  BOImageTable* tbl = BOImageTable::newL(0, 0, 0);
   IImage* images[1] = {};
   EdgeStateThin* thin = EdgeStateThin::newL(*tbl, *images);
   BO_ASSERT(thin != NULL);

@@ -17,7 +17,7 @@ INodeView::~INodeView()
 {TRACE
 }
 
-INodeView::INodeView(Table* parent, IImage*& images)
+INodeView::INodeView(BOImageTable* parent, IImage*& images)
 : parent_(parent)
 , images_(&images)
 {TRACE

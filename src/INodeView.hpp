@@ -13,7 +13,7 @@
 
 class CNodeContext;
 class IImage;
-class Table;
+class BOImageTable;
 
 class INodeView 
 {
@@ -23,7 +23,7 @@ class INodeView
   virtual ~INodeView();
   
  protected:
-  INodeView(Table* parent, IImage*& images);
+  INodeView(BOImageTable* parent, IImage*& images);
   IImage& core();
   IImage& inner();
   IImage& middle();
@@ -32,7 +32,7 @@ class INodeView
   void construct();
   
  protected:
-  Table* parent_;
+  BOImageTable* parent_;
   IImage** images_; //using
 };
 

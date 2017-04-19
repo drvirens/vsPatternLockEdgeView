@@ -26,12 +26,12 @@ void StatePassive::decorate(EHotspotColor color)
 {TRACE
 }
 
-StatePassive::StatePassive(Table& parent, IImage*& images)
+StatePassive::StatePassive(BOImageTable& parent, IImage*& images)
 : INodeView(&parent, images)
 {TRACE
 }
 
-StatePassive* StatePassive::newL(Table& parent, IImage*& images)
+StatePassive* StatePassive::newL(BOImageTable& parent, IImage*& images)
 {TRACE
   StatePassive* obj = new StatePassive(parent, images);
   if (obj) 

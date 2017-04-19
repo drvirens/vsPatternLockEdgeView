@@ -1,5 +1,5 @@
 //
-//  Table.hpp
+//  BOImageTable.hpp
 //  vsNodeView
 //
 //  Created by Virendra Shakya on 4/13/17.
@@ -16,16 +16,16 @@ using namespace std;
 
 class IImage;
 
-class Table
+class BOImageTable
 {
  public:
-  virtual ~Table();
-  static Table* newL(Evas_Object* parent, int bgColSpan, int bgRowSpan);
+  virtual ~BOImageTable();
+  static BOImageTable* newL(Evas_Object* parent, int bgColSpan, int bgRowSpan);
   void add(IImage& image, int col, int row, int colSpan, int rowSpan);
   Evas_Object* nativeTable() const;
   
  private:
-  Table(Evas_Object* parent, int bgColSpan, int bgRowSpan);
+  BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan);
   void construct();
   
  private:

@@ -12,7 +12,7 @@
 #include "IImage.hpp"
 #include "trace.hpp"
 
-EdgeStateThick* EdgeStateThick::newL(Table& table, IImage*& images)
+EdgeStateThick* EdgeStateThick::newL(BOImageTable& table, IImage*& images)
 {TRACE
   EdgeStateThick* obj = new EdgeStateThick(table, images);
   if (obj) 
@@ -35,7 +35,7 @@ void EdgeStateThick::decorate(EHotspotColor color)
 {TRACE
 }
 
-EdgeStateThick::EdgeStateThick(Table& table, IImage*& images)
+EdgeStateThick::EdgeStateThick(BOImageTable& table, IImage*& images)
 : IEdgeView(&table, images)
 {TRACE
 }

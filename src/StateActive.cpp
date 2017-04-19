@@ -27,13 +27,13 @@ void StateActive::decorate(EHotspotColor color)
 {TRACE
 }
 
-StateActive::StateActive(Table& parent, IImage*& images)
+StateActive::StateActive(BOImageTable& parent, IImage*& images)
 : INodeView(&parent, images)
 {TRACE
 }
 
 
-StateActive* StateActive::newL(Table& parent, IImage*& images)
+StateActive* StateActive::newL(BOImageTable& parent, IImage*& images)
 {TRACE
   StateActive* obj = new StateActive(parent, images);
   if (obj) 

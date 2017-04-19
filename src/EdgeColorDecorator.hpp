@@ -20,7 +20,7 @@ class EdgeColorDecorator: public IEdgeDecorator
   virtual void decorate(EHotspotColor color);
   
  //protected:
-  EdgeColorDecorator(IEdgeView& edgeView, Table& parent, IImage*& images);
+  EdgeColorDecorator(IEdgeView& edgeView, BOImageTable& parent, IImage*& images);
   void construct();
 };
 

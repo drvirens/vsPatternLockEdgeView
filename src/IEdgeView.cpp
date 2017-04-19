@@ -17,7 +17,7 @@ IEdgeView::~IEdgeView()
 {TRACE
 }
 
-IEdgeView::IEdgeView(Table* parent, IImage*& images)
+IEdgeView::IEdgeView(BOImageTable* parent, IImage*& images)
 : parent_(parent)
 , images_(&images)
 {TRACE

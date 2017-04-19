@@ -13,7 +13,7 @@
 
 class CEdgeContext;
 class IImage;
-class Table;
+class BOImageTable;
 
 class IEdgeView 
 {
@@ -23,13 +23,13 @@ class IEdgeView
   virtual ~IEdgeView();
   
  protected:
-  IEdgeView(Table* parent, IImage*& images);
+  IEdgeView(BOImageTable* parent, IImage*& images);
   IImage& edge();
   
   void construct();
   
  protected:
-  Table* parent_;
+  BOImageTable* parent_;
   IImage** images_; //using
 };
 

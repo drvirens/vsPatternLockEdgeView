@@ -20,7 +20,7 @@ void IEdgeDecorator::decorate(EHotspotColor color)
 {TRACE
   edgeview_.decorate(color);
 }
-IEdgeDecorator::IEdgeDecorator(IEdgeView& edgeView,Table& parent, IImage*& images)
+IEdgeDecorator::IEdgeDecorator(IEdgeView& edgeView,BOImageTable& parent, IImage*& images)
 : IEdgeView(&parent, images)
 , edgeview_(edgeView)
 {TRACE

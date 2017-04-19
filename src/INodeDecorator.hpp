@@ -20,7 +20,7 @@ class INodeDecorator : public INodeView
   virtual void decorate(EHotspotColor color);
   
  protected:
-  INodeDecorator(INodeView& nodeView, Table& parent, IImage*& images);
+  INodeDecorator(INodeView& nodeView, BOImageTable& parent, IImage*& images);
   
  private:
   INodeView& nodeview_;

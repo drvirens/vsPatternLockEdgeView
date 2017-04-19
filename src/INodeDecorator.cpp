@@ -20,7 +20,7 @@ void INodeDecorator::decorate(EHotspotColor color)
 {TRACE
   nodeview_.decorate(color);
 }
-INodeDecorator::INodeDecorator(INodeView& nodeView,Table& parent, IImage*& images)
+INodeDecorator::INodeDecorator(INodeView& nodeView,BOImageTable& parent, IImage*& images)
 : INodeView(&parent, images)
 , nodeview_(nodeView)
 {TRACE

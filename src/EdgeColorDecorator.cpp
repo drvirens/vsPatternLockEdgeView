@@ -33,7 +33,7 @@ void EdgeColorDecorator::decorate(EHotspotColor color)
 //  IImage& outerimage = outer();
 //  outerimage.decorate(color);
 }
-EdgeColorDecorator::EdgeColorDecorator(IEdgeView& nodeView, Table& parent, IImage*& images)
+EdgeColorDecorator::EdgeColorDecorator(IEdgeView& nodeView, BOImageTable& parent, IImage*& images)
 : IEdgeDecorator(nodeView, parent, images)
 {TRACE
 }

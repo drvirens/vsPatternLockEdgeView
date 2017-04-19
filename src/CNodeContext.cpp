@@ -14,7 +14,7 @@
 #include "ImageMiddle.hpp"
 #include "ImageOuter.hpp"
 #include "NodeColorDecorator.hpp"
-#include "Table.hpp"
+#include "BOImageTable.hpp"
 #include "trace.hpp"
 
 static struct ImagePosition
@@ -57,7 +57,7 @@ CNodeContext::CNodeContext(Evas_Object* parent)
 void CNodeContext::createTable()
 {TRACE
   ImagePosition bgImagePosition = kImagePositions[EImageMaxSize];
-  table_ = Table::newL(parent_, bgImagePosition.colSpan, bgImagePosition.rowSpan);
+  table_ = BOImageTable::newL(parent_, bgImagePosition.colSpan, bgImagePosition.rowSpan);
 }
 
 void CNodeContext::createImages()
