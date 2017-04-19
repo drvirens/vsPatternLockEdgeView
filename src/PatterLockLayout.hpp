@@ -16,6 +16,11 @@ extern const int kTotalTableCells;
 extern const int kBackgroundCellIndex;
 
 extern const int kTotalEdgeCells;
+extern const int kTotalEdgeCells_Vertical;
+extern const int kTotalEdgeCells_Horizontal;
+extern const int kTotalEdgeCells_ForwardSlashed;
+extern const int kTotalEdgeCells_BackwardSlashed;
+
 
 extern BOImageTablePosition kNodesTablePositions[];
 extern BOImageTablePosition kEdgesTablePositions[];

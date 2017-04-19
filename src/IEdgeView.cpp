@@ -17,9 +17,9 @@ IEdgeView::~IEdgeView()
 {TRACE
 }
 
-IEdgeView::IEdgeView(BOImageTable* parent, IImage*& images)
+IEdgeView::IEdgeView(BOImageTable* parent, IImage& image)
 : parent_(parent)
-, images_(&images)
+, image_(&image)
 {TRACE
 }
 
@@ -29,7 +29,7 @@ void IEdgeView::construct()
 
 IImage& IEdgeView::edge()
 {TRACE
-  IImage* i = images_[EImageCore];
+  IImage* i = image_;
   BO_ASSERT(i);
   return *i;
 }

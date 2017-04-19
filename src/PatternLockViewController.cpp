@@ -98,11 +98,46 @@ void PatternLockViewController::addNodesInTable()
 void PatternLockViewController::createEdgeContexts()
 {TRACE
   edgecontexts_.reserve(kTotalEdgeCells);
-  for (int i = 0; i < kTotalEdgeCells; i++)
+//  for (int i = 0; i < kTotalEdgeCells; i++)
+//  {
+//    CEdgeContext* context = CEdgeContext::newL(container_);
+//    edgecontexts_.push_back(context);
+//  } //end for
+
+  int i = 0;
+  int howMany = kTotalEdgeCells_Vertical;
+    //vertical
+  for (; i < howMany; i++)
   {
-    CEdgeContext* context = CEdgeContext::newL(container_);
+    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Vertical);
     edgecontexts_.push_back(context);
   } //end for
+  
+    //horizontal
+  howMany += kTotalEdgeCells_Horizontal;
+  for (; i < howMany; i++)
+  {
+    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Horizontal);
+    edgecontexts_.push_back(context);
+  } //end for
+
+    //forward
+  howMany += kTotalEdgeCells_ForwardSlashed;
+  for (; i < howMany; i++)
+  {
+    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_ForwardSlashed);
+    edgecontexts_.push_back(context);
+  } //end for
+  
+      //backward
+  howMany += kTotalEdgeCells_BackwardSlashed;
+  for (; i < howMany; i++)
+  {
+    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_BackwardSlashed);
+    edgecontexts_.push_back(context);
+  } //end for
+
+
 }
 void PatternLockViewController::addEdgesInTable()
 {TRACE

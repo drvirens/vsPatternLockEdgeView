@@ -11,6 +11,7 @@
 
 #include "OS.h"
 #include "IImage.hpp"
+#include "BOEdgeType.hpp"
 
 class EdgeStateThin;
 class EdgeStateThick;
@@ -21,7 +22,7 @@ class BOImageTable;
 class CEdgeContext
 {
  public:
-  static CEdgeContext* newL(Evas_Object* parent);
+  static CEdgeContext* newL(Evas_Object* parent, const BOEdgeType& type);
   ~CEdgeContext();
   
   void show();
@@ -31,7 +32,7 @@ class CEdgeContext
   Evas_Object* evasObject() const;
 
  private:
-  CEdgeContext(Evas_Object* parent);
+  CEdgeContext(Evas_Object* parent, const BOEdgeType& type);
   void construct();
   void createTable();
   void createImages();
@@ -42,12 +43,14 @@ class CEdgeContext
 
  private:
   Evas_Object* parent_;
-  IImage* images_[EImageMaxSize];
+  //IImage* images_[EImageMaxSize];
+  IImage* image_;
   IEdgeView* state_; //current state
-  EdgeStateThin* passive_;
-  EdgeStateThick* active_;
+  EdgeStateThin* thin_;
+  EdgeStateThick* thick_;
   EdgeColorDecorator* colordecorator_;
   BOImageTable* table_;
+  const BOEdgeType edgetype_;
   
  friend 
   class EdgeStateThin;

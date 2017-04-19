@@ -14,14 +14,14 @@
 class EdgeStateThin : public IEdgeView
 {
  public:
-  static EdgeStateThin* newL(BOImageTable& parent, IImage*& images);
+  static EdgeStateThin* newL(BOImageTable& parent, IImage& image);
   virtual ~EdgeStateThin();
   
   virtual void now(CEdgeContext& context);
   virtual void decorate(EHotspotColor color);
   
  private:
-  EdgeStateThin(BOImageTable& parent, IImage*& images);
+  EdgeStateThin(BOImageTable& parent, IImage& image);
   void construct();
 };
 

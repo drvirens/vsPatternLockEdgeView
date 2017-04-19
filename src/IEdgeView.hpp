@@ -23,14 +23,14 @@ class IEdgeView
   virtual ~IEdgeView();
   
  protected:
-  IEdgeView(BOImageTable* parent, IImage*& images);
+  IEdgeView(BOImageTable* parent, IImage& image);
   IImage& edge();
   
   void construct();
   
  protected:
   BOImageTable* parent_;
-  IImage** images_; //using
+  IImage* image_; //using
 };
 
 

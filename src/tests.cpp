@@ -185,20 +185,20 @@ Evas_Object* testRedNodeViaContext(Evas_Object* parent)
 void testEdgeViewThin()
 {
   BOImageTable* tbl = BOImageTable::newL(0, 0, 0);
-  IImage* images[1] = {};
-  EdgeStateThin* thin = EdgeStateThin::newL(*tbl, *images);
+  IImage* image = 0;
+  EdgeStateThin* thin = EdgeStateThin::newL(*tbl, *image);
   BO_ASSERT(thin != NULL);
 }
 Evas_Object* testThinEdgeView(Evas_Object* parent)
 {
-  CEdgeContext* context = CEdgeContext::newL(parent);
+  CEdgeContext* context = CEdgeContext::newL(parent, BOEdgeType_Vertical);
   context->show();
   Evas_Object* handle = context->evasObject();
   return handle;
 }
 Evas_Object* testThickEdgeView(Evas_Object* parent)
 {
-  CEdgeContext* context = CEdgeContext::newL(parent);
+  CEdgeContext* context = CEdgeContext::newL(parent, BOEdgeType_Vertical);
   context->show();
   Evas_Object* handle = context->evasObject();
   

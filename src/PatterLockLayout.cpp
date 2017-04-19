@@ -11,7 +11,13 @@
 
 static const int kBackgroundCell = 1; 
 const int kTotalNodeCells = 9; 
+
+
 const int kTotalEdgeCells = 20;
+const int kTotalEdgeCells_Vertical = 6;
+const int kTotalEdgeCells_Horizontal = 6;
+const int kTotalEdgeCells_ForwardSlashed = 4;
+const int kTotalEdgeCells_BackwardSlashed = 4;
 
 const int kTotalTableCells = kTotalNodeCells + kBackgroundCell;
 const int kBackgroundCellIndex = kTotalTableCells - 1;
@@ -37,20 +43,38 @@ BOImageTablePosition kNodesTablePositions[kTotalTableCells] =
 
 BOImageTablePosition kEdgesTablePositions[kTotalEdgeCells] =
      {
-        //vertical edges 
+        //
+        //vertical edges: 6
+        // 
         {3, 3, 4, 1}, 
         {6, 3, 4, 1}, 
         {3, 6, 4, 1}, 
         {6, 6, 4, 1}, 
         {3, 9, 4, 1}, 
         {6, 9, 4, 1}, 
-        //horizontal edges
+        //
+        //horizontal edges: 6
+        //
         {3, 3, 1, 4},
         {6, 3, 1, 4},
         {9, 3, 1, 4},
         {3, 6, 1, 4},
         {6, 6, 1, 4},
         {9, 6, 1, 4},
-        //diagonal edges
+        //
+        //diagonal edges - top-left to bottom-right aka forward slashed : 4
+        //
+        {3, 3, 4, 4},
+        {6, 3, 4, 4},
+        {3, 6, 4, 4},
+        {6, 6, 4, 4},
+        //
+        //diagonal edges - top-right to bottom-left aka backslashed : 4
+        //
+        {3, 3, 4, 4},
+        {6, 3, 4, 4},
+        {3, 6, 4, 4},
+        {6, 6, 4, 4},
+
      };
 
