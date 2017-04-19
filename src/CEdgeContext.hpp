@@ -38,8 +38,8 @@ class CEdgeContext
   void createImages();
   void addImagesInTable();
 
-  void setPassive();
-  void setActive();
+  void setThin();
+  void setThick();
 
  private:
   Evas_Object* parent_;

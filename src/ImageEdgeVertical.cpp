@@ -16,7 +16,7 @@ ImageEdgeVertical* ImageEdgeVertical::newL(Evas_Object* parent)
   ImageEdgeVertical* obj = new ImageEdgeVertical(parent);
   if (obj)
   {
-  obj->construct();
+    obj->construct();
   }
   return obj;
 }

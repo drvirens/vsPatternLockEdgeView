@@ -22,7 +22,7 @@
 static const BOImageTablePosition kBOImageTablePositions[EImageMiddle] =
    {
       //{2, 2, 8, 8}, //edge = 0
-      {0, 0, 14, 14}, //vertical edge = 0
+      //{0, 0, 14, 14}, //vertical edge = 0
       {0, 0, 14, 14}, //bg = 1
    };
 
@@ -50,7 +50,8 @@ CEdgeContext::CEdgeContext(Evas_Object* parent, const BOEdgeType& type)
 
 void CEdgeContext::createTable()
 {TRACE
-  BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[EImageInner];
+  //BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[EImageInner];
+  BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[0];
   table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan);
 }
 
@@ -77,9 +78,16 @@ void CEdgeContext::createImages()
 
 void CEdgeContext::addImagesInTable()
 {TRACE
-  BOEdgeType i = edgetype_;
+  //BOEdgeType i = edgetype_;
+  int i = 0; //all the edges are always drawn in same way
   BO_ASSERT(image_ != 0);
   IImage& img = *(image_);
+  int len = sizeof(kBOImageTablePositions)/sizeof(kBOImageTablePositions[0]);
+  BO_ASSERT(i >= 0 && i < len);
+  if (!(i >= 0 && i < len))
+  {
+    return;
+  }
   table_->add(img, kBOImageTablePositions[i].col, kBOImageTablePositions[i].row, kBOImageTablePositions[i].colSpan, kBOImageTablePositions[i].rowSpan);
   
 //  for (int i = EImageCore; i >= 0; i--)//only one image
@@ -126,12 +134,12 @@ Evas_Object* CEdgeContext::evasObject() const
   Evas_Object* tbl = table_->nativeTable();
   return tbl;
 }
-void CEdgeContext::setPassive()
+void CEdgeContext::setThin()
 {TRACE
   state_ = thin_;
 }
 
-void CEdgeContext::setActive()
+void CEdgeContext::setThick()
 {TRACE
   state_ = thick_;
 }

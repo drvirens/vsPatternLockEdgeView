@@ -31,7 +31,7 @@ void EdgeStateThin::now(CEdgeContext& context)
 //  edge().show();
   DBG("This is going to render a line using graphics. No image should be displayed here.");
   
-  context.setActive();
+  context.setThick();
 }
 
 void EdgeStateThin::decorate(EHotspotColor color)

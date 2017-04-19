@@ -105,21 +105,25 @@ void PatternLockViewController::createEdgeContexts()
 //  } //end for
 
   int i = 0;
-  int howMany = kTotalEdgeCells_Vertical;
-    //vertical
-  for (; i < howMany; i++)
-  {
-    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Vertical);
-    edgecontexts_.push_back(context);
-  } //end for
+  int howMany = 0;
   
-    //horizontal
+      //horizontal
   howMany += kTotalEdgeCells_Horizontal;
   for (; i < howMany; i++)
   {
     CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Horizontal);
     edgecontexts_.push_back(context);
   } //end for
+
+
+    //vertical
+  howMany += kTotalEdgeCells_Vertical;
+  for (; i < howMany; i++)
+  {
+    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Vertical);
+    edgecontexts_.push_back(context);
+  } //end for
+  
 
     //forward
   howMany += kTotalEdgeCells_ForwardSlashed;

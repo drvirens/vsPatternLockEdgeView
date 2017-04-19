@@ -16,7 +16,7 @@ ImageEdgeHorizontal* ImageEdgeHorizontal::newL(Evas_Object* parent)
   ImageEdgeHorizontal* obj = new ImageEdgeHorizontal(parent);
   if (obj)
   {
-  obj->construct();
+    obj->construct();
   }
   return obj;
 }

@@ -16,7 +16,7 @@ ImageEdgeBackwardSlashed* ImageEdgeBackwardSlashed::newL(Evas_Object* parent)
   ImageEdgeBackwardSlashed* obj = new ImageEdgeBackwardSlashed(parent);
   if (obj)
   {
-  obj->construct();
+    obj->construct();
   }
   return obj;
 }
