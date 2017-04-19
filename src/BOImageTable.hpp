@@ -22,6 +22,7 @@ class BOImageTable
   virtual ~BOImageTable();
   static BOImageTable* newL(Evas_Object* parent, int bgColSpan, int bgRowSpan);
   void add(IImage& image, int col, int row, int colSpan, int rowSpan);
+  void addEvasObject(Evas_Object* nativeEvasObject, int col, int row, int colSpan, int rowSpan);
   Evas_Object* nativeTable() const;
   
  private:

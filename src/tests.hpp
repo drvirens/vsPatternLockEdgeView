@@ -34,6 +34,7 @@ Evas_Object* testThinEdgeView(Evas_Object* parent);
 Evas_Object* testThickEdgeView(Evas_Object* parent);
 
 Evas_Object* testPatterLockVC(Evas_Object* parent);
+Evas_Object* testPatterLockVCShowAll_PassiveState(Evas_Object* parent);
 
 #ifdef __cplusplus
 }

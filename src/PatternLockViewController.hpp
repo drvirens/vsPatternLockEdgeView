@@ -9,11 +9,16 @@
 #ifndef PatternLockViewController_hpp
 #define PatternLockViewController_hpp
 
+#include <vector>
 #include "IPatternLockViewController.hpp"
 #include "OS.h"
 
+using namespace std;
+
 class BOImageTable;
 class BOPatternbLockConfig;
+class CNodeContext;
+class CEdgeContext;
 
 class PatternLockViewController : public IPatternLockViewController
   {
@@ -34,13 +39,15 @@ class PatternLockViewController : public IPatternLockViewController
   PatternLockViewController(const BOPatternbLockConfig& config, Evas_Object* parent);
   void construct();
   void createTable();
-  void createImages();
+  void createNodeContexts();
   void addImagesInTable();
   
  private:
   Evas_Object* parent_;
   Evas_Object* container_;
   BOImageTable* table_;
+  vector<CNodeContext*> nodecontexts_;
+  vector<CEdgeContext*> edgecontexts_;
   const BOPatternbLockConfig& config_;
   };
 

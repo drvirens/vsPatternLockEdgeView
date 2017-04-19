@@ -10,10 +10,12 @@
 #include "BOImageTable.hpp"
 #include "BOImageTablePosition.hpp"
 #include "BOPatternbLockConfig.hpp"
+#include "CNodeContext.hpp"
+#include "CEdgeContext.hpp"
 #include "trace.hpp"
 
-// 9 == BOPatternbLockConfig::kTotalCells
-static const BOImageTablePosition kBOImageTablePositions[9] =
+static const int kTotalCells = 9;
+static const BOImageTablePosition kBOImageTablePositions[kTotalCells] =
      {
         {6, 6, 2, 2}, //core
         {5, 5, 4, 4}, //inner
@@ -32,13 +34,14 @@ PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig&
 }
 void PatternLockViewController::createTable()
 {TRACE
-  BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[8];
+  BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[kTotalCells-1];
   table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan);
+  container_ = table_->nativeTable();
 }
 void PatternLockViewController::construct()
 {TRACE
   createTable();
-  createImages();
+  createNodeContexts();
   addImagesInTable();
 }
 PatternLockViewController* PatternLockViewController::newL(const BOPatternbLockConfig& config, Evas_Object* parent)
@@ -55,24 +58,31 @@ PatternLockViewController::~PatternLockViewController()
   parent_ = NULL;
 }
 
-void PatternLockViewController::createImages()
+void PatternLockViewController::createNodeContexts()
 {TRACE
-  Evas_Object* tbl = table_->nativeTable();
-//  images_[EImageCore] = ImageCore::newL(tbl);
-//  images_[EImageInner] = ImageInner::newL(tbl);
-//  images_[EImageMiddle] = ImageMiddle::newL(tbl);
-//  images_[EImageOuter] = ImageOuter::newL(tbl);
+  nodecontexts_.reserve(kTotalCells);
+  for (int i = 0; i < kTotalCells; i++)
+  {
+    CNodeContext* context = CNodeContext::newL(container_);
+    nodecontexts_.push_back(context);
+  } //end for
 }
 
 void PatternLockViewController::addImagesInTable()
 {TRACE
-//  //add them in reverse order so that core is always at the top
-//  for (int i = EImageOuter; i >= 0; i--)
-//  {
-//    BO_ASSERT(images_[i] != 0);
-//    IImage& img = *(images_[i]);
-//    table_->add(img, kBOImageTablePositions[i].col, kBOImageTablePositions[i].row, kBOImageTablePositions[i].colSpan, kBOImageTablePositions[i].rowSpan);
-//  } 
+  int i = 0;
+  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
+        it != nodecontexts_.end();
+        ++it) {
+    CNodeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (c) 
+      {
+      Evas_Object* evasObj = c->evasObject();
+      table_->addEvasObject(evasObj, kBOImageTablePositions[i].col, kBOImageTablePositions[i].row, kBOImageTablePositions[i].colSpan, kBOImageTablePositions[i].rowSpan);
+      i++;
+      }
+  } //end for
 }
 
 Evas_Object* PatternLockViewController::evasObject() const
@@ -82,6 +92,16 @@ Evas_Object* PatternLockViewController::evasObject() const
 
 void PatternLockViewController::show()
 {TRACE
+  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
+        it != nodecontexts_.end();
+        ++it) {
+    CNodeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (c) 
+      {
+      c->show();
+      }
+  } //end for
 }
 
 void PatternLockViewController::viewWillAppear(int animated)

@@ -47,6 +47,8 @@ extern "C" {
 #include "PatternLockViewController.hpp"
 #include "BOPatternbLockConfig.hpp"
 
+static const int kTimerDuration = 1;
+
 static void __sleep(unsigned int seconds, Eina_Bool (*sleep_call_back)(void*), void* data );
 static void testContextWithTable(Evas_Object* parent)
 {
@@ -128,9 +130,8 @@ Evas_Object* testTizenActiveNodeView(Evas_Object* parent)
   CNodeContext* context = CNodeContext::newL(parent);
   context->show();
   DBG("\n--------------------------- MOUSE DOWN\n");
-  double in = 3;
   void* data = static_cast<void*>(context);
-  __sleep(in, &__wait_3_seconds, data);
+  __sleep(kTimerDuration, &__wait_3_seconds, data);
   Evas_Object* handle = context->evasObject();
   return handle;
 }
@@ -145,7 +146,7 @@ void testNodeRedDecorator()
 static void __sleep(unsigned int seconds, Eina_Bool (*sleep_call_back)(void*), void* data )
 {
 #if defined __TIZEN__
-  ecore_timer_add(3, sleep_call_back, (const void *)data);
+  ecore_timer_add(seconds, sleep_call_back, (const void *)data);
 #else
   sleep(seconds);
   (*sleep_call_back)(data);
@@ -166,7 +167,7 @@ static Eina_Bool __pause_3_seconds(void* data)
   if (context)
   {
     context->show();
-    __sleep(3, &__pause_another_3_seconds, (void*)context);
+    __sleep(kTimerDuration, &__pause_another_3_seconds, (void*)context);
   }
   return 0;
 }
@@ -176,7 +177,7 @@ Evas_Object* testRedNodeViaContext(Evas_Object* parent)
   context->show();
   DBG("\n--------------------------- MOUSE DOWN\n");
 
-  __sleep(3, &__pause_3_seconds, (void*)context);
+  __sleep(kTimerDuration, &__pause_3_seconds, (void*)context);
 
   Evas_Object* handle = context->evasObject();
   return handle;
@@ -210,6 +211,14 @@ Evas_Object* testPatterLockVC(Evas_Object* parent)
   const BOPatternbLockConfig config = {};
   
   PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
+  Evas_Object* view = pl->evasObject();
+  return view;
+}
+Evas_Object* testPatterLockVCShowAll_PassiveState(Evas_Object* parent)
+{
+  const BOPatternbLockConfig config = {};
+  PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
+  pl->show();
   Evas_Object* view = pl->evasObject();
   return view;
 }
