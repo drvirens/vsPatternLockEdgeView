@@ -39,6 +39,7 @@ Evas_Object* __tizen_create_image(Evas_Object* parent)
 {TRACE
   Evas_Object* image = 0;
   image = elm_image_add(parent);
+  evas_object_resize(image, 100, 100); //XXX: testing
   return image;
 }
 

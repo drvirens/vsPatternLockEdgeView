@@ -28,12 +28,10 @@ static Evas_Object *view_create_background(Evas_Object *parent,
   if ( ( (!bg_image) && (!use_colors_only) && (!use_color_and_image)) ) {
     return NULL;
   }
-  
   Evas_Object *bg = elm_bg_add(parent);
   if (!bg) {
     return NULL;
   }
-
   if (use_color_and_image) {
     char path[PATH_MAX] = { 0 };
     get_app_resource(bg_image, path);

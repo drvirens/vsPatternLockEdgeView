@@ -46,7 +46,11 @@ create_base_gui(appdata_s *ad)
 	{
 	Evas_Object* target = NULL;
 
-	target = testPatterLockVCShowAll_PassiveState(window);
+//	target = testPatterLockVCShowAll_PassiveState(window);
+//	target = testPatterLockVCShowAll_ActiveState(window);
+	target = testPatterLockVCShowAll_ActiveState_WithTimer(window);
+
+
 	BO_ASSERT(target != NULL);
 
 //  evas_object_move(target, 50, 200);

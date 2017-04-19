@@ -222,6 +222,30 @@ Evas_Object* testPatterLockVCShowAll_PassiveState(Evas_Object* parent)
   Evas_Object* view = pl->evasObject();
   return view;
 }
+Evas_Object* testPatterLockVCShowAll_ActiveState(Evas_Object* parent)
+{
+  const BOPatternbLockConfig config;
+  PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
+  pl->show();
+  pl->show();
+  Evas_Object* view = pl->evasObject();
+  return view;
+}
+static Eina_Bool __go_active(void* data)
+{
+  PatternLockViewController* pl = (PatternLockViewController*)data;
+  pl->show();
+  return false;
+}
+Evas_Object* testPatterLockVCShowAll_ActiveState_WithTimer(Evas_Object* parent)
+{
+  const BOPatternbLockConfig config;
+  PatternLockViewController* pl = PatternLockViewController::newL(config, parent);
+  pl->show();
+  __sleep(3, &__go_active, (void*)pl);
+  Evas_Object* view = pl->evasObject();
+  return view;
+}
 static void __halt(Evas_Object* window, Evas_Object* target)
 {
   int sleepSecs = 1000;

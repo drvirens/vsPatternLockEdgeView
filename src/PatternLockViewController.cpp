@@ -8,37 +8,11 @@
 
 #include "PatternLockViewController.hpp"
 #include "BOImageTable.hpp"
-#include "BOImageTablePosition.hpp"
 #include "BOPatternbLockConfig.hpp"
 #include "CNodeContext.hpp"
 #include "CEdgeContext.hpp"
+#include "PatterLockLayout.hpp"
 #include "trace.hpp"
-
-
-static const int kBackgroundCell = 1; 
-static const int kTotalNodeCells = 9; 
-static const int kTotalTableCells = kTotalNodeCells + kBackgroundCell;
-
-static const int kBackgroundCellIndex = kTotalTableCells - 1;
-
-static const BOImageTablePosition kNodesTablePositions[kTotalTableCells] =
-     {
-        //row 1
-        {3, 3, 1, 1}, 
-        {6, 3, 1, 1},
-        {9, 3, 1, 1},
-        //row 2
-        {3, 6, 1, 1},
-        {6, 6, 1, 1},
-        {9, 6, 1, 1},
-        //row 3
-        {3, 9, 1, 1},
-        {6, 9, 1, 1},
-        {9, 9, 1, 1},
-        //bg
-        {0, 0, 13, 13} //always kBackgroundCellIndex
-     };
-
 
 PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig& config, Evas_Object* parent)
 : parent_(parent)
@@ -115,7 +89,6 @@ void PatternLockViewController::resize()
     BO_ASSERT(c != NULL);
     if (c) 
       {
-      //Evas_Object* evasobj = c->evasObject();
       c->resize();
       }
   } //end for
