@@ -77,4 +77,9 @@ void __tizen_add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, 
   //evas_object_resize(nativeTbl, 80, 80);
 }
 
+void __tizen_addMouseDownEventHandler(Evas_Object* nativeTbl, Evas_Object_Event_Cb cb, void* data)
+{TRACE
+  evas_object_event_callback_add(nativeTbl, EVAS_CALLBACK_MOUSE_DOWN, cb, data);
+}
+
 #endif

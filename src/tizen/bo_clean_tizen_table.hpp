@@ -16,9 +16,11 @@ extern "C" {
 #if defined __TIZEN__
 
 #include <evas.h>
+#include "CommonDef.hpp"
 
 Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan);
 void __tizen_add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan);
+void __tizen_addMouseDownEventHandler(Evas_Object* nativeTbl, Evas_Object_Event_Cb cb, void* data);
 
 #endif //#if defined __TIZEN__
 

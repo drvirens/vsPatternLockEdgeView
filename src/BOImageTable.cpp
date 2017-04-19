@@ -13,7 +13,7 @@
 
 static void __add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan);
 static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan);
-
+static void __addMouseDownEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data);
 
 BOImageTable::~BOImageTable()
 {TRACE
@@ -42,11 +42,21 @@ void BOImageTable::addEvasObject(Evas_Object* nativeEvasObject, int col, int row
   __add_image(nativetable, nativeEvasObject, col, row, colSpan, rowSpan);
 }
 
+void BOImageTable::addMouseDownEventHandler(BOImageTableEventCallback cb, void* data)
+{TRACE
+  mousedowncb_ = cb;
+  mousedowncb_data_ = data;
+  Evas_Object* nativetable = nativeTable();
+  __addMouseDownEventHandler(nativetable, cb, this);
+}
+
 BOImageTable::BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan)
 : table_(0)
 , parent_(parent)
 , bgcolspan_(bgColSpan)
 , bgrowspan_(bgRowSpan)
+, mousedowncb_(0)
+, mousedowncb_data_(0)
 {TRACE
 }
 
@@ -79,5 +89,29 @@ static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan
   return &tbl; //to let unit test case asserts pass
 #endif
 return tbl;
+}
+
+#if defined __TIZEN__
+void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_info) {
+  TRACE
+  Evas_Event_Mouse_Down *mouse = (Evas_Event_Mouse_Down *) event_info;
+  BOImageTable* thiz = static_cast<BOImageTable*>(data);
+  BO_ASSERT(thiz != 0);
+  if (!thiz)
+    {
+    return;
+    }
+  if (thiz->mousedowncb_)
+  {
+    (*(thiz->mousedowncb_))(thiz->mousedowncb_data_, mouse);
+  }
+}
+#endif
+
+static void __addMouseDownEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data)
+{TRACE
+#if defined __TIZEN__
+  __tizen_addMouseDownEventHandler(nativeTbl, _mouse_down_cb, data);
+#endif
 }
 

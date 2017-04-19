@@ -21,10 +21,29 @@ PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig&
 , config_(config)
 {TRACE
 }
+
+static void didReceiveMouseDownEvent(void* eventInfo, void* data)
+{TRACE
+  PatternLockViewController* thiz = static_cast<PatternLockViewController*>(data);
+  BO_ASSERT(thiz != 0);
+//  EventInfo evinfo;
+//  thiz->handleMouseDown(evinfo);
+}
 void PatternLockViewController::createTable()
 {TRACE
   BOImageTablePosition bgNodesTablePosition = kNodesTablePositions[kBackgroundCellIndex];
   table_ = BOImageTable::newL(parent_, bgNodesTablePosition.colSpan, bgNodesTablePosition.rowSpan);
+  
+  /*
+  evas_object_event_callback_add(thiz->draw_area_, EVAS_CALLBACK_MOUSE_DOWN, _mouse_down_cb, thiz);
+  evas_object_event_callback_add(thiz->draw_area_, EVAS_CALLBACK_MOUSE_UP, _mouse_up_cb, thiz);
+  evas_object_event_callback_add(thiz->draw_area_, EVAS_CALLBACK_MOUSE_MOVE, _mouse_move_cb, thiz);
+  */
+  
+  table_->addMouseDownEventHandler(didReceiveMouseDownEvent, this);
+//  table_->addMouseUpEventHandler();
+//  table_->addMouseMoveEventHandler();
+  
   container_ = table_->nativeTable();
 }
 void PatternLockViewController::construct()
@@ -78,7 +97,6 @@ Evas_Object* PatternLockViewController::evasObject() const
 {TRACE
   return container_;
 }
-
 
 void PatternLockViewController::resize()
 {TRACE
