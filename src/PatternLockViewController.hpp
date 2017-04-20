@@ -17,10 +17,9 @@ using namespace std;
 
 class BOImageTable;
 class BOPatternbLockConfig;
-class CNodeContext;
-class CEdgeContext;
 class BOHotspot;
 class BOPatternLockView;
+class BOLineManager;
 
 static void didReceiveMouseDownEvent(void* eventInfo, void* data);
 static void didReceiveMouseUpEvent(void* eventInfo, void* data);
@@ -48,15 +47,6 @@ class PatternLockViewController : public IPatternLockViewController
   void construct();
   
   void attachEventHandlersToTable();
-//  void createTable();
-//  void createNodeContexts();
-//  void addNodesInTable();
-//  void createEdgeContexts();
-//  void addEdgesInTable();
-//  void showNodes();
-//  void showEdges();
-
-//  void resize();
   void createHotspots();
   
   void handleMouseDown(Evas_Event_Mouse_Down* mouse);
@@ -66,22 +56,23 @@ class PatternLockViewController : public IPatternLockViewController
   void _reset_coords(Evas_Event_Mouse_Down* mouse);
   void _reset_coords_in_move(Evas_Event_Mouse_Move* mouse);
   void _reset_coords_zeroout();
+  int _get_draw_area_top();
+  BOImageTable& table() const;
+  void tableGeometry(int& x, int& y, int& w, int& h);
+  void _update_line_item();
+  void _create_line();
   
  private:
   Evas_Object* parent_;
-  Evas_Object* container_;
-  BOImageTable* table_;
-//  vector<CNodeContext*> nodecontexts_;
-//  vector<CEdgeContext*> edgecontexts_;
-  
   BOPatternLockView* patternlockview_;
+  BOLineManager* linemgr_;
   
   bool hashotspots_;
   bool mouse_pressed;
   Evas_Coord_Point start;
   Evas_Coord_Point prev;
   Evas_Coord_Point curr;
-  void* current_object; //dummy - like wtf is it for?
+  //void* current_object; //dummy - like wtf is it for?
   
   const BOPatternbLockConfig& config_;
   

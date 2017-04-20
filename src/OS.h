@@ -19,6 +19,8 @@ extern "C" {
 typedef void Evas_Object;
 typedef struct _Evas Evas;
 
+typedef struct _Eina_List            Eina_List;
+
 typedef struct _Evas_Event_Mouse_Down    Evas_Event_Mouse_Down; /**< @brief Event structure for #EVAS_CALLBACK_MOUSE_DOWN event callbacks */
 typedef struct _Evas_Event_Mouse_Up      Evas_Event_Mouse_Up; /**< @brief Event structure for #EVAS_CALLBACK_MOUSE_UP event callbacks */
 typedef struct _Evas_Event_Mouse_In      Evas_Event_Mouse_In; /**< @brief Event structure for #EVAS_CALLBACK_MOUSE_IN event callbacks */

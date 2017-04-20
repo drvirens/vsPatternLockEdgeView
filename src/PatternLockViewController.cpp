@@ -14,17 +14,43 @@
 #include "PatterLockLayout.hpp"
 #include "BOHotspot.hpp"
 #include "BOPatternLockView.hpp"
+#include "BOLineManager.hpp"
 #include "trace.hpp"
 
+void PatternLockViewController::construct()
+{TRACE
+  linemgr_ = BOLineManager::newL(parent_);
+  _reset_coords_zeroout();
+  patternlockview_ = BOPatternLockView::newL(parent_);
+  if (!patternlockview_)
+  {
+    return;
+  }
+  attachEventHandlersToTable();
+}
+PatternLockViewController* PatternLockViewController::newL(const BOPatternbLockConfig& config, Evas_Object* parent)
+{TRACE
+  PatternLockViewController* obj = new PatternLockViewController(config, parent);
+  if (obj)
+    {
+    obj->construct();
+    }
+  return obj;
+}
+PatternLockViewController::~PatternLockViewController()
+{TRACE
+  delete patternlockview_; patternlockview_ = 0;
+  delete linemgr_; patternlockview_ = 0;
+  parent_ = NULL;
+}
 PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig& config, Evas_Object* parent)
 : parent_(parent)
-, container_(0)
-, table_(0)
+, patternlockview_(0)
+, linemgr_(0)
 , hashotspots_(false)
 , mouse_pressed(false)
-, current_object(0)
+//, current_object(0)
 , config_(config)
-, patternlockview_(0)
 {TRACE
 }
 
@@ -64,14 +90,117 @@ void PatternLockViewController::handleMouseUp(Evas_Event_Mouse_Up* mouse)
 {TRACE
   _start_new_line_draw();
 }
+
 void PatternLockViewController::handleMouseMove(Evas_Event_Mouse_Move* mouse)
 {TRACE
+  int x = 0;
+  int y = 0;
+  int w = 0;
+  int h = 0;
+  tableGeometry(x, y, w, h);
+  
+  prev.x = curr.x;
+  prev.y = curr.y;
+
+  if (curr.y < _get_draw_area_top()) {
+    DBG("======>> FOUL this area is not visible stupid ass motherfucker");
+    return;
+  }
+
+  if (mouse->cur.canvas.x < x)
+    curr.x = x;
+  else if (mouse->cur.canvas.x > x + w)
+    curr.x = x + w;
+  else
+    curr.x = mouse->cur.canvas.x;
+
+  if (mouse->cur.canvas.y < y)
+    curr.y = y;
+  else if (mouse->cur.canvas.y > y + h)
+    curr.y = y + h;
+  else
+    curr.y = mouse->cur.canvas.y;
+//XXX: todo - DONT DELETE
+  _update_line_item();
+//  bo_pattern_lock_algorithm_scan_hotspots(alogrithm_, curr.x , curr.y, mouse);
+}
+
+void PatternLockViewController::_update_line_item()
+{TRACE
+  int x1 = 0;
+  int y1 = 0;
+  int x2 = 0;
+  int y2 = 0;
+
+  if (!mouse_pressed) {
+    DBG("mouse pressed did not happen before so return");
+    return;
+  }
+
+//  if (!current_object) {
+//    _create_line();
+//    return;
+//  }
+  bool created = linemgr_->createLine(start.x, start.y, start.x, start.y);
+  if (created) 
+  {
+    return;
+  }
+
+  if (start.y <= curr.y) {
+    x1 = start.x;
+    x2 = curr.x;
+    y1 = start.y;
+    y2 = curr.y;
+  } else {
+    x2 = start.x;
+    x1 = curr.x;
+    y2 = start.y;
+    y1 = curr.y;
+  }
+  
+  linemgr_->drawLine(x1, y1, x2, y2);
+}
+
+void PatternLockViewController::_create_line()
+{TRACE
+}
+
+void PatternLockViewController::tableGeometry(int& x, int& y, int& w, int& h)
+{TRACE
+  BOImageTable& tbl = table();
+  tbl.geometry(x, y, w, h);
+}
+
+int PatternLockViewController::_get_draw_area_top() 
+{TRACE
+//  int y = 0;
+//  int h = 0;
+  int x = 0;
+  int y_top = 0;
+  int w = 0;
+  int h = 0;
+
+//  if (evas_object_visible_get(thiz->color_selector_panel)) {
+//    evas_object_geometry_get(thiz->color_selector_panel, NULL, &y, NULL, &h);
+//    y_top = y + h;
+//  } else {
+//  evas_object_geometry_get(thiz->draw_area_, NULL, &y_top, NULL, NULL);
+//  }
+
+BOImageTable& tbl = table();
+
+//evas_object_geometry_get(thiz->draw_area_, NULL, &y_top, NULL, NULL);
+tbl.geometry(x, y_top, w, h);
+
+  return y_top;
 }
 
 void PatternLockViewController::_start_new_line_draw() 
 {TRACE
-  mouse_pressed = 0; //false;
-  current_object = NULL;
+  mouse_pressed = false;
+  //current_object = NULL;
+  linemgr_->startNewLine();
 }
 void PatternLockViewController::_reset_coords(Evas_Event_Mouse_Down* mouse) 
 {TRACE
@@ -101,188 +230,20 @@ void PatternLockViewController::_reset_coords_zeroout()
   curr.y = 0;
 }
 
-
-
-void PatternLockViewController::construct()
+BOImageTable& PatternLockViewController::table() const
 {TRACE
-  _reset_coords_zeroout();
-  patternlockview_ = BOPatternLockView::newL(parent_);
-  if (!patternlockview_)
-  {
-    return;
-  }
-  attachEventHandlersToTable();
-  
-//  createTable();
-//  createNodeContexts();
-//  addNodesInTable();
-//  createEdgeContexts();
-//  addEdgesInTable();
+  return patternlockview_->table();
 }
-PatternLockViewController* PatternLockViewController::newL(const BOPatternbLockConfig& config, Evas_Object* parent)
-{TRACE
-  PatternLockViewController* obj = new PatternLockViewController(config, parent);
-  if (obj)
-    {
-    obj->construct();
-    }
-  return obj;
-}
-PatternLockViewController::~PatternLockViewController()
-{TRACE
-  parent_ = NULL;
-}
-
 void PatternLockViewController::attachEventHandlersToTable()
 {TRACE
-  BOImageTable& table = patternlockview_->table();
-  table.addMouseDownEventHandler(didReceiveMouseDownEvent, this);
-  table.addMouseUpEventHandler(didReceiveMouseUpEvent, this);
-  table.addMouseMoveEventHandler(didReceiveMouseMoveEvent, this);
-  
-//  container_ = table_->nativeTable();
+  table().addMouseDownEventHandler(didReceiveMouseDownEvent, this);
+  table().addMouseUpEventHandler(didReceiveMouseUpEvent, this);
+  table().addMouseMoveEventHandler(didReceiveMouseMoveEvent, this);
 }
-
-//void PatternLockViewController::createTable()
-//{TRACE
-//  BOImageTablePosition bgNodesTablePosition = kNodesTablePositions[kBackgroundCellIndex];
-//  table_ = BOImageTable::newL(parent_, bgNodesTablePosition.colSpan, bgNodesTablePosition.rowSpan);
-//  
-//  table_->addMouseDownEventHandler(didReceiveMouseDownEvent, this);
-//  table_->addMouseUpEventHandler(didReceiveMouseUpEvent, this);
-//  table_->addMouseMoveEventHandler(didReceiveMouseMoveEvent, this);
-//  
-//  container_ = table_->nativeTable();
-//}
-//void PatternLockViewController::createNodeContexts()
-//{TRACE
-//  nodecontexts_.reserve(kTotalNodeCells);
-//  for (int i = 0; i < kTotalNodeCells; i++)
-//  {
-//    CNodeContext* context = CNodeContext::newL(container_);
-//    nodecontexts_.push_back(context);
-//  } //end for
-//}
-//
-//void PatternLockViewController::addNodesInTable()
-//{TRACE
-//  int i = 0;
-//  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
-//        it != nodecontexts_.end();
-//        ++it) 
-//  {
-//    CNodeContext* c = *it;
-//    BO_ASSERT(c != NULL);
-//    if (!c)
-//    {
-//      continue;
-//    }
-//    Evas_Object* evasObj = c->evasObject();
-//    int column = kNodesTablePositions[i].col;
-//    int row = kNodesTablePositions[i].row;
-//    int columnspan = kNodesTablePositions[i].colSpan;
-//    int rowspan = kNodesTablePositions[i].rowSpan;
-//    
-//    table_->addEvasObject(evasObj, column, row, columnspan, rowspan);
-//    
-//    c->setColumn(column);
-//    c->setRow(row);
-//    
-//    i++;
-//  } //end for
-//}
-//void PatternLockViewController::createEdgeContexts()
-//{TRACE
-//  edgecontexts_.reserve(kTotalEdgeCells);
-//
-//  int i = 0;
-//  int howMany = 0;
-//  
-//      //horizontal
-//  howMany += kTotalEdgeCells_Horizontal;
-//  for (; i < howMany; i++)
-//  {
-//    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Horizontal);
-//    edgecontexts_.push_back(context);
-//  } //end for
-//
-//
-//    //vertical
-//  howMany += kTotalEdgeCells_Vertical;
-//  for (; i < howMany; i++)
-//  {
-//    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Vertical);
-//    edgecontexts_.push_back(context);
-//  } //end for
-//  
-//
-//    //forward
-//  howMany += kTotalEdgeCells_ForwardSlashed;
-//  for (; i < howMany; i++)
-//  {
-//    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_ForwardSlashed);
-//    edgecontexts_.push_back(context);
-//  } //end for
-//  
-//      //backward
-//  howMany += kTotalEdgeCells_BackwardSlashed;
-//  for (; i < howMany; i++)
-//  {
-//    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_BackwardSlashed);
-//    edgecontexts_.push_back(context);
-//  } //end for
-//}
-//void PatternLockViewController::addEdgesInTable()
-//{TRACE
-//  int i = 0;
-//  for (vector<CEdgeContext*>::iterator it = edgecontexts_.begin();
-//        it != edgecontexts_.end();
-//        ++it) 
-//  {
-//    CEdgeContext* c = *it;
-//    BO_ASSERT(c != NULL);
-//    if (c) 
-//      {
-//      Evas_Object* evasObj = c->evasObject();
-//      table_->addEvasObject(evasObj, kEdgesTablePositions[i].col, kEdgesTablePositions[i].row, kEdgesTablePositions[i].colSpan, kEdgesTablePositions[i].rowSpan);
-//      i++;
-//      }
-//  } //end for
-//}
-  
 Evas_Object* PatternLockViewController::evasObject() const
 {TRACE
   return patternlockview_->evasObject();
 }
-
-//void PatternLockViewController::showNodes()
-//{TRACE
-//  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
-//        it != nodecontexts_.end();
-//        ++it) 
-//  {
-//    CNodeContext* c = *it;
-//    BO_ASSERT(c != NULL);
-//    if (c) 
-//      {
-//      c->show();
-//      }
-//  } //end for
-//}
-//void PatternLockViewController::showEdges()
-//{TRACE
-//  for (vector<CEdgeContext*>::iterator it = edgecontexts_.begin();
-//        it != edgecontexts_.end();
-//        ++it) 
-//  {
-//    CEdgeContext* c = *it;
-//    BO_ASSERT(c != NULL);
-//    if (c) 
-//      {
-//      c->show();
-//      }
-//  } //end for
-//}
 void PatternLockViewController::show()
 {TRACE
   patternlockview_->showNodes();
@@ -290,72 +251,28 @@ void PatternLockViewController::show()
 }
 void PatternLockViewController::error()
 {TRACE
-//  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
-//        it != nodecontexts_.end();
-//        ++it) 
-//  {
-//    CNodeContext* c = *it;
-//    BO_ASSERT(c != NULL);
-//    if (c) 
-//      {
-//      c->error();
-//      }
-//  } //end for
   patternlockview_->error();
 }
 void PatternLockViewController::ok()
 {TRACE
-//  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
-//        it != nodecontexts_.end();
-//        ++it) 
-//  {
-//    CNodeContext* c = *it;
-//    BO_ASSERT(c != NULL);
-//    if (c) 
-//      {
-//      c->ok();
-//      }
-//  } //end for
   patternlockview_->ok();
 }
-
 void PatternLockViewController::createHotspots()
 {TRACE
-//  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
-//        it != nodecontexts_.end();
-//        ++it) 
-//  {
-//    CNodeContext* c = *it;
-//    BO_ASSERT(c != NULL);
-//    if (c) 
-//      {
-//      c->populateHotspotInfo();  
-//      }
-//  } //end for
   patternlockview_->createHotspots();
 }
-
-
 void PatternLockViewController::viewWillAppear(int animated)
 {TRACE
 }
-
 void PatternLockViewController::viewDidAppear(int animated)
 {TRACE
 }
-
 void PatternLockViewController::viewDidLoad()
 {TRACE
 }
-
 void PatternLockViewController::viewWillDisappear(int animated)
 {TRACE
 }
-
 void PatternLockViewController::viewDidDisappear(int animated)
 {TRACE
 }
-
-
-
-
