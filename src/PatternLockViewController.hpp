@@ -62,7 +62,8 @@ class PatternLockViewController : public IPatternLockViewController
   BOImageTable* table_;
   vector<CNodeContext*> nodecontexts_;
   vector<CEdgeContext*> edgecontexts_;
-  vector<BOHotspot*> hotspots_;
+  //vector<BOHotspot*> hotspots_;
+  bool hashotspots_;
   const BOPatternbLockConfig& config_;
   
  friend

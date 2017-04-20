@@ -14,13 +14,24 @@
 //it is not already highlighted
 class BOHotspot
 {
- public:
-  static BOHotspot* newL(int x, int y, int w, int h, int col, int row);
-  virtual ~BOHotspot();
+// public:
+//  static BOHotspot* newL(int x, int y, int w, int h, int col, int row);
+//  virtual ~BOHotspot();
+//  
+// private:
+//  BOHotspot(int x, int y, int w, int h, int col, int row);
+//  void construct();
   
- private:
-  BOHotspot(int x, int y, int w, int h, int col, int row);
-  void construct();
+ public:
+  int row_;
+  int column_;
+  int x_;
+  int y_;
+  int w_;
+  int h_;
+  
+ public:
+  BOHotspot();
 };
 
 #endif /* BOHotspot_hpp */

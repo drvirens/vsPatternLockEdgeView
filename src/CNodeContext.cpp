@@ -44,6 +44,7 @@ CNodeContext::CNodeContext(Evas_Object* parent)
 , active_(0)
 , colordecorator_(0)
 , table_(0)
+, hotspot_()
 {TRACE
 }
 
@@ -101,6 +102,38 @@ void CNodeContext::resize()
 {TRACE
   TODO("resize needs to be implemented");
   //table_->resize();
+}
+
+int CNodeContext::row() const
+{TRACE
+  BO_ASSERT(hotspot_.row_ != -1);
+  return hotspot_.row_;
+}
+int CNodeContext::column() const
+{TRACE
+  BO_ASSERT(hotspot_.column_ != -1);
+  return hotspot_.column_;
+}
+void CNodeContext::setRow(int row)
+{TRACE
+  hotspot_.row_ = row;
+}
+void CNodeContext::setColumn(int column)
+{TRACE
+  hotspot_.column_ = column;
+}
+
+void CNodeContext::populateHotspotInfo()
+{TRACE
+  int x = 0;
+  int y = 0;
+  int w = 0;
+  int h = 0;
+  geometry(x, y, w, h);
+  hotspot_.x_ = x;
+  hotspot_.y_ = y;
+  hotspot_.w_ = w;
+  hotspot_.h_ = h;
 }
 
 void CNodeContext::geometry(int& x, int& y, int& w, int& h)

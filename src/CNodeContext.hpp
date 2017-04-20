@@ -11,6 +11,7 @@
 
 #include "OS.h"
 #include "IImage.hpp"
+#include "BOHotspot.hpp"
 
 class StatePassive;
 class StateActive;
@@ -30,8 +31,12 @@ class CNodeContext
   void error();
   
   Evas_Object* evasObject() const;
-  
-  void geometry(int& x, int& y, int& w, int& h);
+  void setRow(int row);
+  void setColumn(int column);
+  int row() const;
+  int column() const;
+  void populateHotspotInfo();
+
 
  private:
   CNodeContext(Evas_Object* parent);
@@ -42,6 +47,8 @@ class CNodeContext
 
   void setPassive();
   void setActive();
+  
+  void geometry(int& x, int& y, int& w, int& h);
 
  private:
   Evas_Object* parent_;
@@ -51,6 +58,9 @@ class CNodeContext
   StateActive* active_;
   NodeColorDecorator* colordecorator_;
   BOImageTable* table_;
+  
+ private: //house keeping for hotspot info
+  BOHotspot hotspot_;
   
  friend 
   class StatePassive;

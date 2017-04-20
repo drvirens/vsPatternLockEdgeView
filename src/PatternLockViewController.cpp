@@ -19,6 +19,7 @@ PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig&
 : parent_(parent)
 , container_(0)
 , table_(0)
+, hashotspots_(false)
 , config_(config)
 {TRACE
 }
@@ -28,7 +29,7 @@ static void didReceiveMouseDownEvent(void* eventInfo, void* data)
   PatternLockViewController* thiz = static_cast<PatternLockViewController*>(data);
   BO_ASSERT(thiz != 0);
   
-  if (thiz->hotspots_.size() == 0) 
+  if (!thiz->hashotspots_) 
   {
     thiz->createHotspots(); //this cant be created before because the geometry of nodes is not available at the time of rendering/creating nodes
   }
@@ -37,7 +38,6 @@ static void didReceiveMouseDownEvent(void* eventInfo, void* data)
 }
 void PatternLockViewController::createHotspots()
 {TRACE
-  int i = 0;
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
         it != nodecontexts_.end();
         ++it) 
@@ -46,21 +46,7 @@ void PatternLockViewController::createHotspots()
     BO_ASSERT(c != NULL);
     if (c) 
       {
-      int x = 0;
-      int y = 0;
-      int w = 0;
-      int h = 0;
-      c->geometry(x, y, w, h);
-      
-      int row = c->row();
-      int col = c->column();
-      
-      BOHotspot* hotspot = BOHotspot::newL(x, y, w, h, col, row);
-      hotspots_.push_back(hotspot);
-      
-//      Evas_Object* evasObj = c->evasObject();
-//      table_->addEvasObject(evasObj, kNodesTablePositions[i].col, kNodesTablePositions[i].row, kNodesTablePositions[i].colSpan, kNodesTablePositions[i].rowSpan);
-      i++;
+      c->populateHotspotInfo();  
       }
   } //end for
 }
@@ -124,12 +110,25 @@ void PatternLockViewController::addNodesInTable()
   {
     CNodeContext* c = *it;
     BO_ASSERT(c != NULL);
+    if (!c)
+    {
+      continue;
+    }
     if (c) 
-      {
+    {
       Evas_Object* evasObj = c->evasObject();
-      table_->addEvasObject(evasObj, kNodesTablePositions[i].col, kNodesTablePositions[i].row, kNodesTablePositions[i].colSpan, kNodesTablePositions[i].rowSpan);
+      int column = kNodesTablePositions[i].col;
+      int row = kNodesTablePositions[i].row;
+      int columnspan = kNodesTablePositions[i].colSpan;
+      int rowspan = kNodesTablePositions[i].rowSpan;
+      
+      table_->addEvasObject(evasObj, column, row, columnspan, rowspan);
+      
+      c->setColumn(column);
+      c->setRow(row);
+      
       i++;
-      }
+    }
   } //end for
 }
 
