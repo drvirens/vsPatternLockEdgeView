@@ -19,6 +19,9 @@ class BOImageTable;
 class BOPatternbLockConfig;
 class CNodeContext;
 class CEdgeContext;
+class BOHotspot;
+
+static void didReceiveMouseDownEvent(void* eventInfo, void* data);
 
 class PatternLockViewController : public IPatternLockViewController
   {
@@ -51,6 +54,7 @@ class PatternLockViewController : public IPatternLockViewController
   void showEdges();
 
   void resize();
+  void createHotspots();
   
  private:
   Evas_Object* parent_;
@@ -58,7 +62,11 @@ class PatternLockViewController : public IPatternLockViewController
   BOImageTable* table_;
   vector<CNodeContext*> nodecontexts_;
   vector<CEdgeContext*> edgecontexts_;
+  vector<BOHotspot*> hotspots_;
   const BOPatternbLockConfig& config_;
+  
+ friend
+  void didReceiveMouseDownEvent(void* eventInfo, void* data);
   };
 
 #endif /* PatternLockViewController_hpp */

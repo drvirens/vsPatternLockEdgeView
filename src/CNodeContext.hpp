@@ -30,6 +30,8 @@ class CNodeContext
   void error();
   
   Evas_Object* evasObject() const;
+  
+  void geometry(int& x, int& y, int& w, int& h);
 
  private:
   CNodeContext(Evas_Object* parent);

@@ -102,6 +102,12 @@ void CNodeContext::resize()
   TODO("resize needs to be implemented");
   //table_->resize();
 }
+
+void CNodeContext::geometry(int& x, int& y, int& w, int& h)
+{TRACE
+  table_->geometry(x, y, w, h);
+}
+
 void CNodeContext::show()
 {TRACE
   state_->now(*this);

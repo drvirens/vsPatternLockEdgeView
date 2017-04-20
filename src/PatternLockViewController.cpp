@@ -12,6 +12,7 @@
 #include "CNodeContext.hpp"
 #include "CEdgeContext.hpp"
 #include "PatterLockLayout.hpp"
+#include "BOHotspot.hpp"
 #include "trace.hpp"
 
 PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig& config, Evas_Object* parent)
@@ -26,9 +27,45 @@ static void didReceiveMouseDownEvent(void* eventInfo, void* data)
 {TRACE
   PatternLockViewController* thiz = static_cast<PatternLockViewController*>(data);
   BO_ASSERT(thiz != 0);
+  
+  if (thiz->hotspots_.size() == 0) 
+  {
+    thiz->createHotspots(); //this cant be created before because the geometry of nodes is not available at the time of rendering/creating nodes
+  }
 //  EventInfo evinfo;
 //  thiz->handleMouseDown(evinfo);
 }
+void PatternLockViewController::createHotspots()
+{TRACE
+  int i = 0;
+  for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
+        it != nodecontexts_.end();
+        ++it) 
+  {
+    CNodeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (c) 
+      {
+      int x = 0;
+      int y = 0;
+      int w = 0;
+      int h = 0;
+      c->geometry(x, y, w, h);
+      
+      int row = c->row();
+      int col = c->column();
+      
+      BOHotspot* hotspot = BOHotspot::newL(x, y, w, h, col, row);
+      hotspots_.push_back(hotspot);
+      
+//      Evas_Object* evasObj = c->evasObject();
+//      table_->addEvasObject(evasObj, kNodesTablePositions[i].col, kNodesTablePositions[i].row, kNodesTablePositions[i].colSpan, kNodesTablePositions[i].rowSpan);
+      i++;
+      }
+  } //end for
+}
+
+
 void PatternLockViewController::createTable()
 {TRACE
   BOImageTablePosition bgNodesTablePosition = kNodesTablePositions[kBackgroundCellIndex];

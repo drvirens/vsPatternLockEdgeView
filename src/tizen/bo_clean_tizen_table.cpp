@@ -86,4 +86,8 @@ void __tizen_addMouseDownEventHandler(Evas_Object* nativeTbl, Evas_Object_Event_
   evas_object_event_callback_add(nativeTbl, EVAS_CALLBACK_MOUSE_DOWN, cb, data);
 }
 
+void __tizen_table_position(Evas_Object* nativetable, int& x, int& y, int& w, int& h)
+{TRACE
+  evas_object_geometry_get(nativetable, &x, &y, &w, &h);
+}
 #endif

@@ -14,6 +14,7 @@
 static void __add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan);
 static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan);
 static void __addMouseDownEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data);
+static void __table_position(Evas_Object* nativetable, int& x, int& y, int& w, int& h);
 
 BOImageTable::~BOImageTable()
 {TRACE
@@ -27,6 +28,12 @@ BOImageTable* BOImageTable::newL(Evas_Object* parent, int bgColSpan, int bgRowSp
     obj->construct();
     }
   return obj;
+}
+
+void BOImageTable::geometry(int& x, int& y, int& w, int& h)
+{TRACE
+  Evas_Object* nativetable = nativeTable();
+  __table_position(nativetable, x, y, w, h);
 }
 
 void BOImageTable::add(IImage& image, int col, int row, int colSpan, int rowSpan)
@@ -115,3 +122,9 @@ static void __addMouseDownEventHandler(Evas_Object* nativeTbl, BOImageTableEvent
 #endif
 }
 
+static void __table_position(Evas_Object* nativetable, int& x, int& y, int& w, int& h) 
+{TRACE
+#if defined __TIZEN__
+  __tizen_table_position(nativetable, x, y, w, h);
+#endif
+}

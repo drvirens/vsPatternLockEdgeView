@@ -35,6 +35,8 @@ friend void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_in
   void addMouseDownEventHandler(BOImageTableEventCallback cb, void* data);
   Evas_Object* nativeTable() const;
   
+  void geometry(int& x, int& y, int& w, int& h);
+  
  private:
   BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan);
   void construct();
