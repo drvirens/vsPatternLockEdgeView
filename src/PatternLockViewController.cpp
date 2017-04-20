@@ -15,6 +15,7 @@
 #include "BOHotspot.hpp"
 #include "BOPatternLockView.hpp"
 #include "BOLineManager.hpp"
+#include "BOPatternLockAlgorithm.hpp"
 #include "trace.hpp"
 
 void PatternLockViewController::construct()
@@ -47,9 +48,9 @@ PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig&
 : parent_(parent)
 , patternlockview_(0)
 , linemgr_(0)
+, algorithm_(0)
 , hashotspots_(false)
 , mouse_pressed(false)
-//, current_object(0)
 , config_(config)
 {TRACE
 }
@@ -123,6 +124,7 @@ void PatternLockViewController::handleMouseMove(Evas_Event_Mouse_Move* mouse)
 //XXX: todo - DONT DELETE
   _update_line_item();
 //  bo_pattern_lock_algorithm_scan_hotspots(alogrithm_, curr.x , curr.y, mouse);
+  algorithm_->scan(curr.x , curr.y, mouse);
 }
 
 void PatternLockViewController::_update_line_item()
@@ -136,11 +138,6 @@ void PatternLockViewController::_update_line_item()
     DBG("mouse pressed did not happen before so return");
     return;
   }
-
-//  if (!current_object) {
-//    _create_line();
-//    return;
-//  }
   bool created = linemgr_->createLine(start.x, start.y, start.x, start.y);
   if (created) 
   {
@@ -174,32 +171,18 @@ void PatternLockViewController::tableGeometry(int& x, int& y, int& w, int& h)
 
 int PatternLockViewController::_get_draw_area_top() 
 {TRACE
-//  int y = 0;
-//  int h = 0;
   int x = 0;
   int y_top = 0;
   int w = 0;
   int h = 0;
-
-//  if (evas_object_visible_get(thiz->color_selector_panel)) {
-//    evas_object_geometry_get(thiz->color_selector_panel, NULL, &y, NULL, &h);
-//    y_top = y + h;
-//  } else {
-//  evas_object_geometry_get(thiz->draw_area_, NULL, &y_top, NULL, NULL);
-//  }
-
-BOImageTable& tbl = table();
-
-//evas_object_geometry_get(thiz->draw_area_, NULL, &y_top, NULL, NULL);
-tbl.geometry(x, y_top, w, h);
-
+  BOImageTable& tbl = table();
+  tbl.geometry(x, y_top, w, h);
   return y_top;
 }
 
 void PatternLockViewController::_start_new_line_draw() 
 {TRACE
   mouse_pressed = false;
-  //current_object = NULL;
   linemgr_->startNewLine();
 }
 void PatternLockViewController::_reset_coords(Evas_Event_Mouse_Down* mouse) 
@@ -259,7 +242,8 @@ void PatternLockViewController::ok()
 }
 void PatternLockViewController::createHotspots()
 {TRACE
-  patternlockview_->createHotspots();
+  vector<CNodeContext*>& hotspts = patternlockview_->createHotspots();
+  algorithm_ = BOPatternLockAlgorithm::newL(hotspts);
 }
 void PatternLockViewController::viewWillAppear(int animated)
 {TRACE

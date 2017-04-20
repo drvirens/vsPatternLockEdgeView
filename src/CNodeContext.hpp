@@ -36,6 +36,7 @@ class CNodeContext
   int row() const;
   int column() const;
   void populateHotspotInfo();
+  BOHotspot& hotspot();
 
 
  private:

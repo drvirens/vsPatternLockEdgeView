@@ -29,7 +29,7 @@ class BOPatternLockView
   void showEdges();
   void error();
   void ok();
-  void createHotspots();
+  vector<CNodeContext*>& createHotspots();
 
  private:
   BOPatternLockView(Evas_Object* parent);

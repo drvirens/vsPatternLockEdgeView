@@ -20,6 +20,7 @@ class BOPatternbLockConfig;
 class BOHotspot;
 class BOPatternLockView;
 class BOLineManager;
+class BOPatternLockAlgorithm;
 
 static void didReceiveMouseDownEvent(void* eventInfo, void* data);
 static void didReceiveMouseUpEvent(void* eventInfo, void* data);
@@ -66,13 +67,14 @@ class PatternLockViewController : public IPatternLockViewController
   Evas_Object* parent_;
   BOPatternLockView* patternlockview_;
   BOLineManager* linemgr_;
+  BOPatternLockAlgorithm* algorithm_;
   
   bool hashotspots_;
   bool mouse_pressed;
   Evas_Coord_Point start;
   Evas_Coord_Point prev;
   Evas_Coord_Point curr;
-  //void* current_object; //dummy - like wtf is it for?
+  
   
   const BOPatternbLockConfig& config_;
   

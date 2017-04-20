@@ -123,6 +123,11 @@ void CNodeContext::setColumn(int column)
   hotspot_.column_ = column;
 }
 
+BOHotspot& CNodeContext::hotspot()
+{TRACE
+  return hotspot_;
+}
+
 void CNodeContext::populateHotspotInfo()
 {TRACE
   int x = 0;

@@ -41,7 +41,6 @@ void BOPatternLockView::construct()
   addEdgesInTable();
 }
 
-
 void BOPatternLockView::showNodes()
 {TRACE
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
@@ -99,7 +98,7 @@ void BOPatternLockView::ok()
   } //end for
 }
 
-void BOPatternLockView::createHotspots()
+vector<CNodeContext*>& BOPatternLockView::createHotspots()
 {TRACE
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
         it != nodecontexts_.end();
@@ -112,6 +111,7 @@ void BOPatternLockView::createHotspots()
       c->populateHotspotInfo();  
       }
   } //end for
+  return nodecontexts_;
 }
 
 void BOPatternLockView::createTable()

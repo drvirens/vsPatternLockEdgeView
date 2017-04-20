@@ -19,10 +19,7 @@ class BOHotspot
  public:
   int row_;
   int column_;
-  
-  //computed internally - treat them as private
-  Eina_Rectangle hotspot_rect_;
-  
+  Eina_Rectangle hotspot_rect_;//computed internally - treat them as private  
   //XXX
   //draw the lines from center_x/y
   int center_x;
@@ -30,7 +27,6 @@ class BOHotspot
   
  public:
   BOHotspot();
-  
   bool lies(int x, int y); //does this point lies in this hotspot or what?
 };
 
