@@ -67,7 +67,14 @@ create_base_gui(appdata_s *ad)
 //  evas_object_move(target, 50, 200);
 //  evas_object_resize(target, 200, 200);
 
-	elm_win_resize_object_add(window, target);
+//	elm_win_resize_object_add(window, target);
+
+  int x = 0, y = 0, w = 0, h = 0;
+  elm_win_screen_size_get(window, &x, &y, &w, &h);
+  
+  evas_object_move(target, 0, 100);
+  evas_object_resize(target, w, w);
+
 
   evas_object_show(target);
 	evas_object_show(window);
