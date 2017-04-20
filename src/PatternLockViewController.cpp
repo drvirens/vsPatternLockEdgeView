@@ -243,7 +243,13 @@ void PatternLockViewController::ok()
 void PatternLockViewController::createHotspots()
 {TRACE
   vector<CNodeContext*>& hotspts = patternlockview_->createHotspots();
-  algorithm_ = BOPatternLockAlgorithm::newL(hotspts);
+  algorithm_ = BOPatternLockAlgorithm::newL(hotspts, *this);
+}
+void PatternLockViewController::didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse)
+{TRACE
+  _start_new_line_draw();
+  mouse_pressed = true;
+  _reset_coords_in_move(mouse);
 }
 void PatternLockViewController::viewWillAppear(int animated)
 {TRACE

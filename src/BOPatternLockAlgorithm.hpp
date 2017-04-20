@@ -16,22 +16,24 @@
 using namespace std;
 
 class CNodeContext;
+class BOPatternLockAlgorithmObserver;
 
 class BOPatternLockAlgorithm
 {
  public:
-  static BOPatternLockAlgorithm* newL(vector<CNodeContext*>& hotspots);
+  static BOPatternLockAlgorithm* newL(vector<CNodeContext*>& hotspots, BOPatternLockAlgorithmObserver& observer);
   virtual ~BOPatternLockAlgorithm();
   void scan(int x, int y, Evas_Event_Mouse_Move* mouse);
   
  private:
   void construct();
-  BOPatternLockAlgorithm(vector<CNodeContext*>& hotspots);
+  BOPatternLockAlgorithm(vector<CNodeContext*>& hotspots, BOPatternLockAlgorithmObserver& observer);
   bool isScanned(CNodeContext* c);
   
  private:
   vector<CNodeContext*>& hotspots_;
   set<CNodeContext*> highlighted_;
+  BOPatternLockAlgorithmObserver& observer_;
 };
 
 #endif /* BOPatternLockAlgorithm_hpp */

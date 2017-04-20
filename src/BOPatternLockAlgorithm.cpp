@@ -9,12 +9,13 @@
 #include "BOPatternLockAlgorithm.hpp"
 #include "CNodeContext.hpp"
 #include "BOHotspot.hpp"
+#include "BOPatternLockAlgorithmObserver.hpp"
 #include "trace.hpp"
 
 
-BOPatternLockAlgorithm* BOPatternLockAlgorithm::newL(vector<CNodeContext*>& hotspots)
+BOPatternLockAlgorithm* BOPatternLockAlgorithm::newL(vector<CNodeContext*>& hotspots, BOPatternLockAlgorithmObserver& observer)
 {TRACE
-  BOPatternLockAlgorithm* obj = new BOPatternLockAlgorithm(hotspots);
+  BOPatternLockAlgorithm* obj = new BOPatternLockAlgorithm(hotspots, observer);
   if (obj)
   {
     obj->construct();
@@ -30,8 +31,9 @@ void BOPatternLockAlgorithm::construct()
 {TRACE
 }
 
-BOPatternLockAlgorithm::BOPatternLockAlgorithm(vector<CNodeContext*>& hotspots)
+BOPatternLockAlgorithm::BOPatternLockAlgorithm(vector<CNodeContext*>& hotspots, BOPatternLockAlgorithmObserver& observer)
 : hotspots_(hotspots)
+, observer_(observer)
 {TRACE
 }
 bool BOPatternLockAlgorithm::isScanned(CNodeContext* c)
@@ -60,13 +62,15 @@ void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
     {
       continue;
     }
-    
     bool pointLiesInHotspot = c->hotspot().lies(x, y);
     if (pointLiesInHotspot)
     {
       c->show();
       highlighted_.insert(c);
+      observer_.didEnterInsideHotspot(mouse);
+      break;
     }
+    
   } //end for
 }
 

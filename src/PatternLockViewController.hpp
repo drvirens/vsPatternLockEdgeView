@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "IPatternLockViewController.hpp"
+#include "BOPatternLockAlgorithmObserver.hpp"
 #include "OS.h"
 
 using namespace std;
@@ -26,7 +27,8 @@ static void didReceiveMouseDownEvent(void* eventInfo, void* data);
 static void didReceiveMouseUpEvent(void* eventInfo, void* data);
 static void didReceiveMouseMoveEvent(void* event_info, void* data);
 
-class PatternLockViewController : public IPatternLockViewController
+class PatternLockViewController : public IPatternLockViewController,
+  public BOPatternLockAlgorithmObserver
   {
  public:
   static PatternLockViewController* newL(const BOPatternbLockConfig& config, Evas_Object* parent);
@@ -36,6 +38,8 @@ class PatternLockViewController : public IPatternLockViewController
   void ok();
   
   Evas_Object* evasObject() const;
+  
+  virtual void didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse);
   
   virtual void viewWillAppear(int animated);
   virtual void viewDidAppear(int animated);
