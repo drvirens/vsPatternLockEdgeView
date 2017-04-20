@@ -85,6 +85,14 @@ void __tizen_addMouseDownEventHandler(Evas_Object* nativeTbl, Evas_Object_Event_
 {TRACE
   evas_object_event_callback_add(nativeTbl, EVAS_CALLBACK_MOUSE_DOWN, cb, data);
 }
+void __tizen_addMouseUpEventHandler(Evas_Object* nativeTbl, Evas_Object_Event_Cb cb, void* data)
+{TRACE
+  evas_object_event_callback_add(nativeTbl, EVAS_CALLBACK_MOUSE_UP, cb, data);
+}
+void __tizen_addMouseMoveEventHandler(Evas_Object* nativeTbl, Evas_Object_Event_Cb cb, void* data)
+{TRACE
+  evas_object_event_callback_add(nativeTbl, EVAS_CALLBACK_MOUSE_MOVE, cb, data);
+}
 
 void __tizen_table_position(Evas_Object* nativetable, int& x, int& y, int& w, int& h)
 {TRACE

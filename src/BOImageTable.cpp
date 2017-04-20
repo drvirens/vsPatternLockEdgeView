@@ -14,6 +14,8 @@
 static void __add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan);
 static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan);
 static void __addMouseDownEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data);
+static void __addMouseUpEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data);
+static void __addMouseMoveEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data);
 static void __table_position(Evas_Object* nativetable, int& x, int& y, int& w, int& h);
 
 BOImageTable::~BOImageTable()
@@ -56,6 +58,20 @@ void BOImageTable::addMouseDownEventHandler(BOImageTableEventCallback cb, void* 
   Evas_Object* nativetable = nativeTable();
   __addMouseDownEventHandler(nativetable, cb, this);
 }
+void BOImageTable::addMouseUpEventHandler(BOImageTableEventCallback cb, void* data)
+{TRACE
+  mouseupcb_ = cb;
+  mouseupcb_data_ = data;
+  Evas_Object* nativetable = nativeTable();
+  __addMouseUpEventHandler(nativetable, cb, this);
+}
+void BOImageTable::addMouseMoveEventHandler(BOImageTableEventCallback cb, void* data)
+{TRACE
+  mousemovecb_ = cb;
+  mousemovecb_data_ = data;
+  Evas_Object* nativetable = nativeTable();
+  __addMouseMoveEventHandler(nativetable, cb, this);
+}
 
 BOImageTable::BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan)
 : table_(0)
@@ -64,6 +80,10 @@ BOImageTable::BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan)
 , bgrowspan_(bgRowSpan)
 , mousedowncb_(0)
 , mousedowncb_data_(0)
+, mouseupcb_(0)
+, mouseupcb_data_(0)
+, mousemovecb_(0)
+, mousemovecb_data_(0)
 {TRACE
 }
 
@@ -98,7 +118,6 @@ static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan
 return tbl;
 }
 
-#if defined __TIZEN__
 void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_info) {
   TRACE
   Evas_Event_Mouse_Down *mouse = (Evas_Event_Mouse_Down *) event_info;
@@ -113,12 +132,51 @@ void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_info) {
     (*(thiz->mousedowncb_))(mouse, thiz->mousedowncb_data_);
   }
 }
-#endif
+void _mouse_up_cb(void *data, Evas *e, Evas_Object *obj, void *event_info) {
+  TRACE
+  Evas_Event_Mouse_Up *mouse = (Evas_Event_Mouse_Up *) event_info;
+  BOImageTable* thiz = static_cast<BOImageTable*>(data);
+  BO_ASSERT(thiz != 0);
+  if (!thiz)
+    {
+    return;
+    }
+  if (thiz->mouseupcb_)
+  {
+    (*(thiz->mouseupcb_))(mouse, thiz->mouseupcb_data_);
+  }
+}
+void _mouse_move_cb(void *data, Evas *e, Evas_Object *obj, void *event_info) {
+  TRACE
+  Evas_Event_Mouse_Move *mouse = (Evas_Event_Mouse_Move *) event_info;
+  BOImageTable* thiz = static_cast<BOImageTable*>(data);
+  BO_ASSERT(thiz != 0);
+  if (!thiz)
+    {
+    return;
+    }
+  if (thiz->mousemovecb_)
+  {
+    (*(thiz->mousemovecb_))(mouse, thiz->mousemovecb_data_);
+  }
+}
 
 static void __addMouseDownEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data)
 {TRACE
 #if defined __TIZEN__
   __tizen_addMouseDownEventHandler(nativeTbl, _mouse_down_cb, data);
+#endif
+}
+static void __addMouseUpEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data)
+{TRACE
+#if defined __TIZEN__
+  __tizen_addMouseUpEventHandler(nativeTbl, _mouse_up_cb, data);
+#endif
+}
+static void __addMouseMoveEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data)
+{TRACE
+#if defined __TIZEN__
+  __tizen_addMouseMoveEventHandler(nativeTbl, _mouse_move_cb, data);
 #endif
 }
 

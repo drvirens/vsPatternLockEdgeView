@@ -22,6 +22,8 @@ class CEdgeContext;
 class BOHotspot;
 
 static void didReceiveMouseDownEvent(void* eventInfo, void* data);
+static void didReceiveMouseUpEvent(void* eventInfo, void* data);
+static void didReceiveMouseMoveEvent(void* event_info, void* data);
 
 class PatternLockViewController : public IPatternLockViewController
   {
@@ -79,6 +81,10 @@ class PatternLockViewController : public IPatternLockViewController
   
  friend
   void didReceiveMouseDownEvent(void* eventInfo, void* data);
-  };
+ friend
+  void didReceiveMouseUpEvent(void* eventInfo, void* data);
+ friend
+  void didReceiveMouseMoveEvent(void* event_info, void* data);
+};
 
 #endif /* PatternLockViewController_hpp */

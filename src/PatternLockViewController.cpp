@@ -33,6 +33,17 @@ static void didReceiveMouseDownEvent(void* event_info, void* data)
   Evas_Event_Mouse_Down* mouse = (Evas_Event_Mouse_Down *) event_info;
   thiz->handleMouseDown(mouse);
 }
+static void didReceiveMouseUpEvent(void* event_info, void* data)
+{TRACE
+  PatternLockViewController* thiz = static_cast<PatternLockViewController*>(data);
+  BO_ASSERT(thiz != 0);
+}
+static void didReceiveMouseMoveEvent(void* event_info, void* data)
+{TRACE
+  PatternLockViewController* thiz = static_cast<PatternLockViewController*>(data);
+  BO_ASSERT(thiz != 0);
+}
+
 void PatternLockViewController::handleMouseDown(Evas_Event_Mouse_Down* mouse)
 {TRACE
   mouse_pressed = true;
@@ -105,8 +116,8 @@ void PatternLockViewController::createTable()
   */
   
   table_->addMouseDownEventHandler(didReceiveMouseDownEvent, this);
-//  table_->addMouseUpEventHandler();
-//  table_->addMouseMoveEventHandler();
+  table_->addMouseUpEventHandler(didReceiveMouseUpEvent, this);
+  table_->addMouseMoveEventHandler(didReceiveMouseMoveEvent, this);
   
   container_ = table_->nativeTable();
 }

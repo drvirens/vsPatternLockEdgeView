@@ -17,6 +17,7 @@ extern "C" {
 
 #if defined __APPLE__
 typedef void Evas_Object;
+typedef struct _Evas Evas;
 
 typedef struct _Evas_Event_Mouse_Down    Evas_Event_Mouse_Down; /**< @brief Event structure for #EVAS_CALLBACK_MOUSE_DOWN event callbacks */
 typedef struct _Evas_Event_Mouse_Up      Evas_Event_Mouse_Up; /**< @brief Event structure for #EVAS_CALLBACK_MOUSE_UP event callbacks */

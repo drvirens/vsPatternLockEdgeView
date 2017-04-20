@@ -17,22 +17,20 @@ using namespace std;
 
 class IImage;
 
-#if defined __TIZEN__
 void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
-#endif
-
+void _mouse_up_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
+void _mouse_move_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
 
 class BOImageTable
 {
-#if defined __TIZEN__
-friend void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
-#endif
  public:
   virtual ~BOImageTable();
   static BOImageTable* newL(Evas_Object* parent, int bgColSpan, int bgRowSpan);
   void add(IImage& image, int col, int row, int colSpan, int rowSpan);
   void addEvasObject(Evas_Object* nativeEvasObject, int col, int row, int colSpan, int rowSpan);
   void addMouseDownEventHandler(BOImageTableEventCallback cb, void* data);
+  void addMouseUpEventHandler(BOImageTableEventCallback cb, void* data);
+  void addMouseMoveEventHandler(BOImageTableEventCallback cb, void* data);
   Evas_Object* nativeTable() const;
   
   void geometry(int& x, int& y, int& w, int& h);
@@ -50,6 +48,19 @@ friend void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_in
   
   BOImageTableEventCallback mousedowncb_;
   void* mousedowncb_data_;
+  
+  BOImageTableEventCallback mouseupcb_;
+  void* mouseupcb_data_;
+  
+  BOImageTableEventCallback mousemovecb_;
+  void* mousemovecb_data_;
+  
+ friend 
+  void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
+ friend 
+  void _mouse_up_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
+ friend 
+  void _mouse_move_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
 };
 
 #endif /* Table_hpp */
