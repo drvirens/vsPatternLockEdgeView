@@ -45,6 +45,7 @@ CNodeContext::CNodeContext(Evas_Object* parent)
 , colordecorator_(0)
 , table_(0)
 , hotspot_()
+, index_(-1)
 {TRACE
 }
 
@@ -122,7 +123,15 @@ void CNodeContext::setColumn(int column)
 {TRACE
   hotspot_.column_ = column;
 }
-
+int CNodeContext::index() const
+{TRACE
+  return index_;
+}
+void CNodeContext::setIndex(int i)
+{TRACE
+  index_ = i;
+}
+  
 BOHotspot& CNodeContext::hotspot()
 {TRACE
   return hotspot_;

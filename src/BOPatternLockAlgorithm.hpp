@@ -16,6 +16,7 @@
 using namespace std;
 
 class CNodeContext;
+class CEdgeContext;
 class BOPatternLockAlgorithmObserver;
 
 class BOPatternLockAlgorithm
@@ -29,10 +30,14 @@ class BOPatternLockAlgorithm
   void construct();
   BOPatternLockAlgorithm(vector<CNodeContext*>& hotspots, BOPatternLockAlgorithmObserver& observer);
   bool isScanned(CNodeContext* c);
+  void highLightEdge(CNodeContext* prev, CNodeContext* curr);
   
  private:
   vector<CNodeContext*>& hotspots_;
-  set<CNodeContext*> highlighted_;
+  set<CNodeContext*> highlightedNodes_;
+  set<CEdgeContext*> highlightedEdges_;
+  CNodeContext* prev_;
+  CNodeContext* curr_;
   BOPatternLockAlgorithmObserver& observer_;
 };
 

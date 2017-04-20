@@ -82,7 +82,7 @@ void BOLineManager::_create_line(int startx, int starty, int startx1, int starty
     return;
 
 #if defined __TIZEN__
-  evas_object_color_set(line_new, BO_COLOR_WHITE_ALPHA);
+  evas_object_color_set(line_new, BO_COLOR_BLUE_ALPHA);
   //evas_object_line_xy_set(line_new, start.x, start.y, start.x, start.y);
   evas_object_line_xy_set(line_new, startx, starty, startx1, starty1);
   evas_object_repeat_events_set(line_new, EINA_TRUE);

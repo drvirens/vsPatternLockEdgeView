@@ -278,6 +278,12 @@ void PatternLockViewController::didEnterInsideHotspot(Evas_Event_Mouse_Move* mou
   mouse_pressed = true;
   _reset_coords_in_move(mouse, nodeContext);
 }
+CEdgeContext* PatternLockViewController::getEdgeBetweenNodes(int prevNodeIndex, int currNodeIndex)
+{TRACE
+  CEdgeContext* edge = patternlockview_->getEdgeBetweenNodes(prevNodeIndex, currNodeIndex);
+  return edge;
+}
+
 void PatternLockViewController::viewWillAppear(int animated)
 {TRACE
 }

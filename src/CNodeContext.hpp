@@ -38,7 +38,9 @@ class CNodeContext
   void populateHotspotInfo();
   BOHotspot& hotspot();
 
-
+  int index() const;
+  void setIndex(int i);
+  
  private:
   CNodeContext(Evas_Object* parent);
   void construct();
@@ -59,9 +61,8 @@ class CNodeContext
   StateActive* active_;
   NodeColorDecorator* colordecorator_;
   BOImageTable* table_;
-  
- private: //house keeping for hotspot info
   BOHotspot hotspot_;
+  int index_;
   
  friend 
   class StatePassive;

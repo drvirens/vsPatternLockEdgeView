@@ -12,12 +12,14 @@
 #include "OS.h"
 
 class CNodeContext;
+class CEdgeContext;
 
 class BOPatternLockAlgorithmObserver
 {
  public:
   virtual ~BOPatternLockAlgorithmObserver() {}
   virtual void didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse, CNodeContext& nodeContext) = 0;
+  virtual CEdgeContext* getEdgeBetweenNodes(int prevNodeIndex, int currNodeIndex) = 0;
 };
 
 

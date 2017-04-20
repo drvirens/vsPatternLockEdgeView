@@ -30,6 +30,7 @@ class BOPatternLockView
   void error();
   void ok();
   vector<CNodeContext*>& createHotspots();
+  CEdgeContext* getEdgeBetweenNodes(int prevNodeIndex, int currNodeIndex);
 
  private:
   BOPatternLockView(Evas_Object* parent);

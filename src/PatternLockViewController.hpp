@@ -40,6 +40,7 @@ class PatternLockViewController : public IPatternLockViewController,
   Evas_Object* evasObject() const;
   
   virtual void didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse, CNodeContext& nodeContext);
+  virtual CEdgeContext* getEdgeBetweenNodes(int prevNodeIndex, int currNodeIndex);
   
   virtual void viewWillAppear(int animated);
   virtual void viewDidAppear(int animated);

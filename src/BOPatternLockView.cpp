@@ -127,6 +127,7 @@ void BOPatternLockView::createNodeContexts()
   for (int i = 0; i < kTotalNodeCells; i++)
   {
     CNodeContext* context = CNodeContext::newL(container_);
+    context->setIndex(i);
     nodecontexts_.push_back(context);
   } //end for
 }
@@ -216,6 +217,16 @@ void BOPatternLockView::addEdgesInTable()
       i++;
       }
   } //end for
+}
+
+CEdgeContext* BOPatternLockView::getEdgeBetweenNodes(int prevNodeIndex, int currNodeIndex)
+{TRACE
+  //testing+
+  static int i = 0;
+  //testing-
+  CEdgeContext* e = edgecontexts_[i];
+  i++;
+  return e;
 }
   
 Evas_Object* BOPatternLockView::evasObject() const
