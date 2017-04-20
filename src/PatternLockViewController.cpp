@@ -121,9 +121,8 @@ void PatternLockViewController::handleMouseMove(Evas_Event_Mouse_Move* mouse)
     curr.y = y + h;
   else
     curr.y = mouse->cur.canvas.y;
-//XXX: todo - DONT DELETE
+
   _update_line_item();
-//  bo_pattern_lock_algorithm_scan_hotspots(alogrithm_, curr.x , curr.y, mouse);
   algorithm_->scan(curr.x , curr.y, mouse);
 }
 
@@ -194,15 +193,43 @@ void PatternLockViewController::_reset_coords(Evas_Event_Mouse_Down* mouse)
   curr.x = mouse->canvas.x;
   curr.y = mouse->canvas.y;
 }
-void PatternLockViewController::_reset_coords_in_move(Evas_Event_Mouse_Move* mouse) 
+//void PatternLockViewController::_reset_coords_in_move(Evas_Event_Mouse_Move* mouse) 
+//{TRACE
+//  start.x = mouse->cur.canvas.x;
+//  start.y = mouse->cur.canvas.y;
+//  
+//  prev.x = mouse->cur.canvas.x;
+//  prev.y = mouse->cur.canvas.y;
+//  
+//  curr.x = mouse->cur.canvas.x;
+//  curr.y = mouse->cur.canvas.y;
+//}
+void PatternLockViewController::_reset_coords_in_move(Evas_Event_Mouse_Move* mouse, CNodeContext& nodeContext) 
 {TRACE
-  start.x = mouse->cur.canvas.x;
-  start.y = mouse->cur.canvas.y;
-  prev.x = mouse->cur.canvas.x;
-  prev.y = mouse->cur.canvas.y;
-  curr.x = mouse->cur.canvas.x;
-  curr.y = mouse->cur.canvas.y;
+  //reset everything to center of hotspot or what?
+  int centerX = nodeContext.hotspot().center_x;
+  int centerY = nodeContext.hotspot().center_y;
+  
+//  start.x = centerX;
+//  start.y = centerY;
+  
+  prev.x = centerX;
+  prev.y = centerY;
+//
+//  curr.x = centerX;
+//  curr.y = centerY;
+  
+    start.x = mouse->cur.canvas.x;
+    start.y = mouse->cur.canvas.y;
+  //
+//    prev.x = mouse->cur.canvas.x;
+//    prev.y = mouse->cur.canvas.y;
+
+    curr.x = mouse->cur.canvas.x;
+    curr.y = mouse->cur.canvas.y;
+
 }
+
 void PatternLockViewController::_reset_coords_zeroout() 
 {TRACE
   start.x = 0;
@@ -245,11 +272,11 @@ void PatternLockViewController::createHotspots()
   vector<CNodeContext*>& hotspts = patternlockview_->createHotspots();
   algorithm_ = BOPatternLockAlgorithm::newL(hotspts, *this);
 }
-void PatternLockViewController::didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse)
+void PatternLockViewController::didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse, CNodeContext& nodeContext)
 {TRACE
   _start_new_line_draw();
   mouse_pressed = true;
-  _reset_coords_in_move(mouse);
+  _reset_coords_in_move(mouse, nodeContext);
 }
 void PatternLockViewController::viewWillAppear(int animated)
 {TRACE

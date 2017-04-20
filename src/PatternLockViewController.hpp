@@ -39,7 +39,7 @@ class PatternLockViewController : public IPatternLockViewController,
   
   Evas_Object* evasObject() const;
   
-  virtual void didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse);
+  virtual void didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse, CNodeContext& nodeContext);
   
   virtual void viewWillAppear(int animated);
   virtual void viewDidAppear(int animated);
@@ -59,7 +59,7 @@ class PatternLockViewController : public IPatternLockViewController,
   void handleMouseMove(Evas_Event_Mouse_Move* mouse);
   void _start_new_line_draw();
   void _reset_coords(Evas_Event_Mouse_Down* mouse);
-  void _reset_coords_in_move(Evas_Event_Mouse_Move* mouse);
+  void _reset_coords_in_move(Evas_Event_Mouse_Move* mouse, CNodeContext& nodeContext);
   void _reset_coords_zeroout();
   int _get_draw_area_top();
   BOImageTable& table() const;

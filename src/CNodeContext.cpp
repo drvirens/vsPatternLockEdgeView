@@ -140,6 +140,8 @@ void CNodeContext::populateHotspotInfo()
   hotspot_.hotspot_rect_.y = y;
   hotspot_.hotspot_rect_.w = w;
   hotspot_.hotspot_rect_.h = h;
+  
+  hotspot_.computeCenterPoint();
 }
 
 void CNodeContext::geometry(int& x, int& y, int& w, int& h)

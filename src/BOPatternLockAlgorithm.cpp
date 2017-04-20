@@ -67,7 +67,7 @@ void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
     {
       c->show();
       highlighted_.insert(c);
-      observer_.didEnterInsideHotspot(mouse);
+      observer_.didEnterInsideHotspot(mouse, *c);
       break;
     }
     

@@ -16,7 +16,15 @@
 BOHotspot::BOHotspot()
 : column_(-1)
 , row_(-1)
+, center_x(-1)
+, center_y(-1)
 {TRACE
+}
+
+void BOHotspot::computeCenterPoint()
+{TRACE
+  center_x = hotspot_rect_.x + (hotspot_rect_.w/2);
+  center_y = hotspot_rect_.y + (hotspot_rect_.h/2);
 }
 
 bool BOHotspot::lies(int x, int y)

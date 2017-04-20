@@ -27,6 +27,7 @@ class BOHotspot
   
  public:
   BOHotspot();
+  void computeCenterPoint();
   bool lies(int x, int y); //does this point lies in this hotspot or what?
 };
 

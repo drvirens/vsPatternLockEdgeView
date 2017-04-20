@@ -11,11 +11,13 @@
 
 #include "OS.h"
 
+class CNodeContext;
+
 class BOPatternLockAlgorithmObserver
 {
  public:
   virtual ~BOPatternLockAlgorithmObserver() {}
-  virtual void didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse) = 0;
+  virtual void didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse, CNodeContext& nodeContext) = 0;
 };
 
 
