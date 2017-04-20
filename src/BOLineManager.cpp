@@ -59,9 +59,8 @@ void BOLineManager::drawLine(int x1, int y1, int x2, int y2)
 
 void BOLineManager::startNewLine()
 {TRACE
+  current_object = NULL;
 }
-
-
 
 void BOLineManager::_create_line(int startx, int starty, int startx1, int starty1) 
 {TRACE
