@@ -130,10 +130,11 @@ void CNodeContext::populateHotspotInfo()
   int w = 0;
   int h = 0;
   geometry(x, y, w, h);
-  hotspot_.x_ = x;
-  hotspot_.y_ = y;
-  hotspot_.w_ = w;
-  hotspot_.h_ = h;
+  
+  hotspot_.hotspot_rect_.x = x;
+  hotspot_.hotspot_rect_.y = y;
+  hotspot_.hotspot_rect_.w = w;
+  hotspot_.hotspot_rect_.h = h;
 }
 
 void CNodeContext::geometry(int& x, int& y, int& w, int& h)

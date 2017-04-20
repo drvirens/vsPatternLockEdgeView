@@ -9,29 +9,29 @@
 #ifndef BOHotspot_hpp
 #define BOHotspot_hpp
 
+#include "OS.h"
+
 //hotspot = area that has a node underlying it. when user moves his
 //finger over this hotspt, the node underneath gets highlighted, if 
 //it is not already highlighted
 class BOHotspot
-{
-// public:
-//  static BOHotspot* newL(int x, int y, int w, int h, int col, int row);
-//  virtual ~BOHotspot();
-//  
-// private:
-//  BOHotspot(int x, int y, int w, int h, int col, int row);
-//  void construct();
-  
+{  
  public:
   int row_;
   int column_;
-  int x_;
-  int y_;
-  int w_;
-  int h_;
+  
+  //computed internally - treat them as private
+  Eina_Rectangle hotspot_rect_;
+  
+  //XXX
+  //draw the lines from center_x/y
+  int center_x;
+  int center_y;
   
  public:
   BOHotspot();
+  
+  bool lies(int x, int y); //does this point lies in this hotspot or what?
 };
 
 #endif /* BOHotspot_hpp */

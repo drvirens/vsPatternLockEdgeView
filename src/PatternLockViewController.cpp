@@ -20,22 +20,30 @@ PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig&
 , container_(0)
 , table_(0)
 , hashotspots_(false)
+, mouse_pressed(false)
+, current_object(0)
 , config_(config)
 {TRACE
 }
 
-static void didReceiveMouseDownEvent(void* eventInfo, void* data)
+static void didReceiveMouseDownEvent(void* event_info, void* data)
 {TRACE
   PatternLockViewController* thiz = static_cast<PatternLockViewController*>(data);
   BO_ASSERT(thiz != 0);
-  
-  if (!thiz->hashotspots_) 
-  {
-    thiz->createHotspots(); //this cant be created before because the geometry of nodes is not available at the time of rendering/creating nodes
-  }
-//  EventInfo evinfo;
-//  thiz->handleMouseDown(evinfo);
+  Evas_Event_Mouse_Down* mouse = (Evas_Event_Mouse_Down *) event_info;
+  thiz->handleMouseDown(mouse);
 }
+void PatternLockViewController::handleMouseDown(Evas_Event_Mouse_Down* mouse)
+{TRACE
+  mouse_pressed = true;
+  if (!hashotspots_) 
+  {
+    createHotspots(); 
+    hashotspots_ = true;
+  }
+  _reset_coords(mouse);
+}
+
 void PatternLockViewController::createHotspots()
 {TRACE
   for (vector<CNodeContext*>::iterator it = nodecontexts_.begin();
@@ -49,6 +57,39 @@ void PatternLockViewController::createHotspots()
       c->populateHotspotInfo();  
       }
   } //end for
+}
+
+void PatternLockViewController::_start_new_line_draw() 
+{TRACE
+  mouse_pressed = 0; //false;
+  current_object = NULL;
+}
+void PatternLockViewController::_reset_coords(Evas_Event_Mouse_Down* mouse) 
+{TRACE
+  start.x = mouse->canvas.x;
+  start.y = mouse->canvas.y;
+  prev.x = mouse->canvas.x;
+  prev.y = mouse->canvas.y;
+  curr.x = mouse->canvas.x;
+  curr.y = mouse->canvas.y;
+}
+void PatternLockViewController::_reset_coords_in_move(Evas_Event_Mouse_Move* mouse) 
+{TRACE
+  start.x = mouse->cur.canvas.x;
+  start.y = mouse->cur.canvas.y;
+  prev.x = mouse->cur.canvas.x;
+  prev.y = mouse->cur.canvas.y;
+  curr.x = mouse->cur.canvas.x;
+  curr.y = mouse->cur.canvas.y;
+}
+void PatternLockViewController::_reset_coords_zeroout() 
+{TRACE
+  start.x = 0;
+  start.y = 0;
+  prev.x = 0;
+  prev.y = 0;
+  curr.x = 0;
+  curr.y = 0;
 }
 
 

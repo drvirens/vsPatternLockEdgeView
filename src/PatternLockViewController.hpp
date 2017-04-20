@@ -56,14 +56,25 @@ class PatternLockViewController : public IPatternLockViewController
   void resize();
   void createHotspots();
   
+  void handleMouseDown(Evas_Event_Mouse_Down* mouse);
+  void _start_new_line_draw();
+  void _reset_coords(Evas_Event_Mouse_Down* mouse);
+  void _reset_coords_in_move(Evas_Event_Mouse_Move* mouse);
+  void _reset_coords_zeroout();
+  
  private:
   Evas_Object* parent_;
   Evas_Object* container_;
   BOImageTable* table_;
   vector<CNodeContext*> nodecontexts_;
   vector<CEdgeContext*> edgecontexts_;
-  //vector<BOHotspot*> hotspots_;
   bool hashotspots_;
+  bool mouse_pressed;
+  Evas_Coord_Point start;
+  Evas_Coord_Point prev;
+  Evas_Coord_Point curr;
+  void* current_object; //dummy - like wtf is it for?
+  
   const BOPatternbLockConfig& config_;
   
  friend
