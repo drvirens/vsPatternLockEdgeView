@@ -147,23 +147,23 @@ const int kTotalEdgeCells_BackwardSlashed = 1;
 
 BOImageTablePosition kNodesTablePositions[kTotalNodeCells] =
      {
-     /* coords      span    name */
-        { 3, 3 ,    4, 4,    1},
-        {13, 3 ,    4, 4,    2},
-        { 3, 13,    4, 4,    3},
-        {13, 13,    4, 4,    4},
+     /* coords      span    name    edgeType*/
+        { 3, 3 ,    4, 4,    1,   BOEdgeType_NotEdge},
+        {13, 3 ,    4, 4,    2,   BOEdgeType_NotEdge},
+        { 3, 13,    4, 4,    3,   BOEdgeType_NotEdge},
+        {13, 13,    4, 4,    4,   BOEdgeType_NotEdge},
      };
 
 BOImageTablePosition kEdgesTablePositions[kTotalEdgeCells] =
      {
      /* coords      span    name */
-        { 5, 4 ,    10, 2,    12},
-        { 4, 5 ,    2, 10,    13},
-        { 14, 5,    2, 10,    24},
-        { 5, 14,    10, 2,    34},
+        { 5, 4 ,    10, 2,    12,  BOEdgeType_Horizontal},
+        { 4, 5 ,    2, 10,    13,  BOEdgeType_Vertical},
+        { 14, 5,    2, 10,    24,  BOEdgeType_Vertical},
+        { 5, 14,    10, 2,    34,  BOEdgeType_Horizontal},
         
-        { 5, 5,     10, 10,   14},
-        { 5, 5,     10, 10,   23},
+        { 5, 5,     10, 10,   14,  BOEdgeType_BackwardSlashed},
+        { 5, 5,     10, 10,   23,  BOEdgeType_ForwardSlashed},
 
      };
      

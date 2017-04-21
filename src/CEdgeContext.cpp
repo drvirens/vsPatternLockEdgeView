@@ -45,7 +45,7 @@ CEdgeContext::CEdgeContext(Evas_Object* parent, const BOEdgeType& type)
 , thick_(0)
 , colordecorator_(0)
 , table_(0)
-, tblBackgroudSpecs_(BO_COLOR_RED_ALPHA, kBgImageName)
+, tblBackgroudSpecs_(BO_COLOR_PURPLE_ALPHA, kBgImageName)
 , edgetype_(type)
 , name_(-1)
 {TRACE

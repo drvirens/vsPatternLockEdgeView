@@ -36,5 +36,8 @@
 #define BO_COLOR_SOMEWHAT_DARK_GRAY      136, 136, 136, 255
 
 #define BO_COLOR_MAGENTA_ALPHA       255, 0, 255, 128
+#define BO_COLOR_MAGENTA_TRANSPARENT       255, 0, 255, 0
+
+#define BO_COLOR_PURPLE_ALPHA       143, 66, 244, 100
 
 #endif /* bo_colors_h */

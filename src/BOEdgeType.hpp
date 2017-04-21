@@ -11,6 +11,7 @@
 
 enum BOEdgeType
 {
+  BOEdgeType_NotEdge,
   BOEdgeType_Horizontal,
   BOEdgeType_Vertical,
   BOEdgeType_ForwardSlashed, /* / */

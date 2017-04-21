@@ -33,7 +33,7 @@ BOPatternLockView::BOPatternLockView(Evas_Object* parent)
 : parent_(parent)
 , container_(0)
 , table_(0)
-, tblBackgroudSpecs_(BO_COLOR_MAGENTA_ALPHA, kBgImageName)
+, tblBackgroudSpecs_(BO_COLOR_MAGENTA_TRANSPARENT, kBgImageName)
 {TRACE
 }
 void BOPatternLockView::construct()
@@ -42,7 +42,7 @@ void BOPatternLockView::construct()
   createNodeContexts();
   addNodesInTable();
   createEdgeContexts();
-  addEdgesInTable();
+  //addEdgesInTable();
 }
 
 void BOPatternLockView::showNodes()
@@ -131,7 +131,6 @@ void BOPatternLockView::createTable()
 void BOPatternLockView::createNodeContexts()
 {TRACE
   int loopfor = kTotalNodeCells;
-loopfor = 0;
   nodecontexts_.reserve(loopfor);
   for (int i = 0; i < loopfor; i++)
   {
@@ -174,53 +173,28 @@ void BOPatternLockView::addNodesInTable()
 void BOPatternLockView::createEdgeContexts()
 {TRACE
   edgecontexts_.reserve(kTotalEdgeCells);
-
-  int i = 0;
-  int howMany = 0;
-#if 0
-      //horizontal
-  howMany += kTotalEdgeCells_Horizontal;
-  for (; i < howMany; i++)
+  for (int i = 0; i < kTotalEdgeCells; i++)
   {
-    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Horizontal);
-    int name = kEdgesTablePositions[i].name;
-    context->setName(name);
-    edgecontexts_.push_back(context);
+    BOImageTablePosition specs = kEdgesTablePositions[i];  
+    int col = specs.col;
+    int row = specs.row;
+    int colSpan = specs.colSpan;
+    int rowSpan = specs.rowSpan;
+    int name = specs.name; 
+    BOEdgeType edgetype = specs.edgetype; 
+    
+    CEdgeContext* e = CEdgeContext::newL(container_, edgetype);
+    e->setName(name);
+    
+    
+    Evas_Object* evasObj = e->evasObject();
+    table_->addEvasObject(evasObj, col, row, colSpan, rowSpan);
+    
+    edgecontexts_.push_back(e);
   } //end for
-
-
-    //vertical
-  howMany += kTotalEdgeCells_Vertical;
-  for (; i < howMany; i++)
-  {
-    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Vertical);
-    int name = kEdgesTablePositions[i].name;
-        context->setName(name);
-    edgecontexts_.push_back(context);
-  } //end for
-  
-
-    //forward
-  howMany += kTotalEdgeCells_ForwardSlashed;
-  for (; i < howMany; i++)
-  {
-    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_ForwardSlashed);
-    int name = kEdgesTablePositions[i].name;
-        context->setName(name);
-    edgecontexts_.push_back(context);
-  } //end for
-  
-      //backward
-  howMany += kTotalEdgeCells_BackwardSlashed;
-  for (; i < howMany; i++)
-  {
-    CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_BackwardSlashed);
-    int name = kEdgesTablePositions[i].name;
-        context->setName(name);
-    edgecontexts_.push_back(context);
-  } //end for
-#endif
 }
+
+
 void BOPatternLockView::addEdgesInTable()
 {TRACE
   int i = 0;
@@ -230,15 +204,21 @@ void BOPatternLockView::addEdgesInTable()
   {
     CEdgeContext* e = *it;
     BO_ASSERT(e != NULL);
-    if (e) 
+    if (!e) 
       {
-      Evas_Object* evasObj = e->evasObject();
-      table_->addEvasObject(evasObj, kEdgesTablePositions[i].col, kEdgesTablePositions[i].row, kEdgesTablePositions[i].colSpan, kEdgesTablePositions[i].rowSpan);
-      i++;
-      
-//      int name = kEdgesTablePositions[i].name;
-//      e->setName(name);
+      continue;
       }
+      
+    BOImageTablePosition specs = kEdgesTablePositions[i];  
+    int col = specs.col;
+    int row = specs.row;
+    int colSpan = specs.colSpan;
+    int rowSpan = specs.rowSpan;
+
+    Evas_Object* evasObj = e->evasObject();
+    table_->addEvasObject(evasObj, kEdgesTablePositions[i].col, kEdgesTablePositions[i].row, kEdgesTablePositions[i].colSpan, kEdgesTablePositions[i].rowSpan);
+    i++;
+      
   } //end for
 }
 
