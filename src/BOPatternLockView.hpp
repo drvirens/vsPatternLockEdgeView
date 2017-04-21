@@ -41,7 +41,6 @@ class BOPatternLockView
   void createNodeContexts();
   void addNodesInTable();
   void createEdgeContexts();
-  void addEdgesInTable();
   
  private:
   Evas_Object* parent_;

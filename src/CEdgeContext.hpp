@@ -47,7 +47,6 @@ class CEdgeContext
 
  private:
   Evas_Object* parent_;
-  //IImage* images_[EImageMaxSize];
   IImage* image_;
   IEdgeView* state_; //current state
   EdgeStateThin* thin_;

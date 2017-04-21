@@ -55,8 +55,8 @@ create_base_gui(appdata_s *ad)
 //  target = testThickEdgeView_ForwardSlashed(window); // /
 //  target = testThickEdgeView_BackwardSlashed(window); // \
   
-//	target = testPatterLockVCShowAll_PassiveState(window);
-	target = testPatterLockVCShowAll_ActiveState(window);
+	target = testPatterLockVCShowAll_PassiveState(window);
+//	target = testPatterLockVCShowAll_ActiveState(window);
 //	target = testPatterLockVCShowAll_ActiveState_WithTimer(window);
 //	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateError(window);
 //	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateOkay(window);
