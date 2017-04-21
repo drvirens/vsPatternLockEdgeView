@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "OS.h"
+#include "BOBackgroundSpec.hpp"
 
 using namespace std;
 
@@ -48,7 +49,7 @@ class BOPatternLockView
   BOImageTable* table_;
   vector<CNodeContext*> nodecontexts_;
   vector<CEdgeContext*> edgecontexts_;
-
+  BOBackgroundSpec tblBackgroudSpecs_;
 };
 
 #endif /* BOPatternLockView_hpp */

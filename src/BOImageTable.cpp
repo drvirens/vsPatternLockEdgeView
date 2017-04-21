@@ -10,9 +10,10 @@
 #include "IImage.hpp"
 #include "trace.hpp"
 #include "bo_clean_tizen_table.hpp"
+#include "BOBackgroundSpec.hpp"
 
 static void __add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col, int row, int colSpan, int rowSpan);
-static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan);
+static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan, const BOBackgroundSpec& bgspecs);
 static void __addMouseDownEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data);
 static void __addMouseUpEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data);
 static void __addMouseMoveEventHandler(Evas_Object* nativeTbl, BOImageTableEventCallback cb, void* data);
@@ -22,9 +23,9 @@ BOImageTable::~BOImageTable()
 {TRACE
 }
 
-BOImageTable* BOImageTable::newL(Evas_Object* parent, int bgColSpan, int bgRowSpan)
+BOImageTable* BOImageTable::newL(Evas_Object* parent, int bgColSpan, int bgRowSpan, const BOBackgroundSpec& bgspecs)
 {TRACE
-  BOImageTable* obj = new BOImageTable(parent, bgColSpan, bgRowSpan);
+  BOImageTable* obj = new BOImageTable(parent, bgColSpan, bgRowSpan, bgspecs);
   if (obj)
     {
     obj->construct();
@@ -73,11 +74,12 @@ void BOImageTable::addMouseMoveEventHandler(BOImageTableEventCallback cb, void* 
   __addMouseMoveEventHandler(nativetable, cb, this);
 }
 
-BOImageTable::BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan)
+BOImageTable::BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan, const BOBackgroundSpec& bgspecs)
 : table_(0)
 , parent_(parent)
 , bgcolspan_(bgColSpan)
 , bgrowspan_(bgRowSpan)
+, bgspecs_(bgspecs)
 , mousedowncb_(0)
 , mousedowncb_data_(0)
 , mouseupcb_(0)
@@ -89,7 +91,7 @@ BOImageTable::BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan)
 
 void BOImageTable::construct()
 {TRACE
-  table_ = __create_table(parent_, bgcolspan_, bgrowspan_);
+  table_ = __create_table(parent_, bgcolspan_, bgrowspan_, bgspecs_);
 }
 
 Evas_Object* BOImageTable::nativeTable() const
@@ -106,11 +108,11 @@ static void __add_image(Evas_Object* nativeTbl, Evas_Object* nativeImg, int col,
 #endif
 }
 
-static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan)
+static Evas_Object* __create_table(Evas_Object* parent, int colSpan, int rowSpan, const BOBackgroundSpec& bgspecs)
 {TRACE
   Evas_Object* tbl = 0;
 #if defined __TIZEN__
-  tbl = __tizen_create_table(parent, colSpan, rowSpan);
+  tbl = __tizen_create_table(parent, colSpan, rowSpan, bgspecs);
   BO_ASSERT(tbl != 0);
 #else
   return &tbl; //to let unit test case asserts pass

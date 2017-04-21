@@ -18,11 +18,12 @@
 #include "BOImageTable.hpp"
 #include "BOImageTablePosition.hpp"
 #include "trace.hpp"
+#include "bo_colors.h"
+
+static string kBgImageName = "";
 
 static const BOImageTablePosition kBOImageTablePositions[EImageMiddle] =
    {
-      //{2, 2, 8, 8}, //edge = 0
-      //{0, 0, 14, 14}, //vertical edge = 0
       {0, 0, 14, 14}, //bg = 1
    };
 
@@ -44,6 +45,7 @@ CEdgeContext::CEdgeContext(Evas_Object* parent, const BOEdgeType& type)
 , thick_(0)
 , colordecorator_(0)
 , table_(0)
+, tblBackgroudSpecs_(BO_COLOR_RED_ALPHA, kBgImageName)
 , edgetype_(type)
 , name_(-1)
 {TRACE
@@ -53,7 +55,7 @@ void CEdgeContext::createTable()
 {TRACE
   //BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[EImageInner];
   BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[0];
-  table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan);
+  table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan, tblBackgroudSpecs_);
 }
 
 void CEdgeContext::createImages()

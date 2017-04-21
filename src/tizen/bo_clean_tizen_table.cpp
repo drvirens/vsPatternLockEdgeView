@@ -15,8 +15,7 @@
 #include "bo_colors.h"
 #include "bo_file_utils.h"
 #include "logger.h"
-
-//#define ENABLE_TABLE_BACKGROUND_FOR_DEBUG 1
+#include "BOBackgroundSpec.hpp"
 
 static const int kTablePaddingHorizontal = 0;
 static const int kTablePaddingVertical = 0;
@@ -49,22 +48,23 @@ static Evas_Object *view_create_background(Evas_Object *parent,
   return bg;
 }
 
-Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan)
+Evas_Object* __tizen_create_table(Evas_Object* parent, int colSpan, int rowSpan, const BOBackgroundSpec& bgspecs)
 {TRACE
   Evas_Object* table = elm_table_add(parent);
   elm_table_padding_set(table, kTablePaddingHorizontal, kTablePaddingVertical);
   elm_table_homogeneous_set(table, EINA_TRUE);
+  
+  int red = bgspecs.r_;
+  int green = bgspecs.g_;
+  int blue = bgspecs.b_;
+  int alpha = bgspecs.a_;
 
   //table background
   static const char* bg_image = NULL;
   static const int use_colors_only = 1;
   static const int use_color_and_image = 0;
 
-#if defined ENABLE_TABLE_BACKGROUND_FOR_DEBUG
-  Evas_Object* bg = view_create_background(table, bg_image, use_colors_only, use_color_and_image, BO_COLOR_BLACK_ALPHA);
-#else
-  Evas_Object* bg = view_create_background(table, bg_image, use_colors_only, use_color_and_image, BO_COLOR_BLACK_ALPHA_FULLY_TRANSPARENT);
-#endif
+  Evas_Object* bg = view_create_background(table, bg_image, use_colors_only, use_color_and_image, red, green, blue, alpha);
 
   if (bg) {
     evas_object_size_hint_align_set(bg, EVAS_HINT_FILL, EVAS_HINT_FILL);

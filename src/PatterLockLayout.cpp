@@ -8,10 +8,12 @@
 
 #include "PatterLockLayout.hpp"
 
+#define __USE_2x2_MATRIX__ 1
+
+#if defined __USE_3x3_MATRIX__
 
 static const int kBackgroundCell = 1; 
 const int kTotalNodeCells = 9; 
-
 
 const int kTotalEdgeCells = 20;
 const int kTotalEdgeCells_Vertical = 6;
@@ -126,3 +128,48 @@ BOImageTablePosition kEdgesTablePositions[kTotalEdgeCells] =
 
      };
 
+#elif __USE_2x2_MATRIX__
+
+BOImageTablePosition kBackgroundTablePosition[1] =
+{
+    { 0, 0,     20, 20,   -1},
+};
+
+
+
+const int kTotalNodeCells = 4; 
+
+const int kTotalEdgeCells = 6;
+const int kTotalEdgeCells_Vertical = 2;
+const int kTotalEdgeCells_Horizontal = 2;
+const int kTotalEdgeCells_ForwardSlashed = 1;
+const int kTotalEdgeCells_BackwardSlashed = 1;
+
+BOImageTablePosition kNodesTablePositions[kTotalNodeCells] =
+     {
+     /* coords      span    name */
+        { 3, 3 ,    4, 4,    1},
+        {13, 3 ,    4, 4,    2},
+        { 3, 13,    4, 4,    3},
+        {13, 13,    4, 4,    4},
+     };
+
+BOImageTablePosition kEdgesTablePositions[kTotalEdgeCells] =
+     {
+     /* coords      span    name */
+        { 5, 4 ,    10, 2,    12},
+        { 4, 5 ,    2, 10,    13},
+        { 14, 5,    2, 10,    24},
+        { 5, 14,    10, 2,    34},
+        
+        { 5, 5,     10, 10,   14},
+        { 5, 5,     10, 10,   23},
+
+     };
+     
+     
+#else
+
+#error You must use either 3x3 or 2x2 matrix
+
+#endif

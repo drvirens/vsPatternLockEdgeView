@@ -46,6 +46,8 @@ extern "C" {
 #include "CEdgeContext.hpp"
 #include "PatternLockViewController.hpp"
 #include "BOPatternbLockConfig.hpp"
+#include "BOBackgroundSpec.hpp"
+#include "bo_colors.h"
 
 static const int kTimerDuration = 1;
 
@@ -61,7 +63,9 @@ Evas_Object* testTable(Evas_Object* parent)
 {
   int bgRowSpan = 14;
   int bgColSpan = 14;
-  BOImageTable* table = BOImageTable::newL(parent, bgColSpan, bgRowSpan);
+  static string kBgImageName = "";
+  BOBackgroundSpec tblBackgroudSpecs(BO_COLOR_GREEN_ALPHA, kBgImageName);
+  BOImageTable* table = BOImageTable::newL(parent, bgColSpan, bgRowSpan, tblBackgroudSpecs);
   Evas_Object* tbl = table->nativeTable();
   IImage* img = ImageCore::newL(tbl);
 
@@ -137,7 +141,9 @@ Evas_Object* testTizenActiveNodeView(Evas_Object* parent)
 }
 void testNodeRedDecorator()
 {
-  BOImageTable* tbl = BOImageTable::newL(0, 0, 0);
+  static string kBgImageName = "";
+  BOBackgroundSpec tblBackgroudSpecs(BO_COLOR_GREEN_ALPHA, kBgImageName);
+  BOImageTable* tbl = BOImageTable::newL(0, 0, 0, tblBackgroudSpecs);
   IImage* images[1] = {0};
   StateActive* active = StateActive::newL(*tbl, *images);
   NodeColorDecorator* red = new NodeColorDecorator(*active, *tbl, *images);
@@ -184,7 +190,9 @@ Evas_Object* testRedNodeViaContext(Evas_Object* parent)
 }
 void testEdgeViewThin()
 {
-  BOImageTable* tbl = BOImageTable::newL(0, 0, 0);
+  static string kBgImageName = "";
+  BOBackgroundSpec tblBackgroudSpecs(BO_COLOR_GREEN_ALPHA, kBgImageName);
+  BOImageTable* tbl = BOImageTable::newL(0, 0, 0, tblBackgroudSpecs);
   IImage* image = 0;
   EdgeStateThin* thin = EdgeStateThin::newL(*tbl, *image);
   BO_ASSERT(thin != NULL);

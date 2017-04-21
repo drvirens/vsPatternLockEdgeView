@@ -32,11 +32,11 @@ create_base_gui(appdata_s *ad)
 	/* Window */
 	ad->win = elm_win_util_standard_add(PACKAGE, PACKAGE);
 	elm_win_autodel_set(ad->win, EINA_TRUE);
-//
-//	if (elm_win_wm_rotation_supported_get(ad->win)) {
-//		int rots[4] = { 0, 90, 180, 270 };
-//		elm_win_wm_rotation_available_rotations_set(ad->win, (const int *)(&rots), 4);
-//	}
+
+	if (elm_win_wm_rotation_supported_get(ad->win)) {
+		int rots[4] = { 0, 90, 180, 270 };
+		elm_win_wm_rotation_available_rotations_set(ad->win, (const int *)(&rots), 4);
+	}
 
 	evas_object_smart_callback_add(ad->win, "delete,request", win_delete_request_cb, NULL);
 	eext_object_event_callback_add(ad->win, EEXT_CALLBACK_BACK, win_back_cb, ad);
@@ -52,14 +52,14 @@ create_base_gui(appdata_s *ad)
 //  target = testThinEdgeView_Vertical(window); //nothing except table background should be displayed
 //  target = testThickEdgeView_Vertical(window);
 //  target = testThickEdgeView_Horizontal(window);
-//  target = testThickEdgeView_ForwardSlashed(window);
-//  target = testThickEdgeView_BackwardSlashed(window);
+//  target = testThickEdgeView_ForwardSlashed(window); // /
+//  target = testThickEdgeView_BackwardSlashed(window); // \
   
 //	target = testPatterLockVCShowAll_PassiveState(window);
-	target = testPatterLockVCShowAll_ActiveState(window);
+//	target = testPatterLockVCShowAll_ActiveState(window);
 //	target = testPatterLockVCShowAll_ActiveState_WithTimer(window);
 //	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateError(window);
-//	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateOkay(window);
+	target = testPatterLockVCShowAll_ActiveState_WithTimer_DecorateOkay(window);
 
 
 	BO_ASSERT(target != NULL);

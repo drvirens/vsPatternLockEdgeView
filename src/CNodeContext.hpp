@@ -12,6 +12,7 @@
 #include "OS.h"
 #include "IImage.hpp"
 #include "BOHotspot.hpp"
+#include "BOBackgroundSpec.hpp"
 
 class StatePassive;
 class StateActive;
@@ -63,6 +64,7 @@ class CNodeContext
   BOImageTable* table_;
   BOHotspot hotspot_;
   int index_;
+  BOBackgroundSpec tblBackgroudSpecs_;
   
  friend 
   class StatePassive;

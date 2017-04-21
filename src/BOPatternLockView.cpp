@@ -13,6 +13,9 @@
 #include "CEdgeContext.hpp"
 #include "PatterLockLayout.hpp"
 #include "trace.hpp"
+#include "bo_colors.h"
+
+static string kBgImageName = "";
 
 BOPatternLockView* BOPatternLockView::newL(Evas_Object* parent)
 {TRACE
@@ -30,6 +33,7 @@ BOPatternLockView::BOPatternLockView(Evas_Object* parent)
 : parent_(parent)
 , container_(0)
 , table_(0)
+, tblBackgroudSpecs_(BO_COLOR_MAGENTA_ALPHA, kBgImageName)
 {TRACE
 }
 void BOPatternLockView::construct()
@@ -116,20 +120,25 @@ vector<CNodeContext*>& BOPatternLockView::createHotspots()
 
 void BOPatternLockView::createTable()
 {TRACE
-  BOImageTablePosition bgNodesTablePosition = kNodesTablePositions[kBackgroundCellIndex];
-  table_ = BOImageTable::newL(parent_, bgNodesTablePosition.colSpan, bgNodesTablePosition.rowSpan);
-
+  BOImageTablePosition bgNodesTablePosition = kBackgroundTablePosition[0];
+  table_ = BOImageTable::newL(parent_, bgNodesTablePosition.colSpan, bgNodesTablePosition.rowSpan, tblBackgroudSpecs_);
+  if (!table_)
+  {
+    return;
+  }
   container_ = table_->nativeTable();
 }
 void BOPatternLockView::createNodeContexts()
 {TRACE
-  nodecontexts_.reserve(kTotalNodeCells);
-  for (int i = 0; i < kTotalNodeCells; i++)
+  int loopfor = kTotalNodeCells;
+loopfor = 0;
+  nodecontexts_.reserve(loopfor);
+  for (int i = 0; i < loopfor; i++)
   {
     CNodeContext* context = CNodeContext::newL(container_);
-//    context->setIndex(i);
     nodecontexts_.push_back(context);
   } //end for
+
 }
 
 void BOPatternLockView::addNodesInTable()
@@ -168,7 +177,7 @@ void BOPatternLockView::createEdgeContexts()
 
   int i = 0;
   int howMany = 0;
-  
+#if 0
       //horizontal
   howMany += kTotalEdgeCells_Horizontal;
   for (; i < howMany; i++)
@@ -210,6 +219,7 @@ void BOPatternLockView::createEdgeContexts()
         context->setName(name);
     edgecontexts_.push_back(context);
   } //end for
+#endif
 }
 void BOPatternLockView::addEdgesInTable()
 {TRACE

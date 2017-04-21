@@ -16,6 +16,7 @@
 #define BO_COLOR_BLACK_TRANSPARENT       0, 0, 0, 128
 #define BO_COLOR_WHITE      0xff, 0xff, 0xff
 #define BO_COLOR_GREEN      0x2e, 0xcc, 0x71
+#define BO_COLOR_GREEN_ALPHA      0x2e, 0xcc, 0x71, 128
 
 
 #define BO_COLOR_LIGHT_GRAY_ALPHA 0xC7, 0xC7, 0xCC, 0xff
@@ -26,10 +27,14 @@
 #define BO_COLOR_BLACK_ALPHA       0, 0, 0, 55
 #define BO_COLOR_BLACK_ALPHA_FULLY_TRANSPARENT 0,0,0,0
 
+#define BO_COLOR_BLUE_ALPHA_TRANSPARENT       066, 134, 244, 255
+
 //use for download area background
 #define BO_COLOR_DARK_GRAY      74, 74, 74, 255
 
 //used for progress view background
 #define BO_COLOR_SOMEWHAT_DARK_GRAY      136, 136, 136, 255
+
+#define BO_COLOR_MAGENTA_ALPHA       255, 0, 255, 128
 
 #endif /* bo_colors_h */

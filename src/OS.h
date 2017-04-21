@@ -9,6 +9,10 @@
 #ifndef OS_h
 #define OS_h
 
+//
+// Purpose of this file is to let Xcode llvm compiler compile the shit while not linking to any tizen specific code
+//
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,6 +22,8 @@ extern "C" {
 #if defined __APPLE__
 typedef void Evas_Object;
 typedef struct _Evas Evas;
+
+typedef void      (*Evas_Object_Event_Cb)(void *data, Evas *e, Evas_Object *obj, void *event_info);
 
 typedef struct _Eina_List            Eina_List;
 

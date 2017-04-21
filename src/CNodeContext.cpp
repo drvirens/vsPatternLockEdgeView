@@ -17,6 +17,9 @@
 #include "BOImageTable.hpp"
 #include "BOImageTablePosition.hpp"
 #include "trace.hpp"
+#include "bo_colors.h"
+
+static string kBgImageName = "";
 
 static const BOImageTablePosition kBOImageTablePositions[EImageMaxSize + 1] =
      {
@@ -46,13 +49,14 @@ CNodeContext::CNodeContext(Evas_Object* parent)
 , table_(0)
 , hotspot_()
 , index_(-1)
+, tblBackgroudSpecs_(BO_COLOR_GREEN_ALPHA, kBgImageName)
 {TRACE
 }
 
 void CNodeContext::createTable()
 {TRACE
   BOImageTablePosition bgBOImageTablePosition = kBOImageTablePositions[EImageMaxSize];
-  table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan);
+  table_ = BOImageTable::newL(parent_, bgBOImageTablePosition.colSpan, bgBOImageTablePosition.rowSpan, tblBackgroudSpecs_);
 }
 
 void CNodeContext::createImages()

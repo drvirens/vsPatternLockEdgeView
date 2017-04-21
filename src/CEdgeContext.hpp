@@ -12,6 +12,7 @@
 #include "OS.h"
 #include "IImage.hpp"
 #include "BOEdgeType.hpp"
+#include "BOBackgroundSpec.hpp"
 
 class EdgeStateThin;
 class EdgeStateThick;
@@ -53,6 +54,7 @@ class CEdgeContext
   EdgeStateThick* thick_;
   EdgeColorDecorator* colordecorator_;
   BOImageTable* table_;
+  BOBackgroundSpec tblBackgroudSpecs_;
   const BOEdgeType edgetype_;
   int name_; //2 digits number each digit specifies a node that connects with
   

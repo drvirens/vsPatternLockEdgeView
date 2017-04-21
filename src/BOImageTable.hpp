@@ -16,6 +16,7 @@
 using namespace std;
 
 class IImage;
+class BOBackgroundSpec;
 
 void _mouse_down_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
 void _mouse_up_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
@@ -25,7 +26,7 @@ class BOImageTable
 {
  public:
   virtual ~BOImageTable();
-  static BOImageTable* newL(Evas_Object* parent, int bgColSpan, int bgRowSpan);
+  static BOImageTable* newL(Evas_Object* parent, int bgColSpan, int bgRowSpan, const BOBackgroundSpec& bgspecs);
   void add(IImage& image, int col, int row, int colSpan, int rowSpan);
   void addEvasObject(Evas_Object* nativeEvasObject, int col, int row, int colSpan, int rowSpan);
   void addMouseDownEventHandler(BOImageTableEventCallback cb, void* data);
@@ -36,7 +37,7 @@ class BOImageTable
   void geometry(int& x, int& y, int& w, int& h);
   
  private:
-  BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan);
+  BOImageTable(Evas_Object* parent, int bgColSpan, int bgRowSpan, const BOBackgroundSpec& bgspecs);
   void construct();
   
  private:
@@ -45,6 +46,7 @@ class BOImageTable
   Evas_Object* parent_;
   int bgcolspan_;
   int bgrowspan_;
+  const BOBackgroundSpec& bgspecs_;
   
   BOImageTableEventCallback mousedowncb_;
   void* mousedowncb_data_;
