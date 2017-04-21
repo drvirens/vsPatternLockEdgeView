@@ -127,7 +127,7 @@ void BOPatternLockView::createNodeContexts()
   for (int i = 0; i < kTotalNodeCells; i++)
   {
     CNodeContext* context = CNodeContext::newL(container_);
-    context->setIndex(i);
+//    context->setIndex(i);
     nodecontexts_.push_back(context);
   } //end for
 }
@@ -150,11 +150,13 @@ void BOPatternLockView::addNodesInTable()
     int row = kNodesTablePositions[i].row;
     int columnspan = kNodesTablePositions[i].colSpan;
     int rowspan = kNodesTablePositions[i].rowSpan;
+    int name = kNodesTablePositions[i].name;
     
     table_->addEvasObject(evasObj, column, row, columnspan, rowspan);
     
     c->setColumn(column);
     c->setRow(row);
+    c->setIndex(name);
     
     i++;
   } //end for
@@ -172,6 +174,8 @@ void BOPatternLockView::createEdgeContexts()
   for (; i < howMany; i++)
   {
     CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Horizontal);
+    int name = kEdgesTablePositions[i].name;
+    context->setName(name);
     edgecontexts_.push_back(context);
   } //end for
 
@@ -181,6 +185,8 @@ void BOPatternLockView::createEdgeContexts()
   for (; i < howMany; i++)
   {
     CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_Vertical);
+    int name = kEdgesTablePositions[i].name;
+        context->setName(name);
     edgecontexts_.push_back(context);
   } //end for
   
@@ -190,6 +196,8 @@ void BOPatternLockView::createEdgeContexts()
   for (; i < howMany; i++)
   {
     CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_ForwardSlashed);
+    int name = kEdgesTablePositions[i].name;
+        context->setName(name);
     edgecontexts_.push_back(context);
   } //end for
   
@@ -198,6 +206,8 @@ void BOPatternLockView::createEdgeContexts()
   for (; i < howMany; i++)
   {
     CEdgeContext* context = CEdgeContext::newL(container_, BOEdgeType_BackwardSlashed);
+    int name = kEdgesTablePositions[i].name;
+        context->setName(name);
     edgecontexts_.push_back(context);
   } //end for
 }
@@ -208,25 +218,55 @@ void BOPatternLockView::addEdgesInTable()
         it != edgecontexts_.end();
         ++it) 
   {
-    CEdgeContext* c = *it;
-    BO_ASSERT(c != NULL);
-    if (c) 
+    CEdgeContext* e = *it;
+    BO_ASSERT(e != NULL);
+    if (e) 
       {
-      Evas_Object* evasObj = c->evasObject();
+      Evas_Object* evasObj = e->evasObject();
       table_->addEvasObject(evasObj, kEdgesTablePositions[i].col, kEdgesTablePositions[i].row, kEdgesTablePositions[i].colSpan, kEdgesTablePositions[i].rowSpan);
       i++;
+      
+//      int name = kEdgesTablePositions[i].name;
+//      e->setName(name);
       }
   } //end for
 }
 
 CEdgeContext* BOPatternLockView::getEdgeBetweenNodes(int prevNodeIndex, int currNodeIndex)
 {TRACE
-  //testing+
-  static int i = 0;
-  //testing-
-  CEdgeContext* e = edgecontexts_[i];
-  i++;
-  return e;
+  CEdgeContext* retEdge = 0; //edgecontexts_[i];
+  //create the name of the edge we are looking for. we create two numbers.
+  // <prev><curr> and <curr><prev>
+  //If one is not found, look for other
+  
+  int name1 = 0;
+  int name2 = 0;
+  
+  name1 = (prevNodeIndex * 10) + currNodeIndex;
+  name2 = (currNodeIndex * 10) + prevNodeIndex;
+    
+  //then we look for that specific edge 
+  for (vector<CEdgeContext*>::iterator it = edgecontexts_.begin();
+        it != edgecontexts_.end();
+        ++it) 
+  {
+    CEdgeContext* e = *it;
+    BO_ASSERT(e != NULL);
+    if (!e) 
+      {
+      continue;
+      }
+    int name = e->name();
+    if (name == name1 /*|| name == name2*/)
+    {
+      //bingo
+      retEdge = e;
+      break;
+    }
+      
+  } //end for
+  
+  return retEdge;
 }
   
 Evas_Object* BOPatternLockView::evasObject() const

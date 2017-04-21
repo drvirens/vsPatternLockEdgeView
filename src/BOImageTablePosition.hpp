@@ -15,6 +15,7 @@ struct BOImageTablePosition
   int row;
   int colSpan;
   int rowSpan;
+  int name; 
 };
 
 #endif /* BOImageTablePosition_hpp */

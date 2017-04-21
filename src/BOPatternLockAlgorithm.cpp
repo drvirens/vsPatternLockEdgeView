@@ -70,15 +70,22 @@ void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
       continue;
     }
     
+    prev_ = curr_;
+    curr_ = c;
+    //check which edge needs to be higlighted
+    highLightEdge(prev_, curr_);
+
+
+
     c->show();
     highlightedNodes_.insert(c);
     observer_.didEnterInsideHotspot(mouse, *c);
     
-    prev_ = curr_;
-    curr_ = c;
-    
-    //check which edge needs to be higlighted
-    highLightEdge(prev_, curr_);
+//    prev_ = curr_;
+//    curr_ = c;
+//
+//    //check which edge needs to be higlighted
+//    highLightEdge(prev_, curr_);
     break;
 
   } //end for
@@ -95,5 +102,13 @@ void BOPatternLockAlgorithm::highLightEdge(CNodeContext* prev, CNodeContext* cur
   int c = curr->index();
   DBG("Highlight edge between nodes [%d] and [%d]", p, c);
   CEdgeContext* edge = observer_.getEdgeBetweenNodes(p, c);
-  edge->show();
+  //BO_ASSERT(edge != 0);
+  if (edge)
+  {
+    edge->show();
+  }
+  else
+  {
+    DBG("we dont have image for this edge");
+  }
 }

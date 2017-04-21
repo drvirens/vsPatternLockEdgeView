@@ -30,6 +30,9 @@ class CEdgeContext
   void error();
   
   Evas_Object* evasObject() const;
+  
+  void setName(int name);
+  int name() const;
 
  private:
   CEdgeContext(Evas_Object* parent, const BOEdgeType& type);
@@ -51,6 +54,7 @@ class CEdgeContext
   EdgeColorDecorator* colordecorator_;
   BOImageTable* table_;
   const BOEdgeType edgetype_;
+  int name_; //2 digits number each digit specifies a node that connects with
   
  friend 
   class EdgeStateThin;

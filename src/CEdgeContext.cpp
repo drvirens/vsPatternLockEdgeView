@@ -45,6 +45,7 @@ CEdgeContext::CEdgeContext(Evas_Object* parent, const BOEdgeType& type)
 , colordecorator_(0)
 , table_(0)
 , edgetype_(type)
+, name_(-1)
 {TRACE
 }
 
@@ -106,6 +107,7 @@ void CEdgeContext::construct()
 
 CEdgeContext::~CEdgeContext()
 {TRACE
+  delete colordecorator_;
 }
 
 void CEdgeContext::show()
@@ -120,6 +122,15 @@ void CEdgeContext::ok()
 void CEdgeContext::error()
 {TRACE
   colordecorator_->decorate(eRed);
+}
+
+void CEdgeContext::setName(int name)
+{TRACE
+  name_ = name;
+}
+int CEdgeContext::name() const
+{TRACE
+  return name_;
 }
   
 Evas_Object* CEdgeContext::evasObject() const
