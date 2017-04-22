@@ -9,7 +9,7 @@
 #include "BOPatternLockAlgorithm.hpp"
 #include "CNodeContext.hpp"
 #include "CEdgeContext.hpp"
-//#include "BOHotspot.hpp"
+#include "BOHotspot.hpp"
 #include "BOPatternLockAlgorithmObserver.hpp"
 #include "trace.hpp"
 
