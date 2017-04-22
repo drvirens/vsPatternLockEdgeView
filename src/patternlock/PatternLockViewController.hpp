@@ -24,9 +24,9 @@ class BOPatternLockView;
 class BOLineManager;
 class BOPatternLockAlgorithm;
 
-static void didReceiveMouseDownEvent(void* eventInfo, void* data);
-static void didReceiveMouseUpEvent(void* eventInfo, void* data);
-static void didReceiveMouseMoveEvent(void* event_info, void* data);
+extern void didReceiveMouseDownEvent(void* eventInfo, void* data);
+extern void didReceiveMouseUpEvent(void* eventInfo, void* data);
+extern void didReceiveMouseMoveEvent(void* event_info, void* data);
 
 enum EPatternLockMode
 {

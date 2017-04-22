@@ -121,6 +121,17 @@ bool BOPatternLockAlgorithm::isEdgeHighighted(CEdgeContext* e)
   return ret;
 }
 
+void BOPatternLockAlgorithm::processNode(CNodeContext* c, Evas_Event_Mouse_Move* mouse)
+{TRACE
+  c->show();
+  highlightedNodes_.insert(c);
+  int index = c->index();
+  enteredPassword_ << index;
+  string p = enteredPassword_.str();
+  DBG("enteredPassword_ is [%s], index is [%d]\n", p.c_str(), index);
+  
+  observer_.didEnterInsideHotspot(mouse, *c);
+}
 
 void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
 {TRACE
@@ -146,21 +157,33 @@ void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
       continue;
     }
     
-    c->show();
-    highlightedNodes_.insert(c);
-    int index = c->index();
-    enteredPassword_ << index;
-    string p = enteredPassword_.str();
-    DBG("enteredPassword_ is [%s], index is [%d]\n", p.c_str(), index);
+//    c->show();
+//    highlightedNodes_.insert(c);
+//    int index = c->index();
+//    enteredPassword_ << index;
+//    string p = enteredPassword_.str();
+//    DBG("enteredPassword_ is [%s], index is [%d]\n", p.c_str(), index);
     
-    observer_.didEnterInsideHotspot(mouse, *c);
+//    observer_.didEnterInsideHotspot(mouse, *c);
 
     prev_ = curr_;
     curr_ = c;
 
     if (prev_ != curr_)
     {
-      highLightEdge(prev_, curr_);
+      bool highlightedNodesEmpty = highlightedNodes_.empty();
+      if (highlightedNodesEmpty)
+      {
+        processNode(c, mouse);
+        return;
+      }
+      
+      bool edgeExists = highLightEdge(prev_, curr_);
+      if (edgeExists) //some edge was highlighted
+      {
+        processNode(c, mouse);
+        return;
+      } 
     }
 
     break;
@@ -173,44 +196,47 @@ static bool isValidNodeNumber(int nodeNumber)
   return ret;
 }
 
-void BOPatternLockAlgorithm::highLightEdge(CNodeContext* prev, CNodeContext* curr)
+//return true if highlighted
+bool BOPatternLockAlgorithm::highLightEdge(CNodeContext* prev, CNodeContext* curr)
 {TRACE
   if ( !(prev && curr) )
   {
     DBG("to highlight edge we need two nodes");
-    return;
+    return false;
   }
   int p = prev->index();
   int c = curr->index();
   if (!isValidNodeNumber(p)) 
   {
     DBG("[%d] is NOT a valid node number so return", p);
-    return;
+    return false;
   }
   if (!isValidNodeNumber(c)) 
   {
     DBG("[%d] is NOT a valid node number so return", c);
-    return;
+    return false;
   }
   if ( p == c ) 
   {
     DBG("there is no edge to highlight with only node ");
-    return;
+    return false;
   }
   
   DBG("Highlight edge between nodes [%d] and [%d]", p, c);
   CEdgeContext* edge = observer_.getEdgeBetweenNodes(p, c);
-  BO_ASSERT(edge != 0);
+  //BO_ASSERT(edge != 0);
   if (edge)
   {
     if (!isEdgeHighighted(edge)) 
     {
       edge->show();
       highlightedEdges_.insert(edge);
+      return true;
     }
   }
   else
   {
     DBG("we dont have image for this edge");
   }
+  return false;
 }

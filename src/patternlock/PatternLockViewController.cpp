@@ -56,21 +56,21 @@ PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig&
 {TRACE
 }
 
-static void didReceiveMouseDownEvent(void* event_info, void* data)
+extern void didReceiveMouseDownEvent(void* event_info, void* data)
 {TRACE
   PatternLockViewController* thiz = static_cast<PatternLockViewController*>(data);
   BO_ASSERT(thiz != 0);
   Evas_Event_Mouse_Down* mouse = (Evas_Event_Mouse_Down*) event_info;
   thiz->handleMouseDown(mouse);
 }
-static void didReceiveMouseUpEvent(void* event_info, void* data)
+extern void didReceiveMouseUpEvent(void* event_info, void* data)
 {TRACE
   PatternLockViewController* thiz = static_cast<PatternLockViewController*>(data);
   BO_ASSERT(thiz != 0);
   Evas_Event_Mouse_Up* mouse = (Evas_Event_Mouse_Up*) event_info;
   thiz->handleMouseUp(mouse);
 }
-static void didReceiveMouseMoveEvent(void* event_info, void* data)
+extern void didReceiveMouseMoveEvent(void* event_info, void* data)
 {TRACE
   PatternLockViewController* thiz = static_cast<PatternLockViewController*>(data);
   BO_ASSERT(thiz != 0);
