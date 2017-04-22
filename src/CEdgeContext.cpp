@@ -14,6 +14,10 @@
 #include "ImageEdgeHorizontal.hpp"
 #include "ImageEdgeForwardSlashed.hpp"
 #include "ImageEdgeBackwardSlashed.hpp"
+#include "ImageEdgeBackwardSlashed_Elongated_Horizontal.hpp"
+#include "ImageEdgeForwardSlashed_Elongated_Horizontal.hpp"
+#include "ImageEdgeBackwardSlashed_Elongated_Vertical.hpp"
+#include "ImageEdgeForwardSlashed_Elongated_Vertical.hpp"
 #include "EdgeColorDecorator.hpp"
 #include "BOImageTable.hpp"
 #include "BOImageTablePosition.hpp"
@@ -64,16 +68,42 @@ void CEdgeContext::createImages()
   if (edgetype_ == BOEdgeType_Horizontal)
   {
     image_ = ImageEdgeHorizontal::newL(tbl);
-  } else if (edgetype_ == BOEdgeType_Vertical)
+  } 
+  else if (edgetype_ == BOEdgeType_Vertical)
   {
     image_ = ImageEdgeVertical::newL(tbl);
-  } else if (edgetype_ == BOEdgeType_ForwardSlashed)
+  } 
+  else if (edgetype_ == BOEdgeType_ForwardSlashed)
   {
     image_ = ImageEdgeForwardSlashed::newL(tbl);
-  } else if (edgetype_ == BOEdgeType_BackwardSlashed)
+  } 
+  else if (edgetype_ == BOEdgeType_BackwardSlashed)
   {
     image_ = ImageEdgeBackwardSlashed::newL(tbl);
-  } else {
+  } 
+  
+  
+  else 
+  if (edgetype_ == BOEdgeType_BackwardSlashed_Elongated_Horizontal)
+  {
+    image_ = ImageEdgeBackwardSlashed_Elongated_Horizontal::newL(tbl);
+  } 
+  else if (edgetype_ == BOEdgeType_ForwardSlashed_Elongated_Horizontal)
+  {
+    image_ = ImageEdgeForwardSlashed_Elongated_Horizontal::newL(tbl);
+  } 
+  else if (edgetype_ == BOEdgeType_BackwardSlashed_Elongated_Vertical)
+  {
+    image_ = ImageEdgeBackwardSlashed_Elongated_Vertical::newL(tbl);
+  } 
+  else if (edgetype_ == BOEdgeType_ForwardSlashed_Elongated_Vertical)
+  {
+    image_ = ImageEdgeForwardSlashed_Elongated_Vertical::newL(tbl);
+  }
+  
+  
+  else 
+  {
     image_ = 0;
   }
   BO_ASSERT(image_ != 0);

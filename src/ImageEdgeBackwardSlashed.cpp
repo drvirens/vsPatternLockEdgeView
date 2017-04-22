@@ -49,3 +49,4 @@ void ImageEdgeBackwardSlashed::construct()
 ImageEdgeBackwardSlashed::~ImageEdgeBackwardSlashed()
 {TRACE
 }
+
