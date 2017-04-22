@@ -31,10 +31,9 @@ class BOLineManager
  private:
   Evas* evas;
   Evas_Object* line_new_; //viren - represent one line
-  //Eina_List* objects; //lines array
   vector<Evas_Object*> objects;
   vector<Evas_Object*> lines_;
-  int win_layer;
+  //int win_layer;
   void* current_object;
   Evas_Object* parent_;
 };

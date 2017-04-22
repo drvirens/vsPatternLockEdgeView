@@ -14,8 +14,8 @@
 #include "trace.hpp"
 
 BOHotspot::BOHotspot()
-: column_(-1)
-, row_(-1)
+: row_(-1)
+, column_(-1)
 , center_x(-1)
 , center_y(-1)
 {TRACE

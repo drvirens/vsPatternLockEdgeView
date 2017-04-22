@@ -54,6 +54,7 @@ create_base_gui(appdata_s *ad)
 //  target = testThickEdgeView_Horizontal(window);
 //  target = testThickEdgeView_ForwardSlashed(window); // /
 //  target = testThickEdgeView_BackwardSlashed(window); // \
+//
   
 	target = testPatterLockVCShowAll_PassiveState(window);
 //	target = testPatterLockVCShowAll_ActiveState(window);

@@ -12,6 +12,8 @@
 #include <string>
 using namespace std;
 
+//#define DEBUG_TABLE_BACKGROUND 1
+
 class BOBackgroundSpec
 {
  public:
@@ -21,7 +23,13 @@ class BOBackgroundSpec
    , b_(b)
    , a_(a)
    , bgimgname_(bgimgname)
-  {}
+  {
+#if defined DEBUG_TABLE_BACKGROUND
+  //a_ = 128;
+#else
+  a_ = 0;
+#endif
+  }
   
  public:
   int r_;

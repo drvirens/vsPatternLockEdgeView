@@ -20,7 +20,6 @@ void BOLineManager::construct()
 BOLineManager::BOLineManager(Evas_Object* parent)
 : evas(0)
 , line_new_(0)
-, win_layer(0)
 , current_object(0)
 , parent_(parent)
 {TRACE

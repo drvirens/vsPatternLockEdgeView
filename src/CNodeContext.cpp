@@ -103,12 +103,6 @@ CNodeContext::~CNodeContext()
 {TRACE
 }
 
-void CNodeContext::resize()
-{TRACE
-  TODO("resize needs to be implemented");
-  //table_->resize();
-}
-
 int CNodeContext::row() const
 {TRACE
   BO_ASSERT(hotspot_.row_ != -1);
