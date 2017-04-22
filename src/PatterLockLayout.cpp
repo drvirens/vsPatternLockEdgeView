@@ -23,7 +23,7 @@ BOImageTablePosition kBackgroundTablePosition[1] =
 
 const int kTotalNodeCells = 9; 
 
-const int kTotalEdgeCells = 20;
+const int kTotalEdgeCells = 28;
 
 BOImageTablePosition kNodesTablePositions[kTotalNodeCells] =
      {
@@ -75,6 +75,21 @@ BOImageTablePosition kEdgesTablePositions[kTotalEdgeCells] =
 
         { 15, 15,     10, 10,   59,  BOEdgeType_BackwardSlashed},
         { 15, 15,     10, 10,   68,  BOEdgeType_ForwardSlashed},
+        
+        
+        //
+        		
+        { 5, 5,     20, 10,   16,  BOEdgeType_BackwardSlashed},
+        { 5, 5,     20, 10,   34,  BOEdgeType_ForwardSlashed},
+		
+        { 5, 15,     20, 10,   49,  BOEdgeType_BackwardSlashed},
+        { 5, 15,     20, 10,   67,  BOEdgeType_ForwardSlashed},
+
+        { 5, 5,     10, 20,   18,  BOEdgeType_BackwardSlashed},
+        { 5, 5,     10, 20,   27,  BOEdgeType_ForwardSlashed},
+		
+        { 15, 5,     10, 20,   29,  BOEdgeType_BackwardSlashed},
+        { 15, 5,     10, 20,   38,  BOEdgeType_ForwardSlashed},
 
      };
 
