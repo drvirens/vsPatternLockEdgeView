@@ -16,8 +16,8 @@
 #include "logger.h"
 #include "trace.hpp"
 
-//static const int kImageSize = 100;
-static const int kImageSize = 50;
+static const int kImageSize = 100;
+//static const int kImageSize = 50;
 
 typedef enum bo_color_index
 {

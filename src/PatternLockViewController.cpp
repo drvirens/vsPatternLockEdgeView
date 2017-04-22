@@ -142,11 +142,33 @@ void PatternLockViewController::handleMouseMove(Evas_Event_Mouse_Move* mouse)
   else
     curr.y = mouse->cur.canvas.y;
 
-  _update_line_item();
+{
+  int lineX2 = 0;
+  int lineY2 = 0;
+  
+  _update_line_item(lineX2, lineY2);
+  
+  int scanPointX = lineX2;
+  int scanPointY = lineY2;
+  
+  if (scanPointX == 0)
+  {
+    scanPointX = curr.x;
+  }
+  if (scanPointY == 0)
+  {
+    scanPointY = curr.y;
+  }
+
+  //algorithm_->scan(scanPointX , scanPointY, mouse);
+  
+  
   algorithm_->scan(curr.x , curr.y, mouse);
 }
 
-void PatternLockViewController::_update_line_item()
+}
+
+void PatternLockViewController::_update_line_item(int& lineX2, int& lineY2)
 {TRACE
   int x1 = 0;
   int y1 = 0;
@@ -175,11 +197,9 @@ void PatternLockViewController::_update_line_item()
     y1 = curr.y;
   }
   
+  lineX2 = x2;
+  lineY2 = y2;
   linemgr_->drawLine(x1, y1, x2, y2);
-}
-
-void PatternLockViewController::_create_line()
-{TRACE
 }
 
 void PatternLockViewController::tableGeometry(int& x, int& y, int& w, int& h)
@@ -213,17 +233,6 @@ void PatternLockViewController::_reset_coords(Evas_Event_Mouse_Down* mouse)
   curr.x = mouse->canvas.x;
   curr.y = mouse->canvas.y;
 }
-//void PatternLockViewController::_reset_coords_in_move(Evas_Event_Mouse_Move* mouse) 
-//{TRACE
-//  start.x = mouse->cur.canvas.x;
-//  start.y = mouse->cur.canvas.y;
-//  
-//  prev.x = mouse->cur.canvas.x;
-//  prev.y = mouse->cur.canvas.y;
-//  
-//  curr.x = mouse->cur.canvas.x;
-//  curr.y = mouse->cur.canvas.y;
-//}
 void PatternLockViewController::_reset_coords_in_move(Evas_Event_Mouse_Move* mouse, CNodeContext& nodeContext) 
 {TRACE
   //reset everything to center of hotspot or what?

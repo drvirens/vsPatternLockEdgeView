@@ -16,6 +16,10 @@ enum BOEdgeType
   BOEdgeType_Vertical,
   BOEdgeType_ForwardSlashed, /* / */
   BOEdgeType_BackwardSlashed, /* \ */
+  BOEdgeType_BackwardSlashed_Elongated_Horizontal,
+  BOEdgeType_ForwardSlashed_Elongated_Horizontal,
+  BOEdgeType_BackwardSlashed_Elongated_Vertical,
+  BOEdgeType_ForwardSlashed_Elongated_Vertical
 };
 
 #endif /* BOEdgeType_hpp */

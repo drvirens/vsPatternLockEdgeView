@@ -22,27 +22,31 @@ BOImageTablePosition kBackgroundTablePosition[1] =
 
 
 const int kTotalNodeCells = 9; 
-
 const int kTotalEdgeCells = 28;
+static const int kInceaseNodeBy = 1;
+
+static const int kNodeWidth = 4 + (kInceaseNodeBy*2);
 
 BOImageTablePosition kNodesTablePositions[kTotalNodeCells] =
      {
      /* coords      span    name    edgeType*/
 	 //row 1
-        { 3, 3 ,    4, 4,    1,   BOEdgeType_NotEdge},
-        {13, 3 ,    4, 4,    2,   BOEdgeType_NotEdge},
-        {23, 3 ,    4, 4,    3,   BOEdgeType_NotEdge},
+        { 3-kInceaseNodeBy, 3-kInceaseNodeBy ,    kNodeWidth, kNodeWidth,    1,   BOEdgeType_NotEdge},
+        {13-kInceaseNodeBy, 3-kInceaseNodeBy ,    kNodeWidth, kNodeWidth,    2,   BOEdgeType_NotEdge},
+        {23-kInceaseNodeBy, 3-kInceaseNodeBy ,    kNodeWidth, kNodeWidth,    3,   BOEdgeType_NotEdge},
 		
 	//row 2
-        { 3, 13,    4, 4,    4,   BOEdgeType_NotEdge},
-        {13, 13,    4, 4,    5,   BOEdgeType_NotEdge},
-        {23, 13,    4, 4,    6,   BOEdgeType_NotEdge},
+        { 3-kInceaseNodeBy, 13-kInceaseNodeBy,    kNodeWidth, kNodeWidth,    4,   BOEdgeType_NotEdge},
+        {13-kInceaseNodeBy, 13-kInceaseNodeBy,    kNodeWidth, kNodeWidth,    5,   BOEdgeType_NotEdge},
+        {23-kInceaseNodeBy, 13-kInceaseNodeBy,    kNodeWidth, kNodeWidth,    6,   BOEdgeType_NotEdge},
 		
 	//row 3
-        { 3, 23,    4, 4,    7,   BOEdgeType_NotEdge},
-        {13, 23,    4, 4,    8,   BOEdgeType_NotEdge},
-        {23, 23,    4, 4,    9,   BOEdgeType_NotEdge},
+        { 3-kInceaseNodeBy, 23-kInceaseNodeBy,    kNodeWidth, kNodeWidth,    7,   BOEdgeType_NotEdge},
+        {13-kInceaseNodeBy, 23-kInceaseNodeBy,    kNodeWidth, kNodeWidth,    8,   BOEdgeType_NotEdge},
+        {23-kInceaseNodeBy, 23-kInceaseNodeBy,    kNodeWidth, kNodeWidth,    9,   BOEdgeType_NotEdge},
      };
+
+
 
 BOImageTablePosition kEdgesTablePositions[kTotalEdgeCells] =
      {
@@ -77,21 +81,45 @@ BOImageTablePosition kEdgesTablePositions[kTotalEdgeCells] =
         { 15, 15,     10, 10,   68,  BOEdgeType_ForwardSlashed},
         
         
-        //
+        // 8 elongated edges
         		
-        { 5, 5,     20, 10,   16,  BOEdgeType_BackwardSlashed},
-        { 5, 5,     20, 10,   34,  BOEdgeType_ForwardSlashed},
+        { 5, 5,     20, 10,   16,  BOEdgeType_BackwardSlashed_Elongated_Horizontal},
+        { 5, 5,     20, 10,   34,  BOEdgeType_ForwardSlashed_Elongated_Horizontal},
 		
-        { 5, 15,     20, 10,   49,  BOEdgeType_BackwardSlashed},
-        { 5, 15,     20, 10,   67,  BOEdgeType_ForwardSlashed},
+        { 5, 15,     20, 10,   49,  BOEdgeType_BackwardSlashed_Elongated_Horizontal},
+        { 5, 15,     20, 10,   67,  BOEdgeType_ForwardSlashed_Elongated_Horizontal},
 
-        { 5, 5,     10, 20,   18,  BOEdgeType_BackwardSlashed},
-        { 5, 5,     10, 20,   27,  BOEdgeType_ForwardSlashed},
+        { 5, 5,     10, 20,   18,  BOEdgeType_BackwardSlashed_Elongated_Vertical},
+        { 5, 5,     10, 20,   27,  BOEdgeType_ForwardSlashed_Elongated_Vertical},
 		
-        { 15, 5,     10, 20,   29,  BOEdgeType_BackwardSlashed},
-        { 15, 5,     10, 20,   38,  BOEdgeType_ForwardSlashed},
+        { 15, 5,     10, 20,   29,  BOEdgeType_BackwardSlashed_Elongated_Vertical},
+        { 15, 5,     10, 20,   38,  BOEdgeType_ForwardSlashed_Elongated_Vertical},
 
      };
+
+
+
+#if 0
+//works but too small
+BOImageTablePosition kNodesTablePositions[kTotalNodeCells] =
+     {
+     /* coords      span    name    edgeType*/
+	 //row 1
+        { 3, 3 ,    4, 4,    1,   BOEdgeType_NotEdge},
+        {13, 3 ,    4, 4,    2,   BOEdgeType_NotEdge},
+        {23, 3 ,    4, 4,    3,   BOEdgeType_NotEdge},
+		
+	//row 2
+        { 3, 13,    4, 4,    4,   BOEdgeType_NotEdge},
+        {13, 13,    4, 4,    5,   BOEdgeType_NotEdge},
+        {23, 13,    4, 4,    6,   BOEdgeType_NotEdge},
+		
+	//row 3
+        { 3, 23,    4, 4,    7,   BOEdgeType_NotEdge},
+        {13, 23,    4, 4,    8,   BOEdgeType_NotEdge},
+        {23, 23,    4, 4,    9,   BOEdgeType_NotEdge},
+     };
+#endif
 
 
 #elif __USE_2x2_MATRIX__
