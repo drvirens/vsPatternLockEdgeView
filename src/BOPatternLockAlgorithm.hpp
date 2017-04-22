@@ -35,7 +35,10 @@ class BOPatternLockAlgorithm
   void construct();
   BOPatternLockAlgorithm(vector<CNodeContext*>& hotspots, BOPatternLockAlgorithmObserver& observer);
   bool isScanned(CNodeContext* c);
+  bool isEdgeHighighted(CEdgeContext* e);
   void highLightEdge(CNodeContext* prev, CNodeContext* curr);
+  void decorateHighlightedNodes(EHotspotColor color);
+  void decorateHighlightedEdges(EHotspotColor color);
   
  private:
   vector<CNodeContext*>& hotspots_;

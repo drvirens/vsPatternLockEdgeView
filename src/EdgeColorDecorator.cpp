@@ -21,18 +21,8 @@ void EdgeColorDecorator::decorate(EHotspotColor color)
 {TRACE
   IEdgeDecorator::decorate(color);
   DBG("set all image color to be RED here\n");
-  
-  //XXX: use the respective image based on edgeType
-  //IImage& coreimage = core(); //don't decorate this guy
-  
-//  IImage& innerimage = inner();
-//  innerimage.decorate(color);
-//  
-//  IImage& middleimage = middle();
-//  middleimage.decorate(color);
-//  
-//  IImage& outerimage = outer();
-//  outerimage.decorate(color);
+  IImage& edgeimg = edge();
+  edgeimg.decorate(color);
 }
 EdgeColorDecorator::EdgeColorDecorator(IEdgeView& nodeView, BOImageTable& parent, IImage& image)
 : IEdgeDecorator(nodeView, parent, image)

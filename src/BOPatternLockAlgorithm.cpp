@@ -50,6 +50,12 @@ bool BOPatternLockAlgorithm::isPasswordCorrect()
 
 void BOPatternLockAlgorithm::decorate(EHotspotColor color)
 {TRACE
+  decorateHighlightedNodes(color);
+  decorateHighlightedEdges(color);
+}
+
+void BOPatternLockAlgorithm::decorateHighlightedNodes(EHotspotColor color)
+{TRACE
   for (set<CNodeContext*>::iterator it = highlightedNodes_.begin();
       it != highlightedNodes_.end();
       ++it)
@@ -68,7 +74,29 @@ void BOPatternLockAlgorithm::decorate(EHotspotColor color)
     {
       c->ok();
     }
-  }
+  } //end for
+}
+void BOPatternLockAlgorithm::decorateHighlightedEdges(EHotspotColor color)
+{TRACE
+  for (set<CEdgeContext*>::iterator it = highlightedEdges_.begin();
+      it != highlightedEdges_.end();
+      ++it)
+  {
+    CEdgeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (!c) 
+      {
+      break;  
+      }
+    if (color == eRed)
+    {
+      c->error();
+    }
+    else if (color == eGreen)
+    {
+      c->ok();
+    }
+  } //end for
 }
 
 bool BOPatternLockAlgorithm::isScanned(CNodeContext* c)
@@ -76,6 +104,17 @@ bool BOPatternLockAlgorithm::isScanned(CNodeContext* c)
   bool ret = false;
   set<CNodeContext*>::iterator it = highlightedNodes_.find(c); 
   if (it != highlightedNodes_.end())
+  {
+    ret = true;
+  }
+  return ret;
+}
+
+bool BOPatternLockAlgorithm::isEdgeHighighted(CEdgeContext* e)
+{TRACE
+  bool ret = false;
+  set<CEdgeContext*>::iterator it = highlightedEdges_.find(e); 
+  if (it != highlightedEdges_.end())
   {
     ret = true;
   }
@@ -164,7 +203,11 @@ void BOPatternLockAlgorithm::highLightEdge(CNodeContext* prev, CNodeContext* cur
   BO_ASSERT(edge != 0);
   if (edge)
   {
-    edge->show();
+    if (!isEdgeHighighted(edge)) 
+    {
+      edge->show();
+      highlightedEdges_.insert(edge);
+    }
   }
   else
   {
