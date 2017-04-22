@@ -10,6 +10,7 @@
 #define PatternLockViewController_hpp
 
 #include <vector>
+
 #include "IPatternLockViewController.hpp"
 #include "BOPatternLockAlgorithmObserver.hpp"
 #include "OS.h"
@@ -26,6 +27,12 @@ class BOPatternLockAlgorithm;
 static void didReceiveMouseDownEvent(void* eventInfo, void* data);
 static void didReceiveMouseUpEvent(void* eventInfo, void* data);
 static void didReceiveMouseMoveEvent(void* event_info, void* data);
+
+enum EPatternLockMode
+{
+  EPatternLockMode_Setup, //setting it up
+  EPatternLockMode_ScreenLock //showing it on screen lock
+};
 
 class PatternLockViewController : public IPatternLockViewController,
   public BOPatternLockAlgorithmObserver
@@ -80,6 +87,7 @@ class PatternLockViewController : public IPatternLockViewController,
   Evas_Coord_Point prev;
   Evas_Coord_Point curr;
   
+  EPatternLockMode mode_;
   
   const BOPatternbLockConfig& config_;
   

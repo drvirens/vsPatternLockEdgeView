@@ -11,7 +11,10 @@
 
 #include <vector>
 #include <set>
+#include <string>
+#include <sstream>
 #include "OS.h"
+#include "NodeColor.hpp"
 
 using namespace std;
 
@@ -25,6 +28,8 @@ class BOPatternLockAlgorithm
   static BOPatternLockAlgorithm* newL(vector<CNodeContext*>& hotspots, BOPatternLockAlgorithmObserver& observer);
   virtual ~BOPatternLockAlgorithm();
   void scan(int x, int y, Evas_Event_Mouse_Move* mouse);
+  bool isPasswordCorrect();
+  void decorate(EHotspotColor color);
   
  private:
   void construct();
@@ -38,6 +43,8 @@ class BOPatternLockAlgorithm
   set<CEdgeContext*> highlightedEdges_;
   CNodeContext* prev_;
   CNodeContext* curr_;
+  stringstream enteredPassword_;
+  string expectedPassword_;
   BOPatternLockAlgorithmObserver& observer_;
 };
 

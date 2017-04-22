@@ -12,23 +12,9 @@
 class BOPatternbLockConfig
 {
  public:
-  int columns() const { return columns_; }
-  int rows() const { return rows_; }
-  int columnspan() const { return columnspan_; }
-  int rowspan() const { return rowspan_; }
-  
-  BOPatternbLockConfig();
-  
- public:
-  static const int kTotalRows;
-  static const int kTotalColumns;
-  static const int kTotalCells;
+  BOPatternbLockConfig() {}
   
  private:
-  int columns_;
-  int rows_;
-  int columnspan_;
-  int rowspan_;
 };
 
 #endif /* BOPatternbLockConfig_hpp */

@@ -36,8 +36,41 @@ BOPatternLockAlgorithm::BOPatternLockAlgorithm(vector<CNodeContext*>& hotspots, 
 , prev_(0)
 , curr_(0)
 , observer_(observer)
+, enteredPassword_("")
+, expectedPassword_("1234")
 {TRACE
 }
+
+bool BOPatternLockAlgorithm::isPasswordCorrect()
+{TRACE
+  string p = enteredPassword_.str();
+  bool ret = (p == expectedPassword_);
+  return ret;
+}
+
+void BOPatternLockAlgorithm::decorate(EHotspotColor color)
+{TRACE
+  for (set<CNodeContext*>::iterator it = highlightedNodes_.begin();
+      it != highlightedNodes_.end();
+      ++it)
+  {
+    CNodeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (!c) 
+      {
+      break;  
+      }
+    if (color == eRed)
+    {
+      c->error();
+    }
+    else if (color == eGreen)
+    {
+      c->ok();
+    }
+  }
+}
+
 bool BOPatternLockAlgorithm::isScanned(CNodeContext* c)
 {TRACE
   bool ret = false;
@@ -76,6 +109,11 @@ void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
     
     c->show();
     highlightedNodes_.insert(c);
+    int index = c->index();
+    enteredPassword_ << index;
+    string p = enteredPassword_.str();
+    DBG("enteredPassword_ is [%s], index is [%d]\n", p.c_str(), index);
+    
     observer_.didEnterInsideHotspot(mouse, *c);
 
     prev_ = curr_;
@@ -91,7 +129,7 @@ void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
 }
 
 static bool isValidNodeNumber(int nodeNumber)
-{
+{TRACE
   bool ret = ((nodeNumber >= 1) && (nodeNumber <= 9)); 
   return ret;
 }

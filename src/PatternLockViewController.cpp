@@ -51,6 +51,7 @@ PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig&
 , algorithm_(0)
 , hashotspots_(false)
 , mouse_pressed(false)
+, mode_(EPatternLockMode_ScreenLock)
 , config_(config)
 {TRACE
 }
@@ -90,6 +91,24 @@ void PatternLockViewController::handleMouseDown(Evas_Event_Mouse_Down* mouse)
 void PatternLockViewController::handleMouseUp(Evas_Event_Mouse_Up* mouse)
 {TRACE
   _start_new_line_draw();
+  
+  if (EPatternLockMode_ScreenLock == mode_)
+  {
+    bool passwordcorrect = algorithm_->isPasswordCorrect();
+    EHotspotColor color;
+    if (passwordcorrect)
+    {
+      DBG("password is correct");
+      color = eGreen;
+    }
+    else 
+    {
+      //XXX: timer here
+      DBG("password is not correct: start a timer and reset all shit at end of timer");
+      color = eRed;
+    }
+    algorithm_->decorate(color);
+  }
 }
 
 void PatternLockViewController::handleMouseMove(Evas_Event_Mouse_Move* mouse)
@@ -103,7 +122,8 @@ void PatternLockViewController::handleMouseMove(Evas_Event_Mouse_Move* mouse)
   prev.x = curr.x;
   prev.y = curr.y;
 
-  if (curr.y < _get_draw_area_top()) {
+  if (curr.y < _get_draw_area_top()) 
+  {
     DBG("======>> FOUL this area is not visible stupid ass motherfucker");
     return;
   }
