@@ -85,9 +85,9 @@ void BOPatternLockAlgorithm::decorateHighlightedEdges(EHotspotColor color)
     CEdgeContext* c = *it;
     BO_ASSERT(c != NULL);
     if (!c) 
-      {
+    {
       break;  
-      }
+    }
     if (color == eRed)
     {
       c->error();

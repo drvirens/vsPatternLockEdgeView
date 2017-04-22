@@ -8,125 +8,76 @@
 
 #include "PatterLockLayout.hpp"
 
-#define __USE_2x2_MATRIX__ 1
+//#define __USE_2x2_MATRIX__ 1
+#define __USE_3x3_MATRIX__ 1
+
 
 #if defined __USE_3x3_MATRIX__
 
-static const int kBackgroundCell = 1; 
+
+BOImageTablePosition kBackgroundTablePosition[1] =
+{
+    { 0, 0,     30, 30,   -1},
+};
+
+
 const int kTotalNodeCells = 9; 
 
 const int kTotalEdgeCells = 20;
-const int kTotalEdgeCells_Vertical = 6;
-const int kTotalEdgeCells_Horizontal = 6;
-const int kTotalEdgeCells_ForwardSlashed = 4;
-const int kTotalEdgeCells_BackwardSlashed = 4;
 
-const int kTotalTableCells = kTotalNodeCells + kBackgroundCell;
-const int kBackgroundCellIndex = kTotalTableCells - 1;
-
-
-BOImageTablePosition kNodesTablePositions[kTotalTableCells] =
+BOImageTablePosition kNodesTablePositions[kTotalNodeCells] =
      {
-        //row 1
-        {2, 2, 1, 1, 1}, 
-        {5, 2, 1, 1, 2},
-        {8, 2, 1, 1, 3},
-        //row 2
-        {2, 5, 1, 1, 4},
-        {5, 5, 1, 1, 5},
-        {8, 5, 1, 1, 6},
-        //row 3
-        {2, 8, 1, 1, 7},
-        {5, 8, 1, 1, 8},
-        {8, 8, 1, 1, 9},
-        //bg
-        {0, 0, 13, 13, 10} //always kBackgroundCellIndex
+     /* coords      span    name    edgeType*/
+	 //row 1
+        { 3, 3 ,    4, 4,    1,   BOEdgeType_NotEdge},
+        {13, 3 ,    4, 4,    2,   BOEdgeType_NotEdge},
+        {23, 3 ,    4, 4,    3,   BOEdgeType_NotEdge},
+		
+	//row 2
+        { 3, 13,    4, 4,    4,   BOEdgeType_NotEdge},
+        {13, 13,    4, 4,    5,   BOEdgeType_NotEdge},
+        {23, 13,    4, 4,    6,   BOEdgeType_NotEdge},
+		
+	//row 3
+        { 3, 23,    4, 4,    7,   BOEdgeType_NotEdge},
+        {13, 23,    4, 4,    8,   BOEdgeType_NotEdge},
+        {23, 23,    4, 4,    9,   BOEdgeType_NotEdge},
      };
 
 BOImageTablePosition kEdgesTablePositions[kTotalEdgeCells] =
      {
-        //
-        //vertical edges: 6
-        // 
-        /*
-             1 2 3
-             4 5 6
-             6 7 8
-        */
-        //
-        //   1 - 2 - 3
-        //   
-        //   4 - 5 - 6
-        //
-        //   7 - 8 - 9
-        // 
-        {3, 3, 4, 1, 12},
-        {6, 3, 4, 1, 23},
-        {3, 6, 4, 1, 45},
-        {6, 6, 4, 1, 56},
-        {3, 9, 4, 1, 78},
-        {6, 9, 4, 1, 89},
-        //
-        //horizontal edges: 6
-        //
-        /*
-             1 2 3
-             4 5 6
-             6 7 8
-        */
-        //
-        //   1  2  3
-        //   |  |  |
-        //   4  5  6
-        //   |  |  |
-        //   7  8  9
-        // 
-        {3, 3, 1, 4, 14},
-        {6, 3, 1, 4, 25},
-        {9, 3, 1, 4, 36},
-        {3, 6, 1, 4, 47},
-        {6, 6, 1, 4, 58},
-        {9, 6, 1, 4, 69},
-        //
-        //diagonal edges - top-left to bottom-right aka forward slashed : 4
-        //
-        /*
-             1 2 3
-             4 5 6
-             6 7 8
-        */
-        //
-        //   1  2  3
-        //     \  \
-        //   4  5  6
-        //     \  \ 
-        //   7  8  9
-        //
-        {3, 3, 4, 4, 15},
-        {6, 3, 4, 4, 26},
-        {3, 6, 4, 4, 48},
-        {6, 6, 4, 4, 59},
-        //
-        //diagonal edges - top-right to bottom-left aka backslashed : 4
-        //
-        /*
-             1 2 3
-             4 5 6
-             6 7 8
-        */
-        //
-        //   1  2  3
-        //     /  /
-        //   4  5  6
-        //     /  / 
-        //   7  8  9
-        //
-        {3, 3, 4, 4, 24},
-        {6, 3, 4, 4, 35},
-        {3, 6, 4, 4, 57},
-        {6, 6, 4, 4, 68},
+     /* coords      span    name */
+        { 5, 4 ,    10, 2,    12,  BOEdgeType_Horizontal},
+        { 15, 4,    10, 2,    23,  BOEdgeType_Horizontal},
+		
+        { 4, 5 ,    2, 10,    14,  BOEdgeType_Vertical},
+        { 14, 5 ,   2, 10,    25,  BOEdgeType_Vertical},
+        { 24, 5 ,   2, 10,    36,  BOEdgeType_Vertical},
+		
+        { 5, 14,    10, 2,    45,  BOEdgeType_Horizontal},
+        { 15, 14,   10, 2,    56,  BOEdgeType_Horizontal},
+            
+        { 4, 15 ,    2, 10,    47,  BOEdgeType_Vertical},
+        { 14, 15 ,   2, 10,    58,  BOEdgeType_Vertical},
+        { 24, 15 ,   2, 10,    69,  BOEdgeType_Vertical},
+		
+        { 5, 24,     10, 2,    78,  BOEdgeType_Horizontal},
+        { 15, 24,    10, 2,    89,  BOEdgeType_Horizontal},
+				
+        { 5, 5,     10, 10,   15,  BOEdgeType_BackwardSlashed},
+        { 5, 5,     10, 10,   24,  BOEdgeType_ForwardSlashed},
+		
+        { 15, 5,     10, 10,   26,  BOEdgeType_BackwardSlashed},
+        { 15, 5,     10, 10,   35,  BOEdgeType_ForwardSlashed},
+		
+        { 5, 15,     10, 10,   48,  BOEdgeType_BackwardSlashed},
+        { 5, 15,     10, 10,   57,  BOEdgeType_ForwardSlashed},
+
+        { 15, 15,     10, 10,   59,  BOEdgeType_BackwardSlashed},
+        { 15, 15,     10, 10,   68,  BOEdgeType_ForwardSlashed},
 
      };
+
 
 #elif __USE_2x2_MATRIX__
 
@@ -140,10 +91,6 @@ BOImageTablePosition kBackgroundTablePosition[1] =
 const int kTotalNodeCells = 4; 
 
 const int kTotalEdgeCells = 6;
-const int kTotalEdgeCells_Vertical = 2;
-const int kTotalEdgeCells_Horizontal = 2;
-const int kTotalEdgeCells_ForwardSlashed = 1;
-const int kTotalEdgeCells_BackwardSlashed = 1;
 
 BOImageTablePosition kNodesTablePositions[kTotalNodeCells] =
      {
