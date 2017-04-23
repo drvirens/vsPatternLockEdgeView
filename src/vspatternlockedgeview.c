@@ -3,6 +3,7 @@
 
 #include <tizen.h>
 #include "vspatternlockedgeview.h"
+#include "BOLockWindowWrapper.h"
 #include "trace.hpp"
 #include "tests.hpp"
 
@@ -12,26 +13,23 @@ typedef struct appdata {
 	Evas_Object *bg;
 } appdata_s;
 
-static void
-win_delete_request_cb(void *data, Evas_Object *obj, void *event_info)
-{
+static void win_delete_request_cb(void *data, Evas_Object *obj, void *event_info) {
 	ui_app_exit();
 }
 
-static void
-win_back_cb(void *data, Evas_Object *obj, void *event_info)
-{
+static void win_back_cb(void *data, Evas_Object *obj, void *event_info) {
 	appdata_s *ad = data;
 	/* Let window go to hide state. */
 	elm_win_lower(ad->win);
 }
 
-static void
-create_base_gui(appdata_s *ad)
+static void create_base_gui(appdata_s *ad)
 {
 	/* Window */
-	ad->win = elm_win_util_standard_add(PACKAGE, PACKAGE);
-	elm_win_autodel_set(ad->win, EINA_TRUE);
+//	ad->win = elm_win_util_standard_add(PACKAGE, PACKAGE);
+//	elm_win_autodel_set(ad->win, EINA_TRUE);
+
+  ad->win = wrapper_CreateLockWindow();
 
 //	if (elm_win_wm_rotation_supported_get(ad->win)) {
 //		int rots[4] = { 0, 90, 180, 270 };
@@ -41,15 +39,15 @@ create_base_gui(appdata_s *ad)
 	evas_object_smart_callback_add(ad->win, "delete,request", win_delete_request_cb, NULL);
 	eext_object_event_callback_add(ad->win, EEXT_CALLBACK_BACK, win_back_cb, ad);
 
-
-	//window-background+
-	ad->bg = elm_bg_add(ad->win);
-	  evas_object_size_hint_weight_set(ad->bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
-	  elm_win_resize_object_add(ad->win, ad->bg);
-	  //elm_bg_color_set(ad->bg, 0x00, 0xff, 0x00);
-	  elm_bg_color_set(ad->bg, 0x00, 0x00, 0x00);
-	  evas_object_show(ad->bg);
-	  //window-background-
+//
+//	//window-background+
+//	ad->bg = elm_bg_add(ad->win);
+//	  evas_object_size_hint_weight_set(ad->bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+//	  elm_win_resize_object_add(ad->win, ad->bg);
+//	  //elm_bg_color_set(ad->bg, 0x00, 0xff, 0x00);
+//	  elm_bg_color_set(ad->bg, 0x00, 0x00, 0x00);
+//	  evas_object_show(ad->bg);
+//	  //window-background-
 
 
 

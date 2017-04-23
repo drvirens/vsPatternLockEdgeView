@@ -1,6 +1,8 @@
 #delete
 #add
+shared/.DS_Store
 #modify
 author-signature.xml
 signature1.xml
+bin/vspatternlockedgeview
 tizen-manifest.xml
