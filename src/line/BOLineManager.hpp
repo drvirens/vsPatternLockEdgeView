@@ -30,12 +30,12 @@ class BOLineManager
   
  private:
   Evas* evas;
-  Evas_Object* line_new_; //viren - represent one line
+  Evas_Object* line_new_; 
   vector<Evas_Object*> objects;
   vector<Evas_Object*> lines_;
-  //int win_layer;
   void* current_object;
   Evas_Object* parent_;
+  bool showLastLineOnly_;
 };
 
 #endif /* BOLineManager_hpp */

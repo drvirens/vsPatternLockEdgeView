@@ -12,7 +12,7 @@
 #include <string>
 using namespace std;
 
-#define DEBUG_TABLE_BACKGROUND 1
+//#define DEBUG_TABLE_BACKGROUND 1
 
 class BOBackgroundSpec
 {

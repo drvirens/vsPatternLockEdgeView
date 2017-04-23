@@ -9,7 +9,7 @@
 typedef struct appdata {
 	Evas_Object *win;
 	Evas_Object *conform;
-	Evas_Object *label;
+	Evas_Object *bg;
 } appdata_s;
 
 static void
@@ -33,13 +33,24 @@ create_base_gui(appdata_s *ad)
 	ad->win = elm_win_util_standard_add(PACKAGE, PACKAGE);
 	elm_win_autodel_set(ad->win, EINA_TRUE);
 
-	if (elm_win_wm_rotation_supported_get(ad->win)) {
-		int rots[4] = { 0, 90, 180, 270 };
-		elm_win_wm_rotation_available_rotations_set(ad->win, (const int *)(&rots), 4);
-	}
+//	if (elm_win_wm_rotation_supported_get(ad->win)) {
+//		int rots[4] = { 0, 90, 180, 270 };
+//		elm_win_wm_rotation_available_rotations_set(ad->win, (const int *)(&rots), 4);
+//	}
 
 	evas_object_smart_callback_add(ad->win, "delete,request", win_delete_request_cb, NULL);
 	eext_object_event_callback_add(ad->win, EEXT_CALLBACK_BACK, win_back_cb, ad);
+
+
+	//window-background+
+	ad->bg = elm_bg_add(ad->win);
+	  evas_object_size_hint_weight_set(ad->bg, EVAS_HINT_EXPAND, EVAS_HINT_EXPAND);
+	  elm_win_resize_object_add(ad->win, ad->bg);
+	  //elm_bg_color_set(ad->bg, 0x00, 0xff, 0x00);
+	  elm_bg_color_set(ad->bg, 0x00, 0x00, 0x00);
+	  evas_object_show(ad->bg);
+	  //window-background-
+
 
 
 	Evas_Object* window = ad->win;
