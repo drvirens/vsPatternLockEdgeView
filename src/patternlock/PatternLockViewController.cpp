@@ -29,6 +29,12 @@ void PatternLockViewController::construct()
   }
   attachEventHandlersToTable();
 }
+void PatternLockViewController::createHotspots()
+{TRACE
+  vector<CNodeContext*>& hotspts = patternlockview_->createHotspots();
+  algorithm_ = BOPatternLockAlgorithm::newL(hotspts, *this);
+}
+
 PatternLockViewController* PatternLockViewController::newL(const BOPatternbLockConfig& config, Evas_Object* parent)
 {TRACE
   PatternLockViewController* obj = new PatternLockViewController(config, parent);
@@ -42,6 +48,7 @@ PatternLockViewController::~PatternLockViewController()
 {TRACE
   delete patternlockview_; patternlockview_ = 0;
   delete linemgr_; patternlockview_ = 0;
+  delete algorithm_; algorithm_ = 0;
   parent_ = NULL;
 }
 PatternLockViewController::PatternLockViewController(const BOPatternbLockConfig& config, Evas_Object* parent)
@@ -142,33 +149,28 @@ void PatternLockViewController::handleMouseMove(Evas_Event_Mouse_Move* mouse)
   else
     curr.y = mouse->cur.canvas.y;
 
-{
-  int lineX2 = 0;
-  int lineY2 = 0;
-  
-  _update_line_item(lineX2, lineY2);
-  
-  int scanPointX = lineX2;
-  int scanPointY = lineY2;
-  
-  if (scanPointX == 0)
   {
-    scanPointX = curr.x;
+    int lineX1 = 0;
+    int lineY1 = 0;
+    int lineX2 = 0;
+    int lineY2 = 0;
+    
+    _update_line_item(lineX1, lineY1, lineX2, lineY2);
+    
+    bool intersectsrect = algorithm_->checkLineRectIntersection(lineX1, lineY1, lineX2, lineY2, mouse);
+    if (intersectsrect)
+    {
+      DBG("line segment did intersect some rectangle that was not highlighted");
+    }
+    
+    algorithm_->scan(curr.x , curr.y, mouse);
   }
-  if (scanPointY == 0)
-  {
-    scanPointY = curr.y;
-  }
-
-  //algorithm_->scan(scanPointX , scanPointY, mouse);
-  
-  
-  algorithm_->scan(curr.x , curr.y, mouse);
-}
 
 }
 
-void PatternLockViewController::_update_line_item(int& lineX2, int& lineY2)
+
+
+void PatternLockViewController::_update_line_item(int& lineX1, int& lineY1, int& lineX2, int& lineY2)
 {TRACE
   int x1 = 0;
   int y1 = 0;
@@ -197,8 +199,11 @@ void PatternLockViewController::_update_line_item(int& lineX2, int& lineY2)
     y1 = curr.y;
   }
   
+  lineX1 = x1;
+  lineY1 = y1;
   lineX2 = x2;
   lineY2 = y2;
+  
   linemgr_->drawLine(x1, y1, x2, y2);
 }
 
@@ -295,11 +300,6 @@ void PatternLockViewController::error()
 void PatternLockViewController::ok()
 {TRACE
   patternlockview_->ok();
-}
-void PatternLockViewController::createHotspots()
-{TRACE
-  vector<CNodeContext*>& hotspts = patternlockview_->createHotspots();
-  algorithm_ = BOPatternLockAlgorithm::newL(hotspts, *this);
 }
 void PatternLockViewController::didEnterInsideHotspot(Evas_Event_Mouse_Move* mouse, CNodeContext& nodeContext)
 {TRACE

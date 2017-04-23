@@ -35,9 +35,9 @@ BOPatternLockAlgorithm::BOPatternLockAlgorithm(vector<CNodeContext*>& hotspots, 
 : hotspots_(hotspots)
 , prev_(0)
 , curr_(0)
-, observer_(observer)
 , enteredPassword_("")
 , expectedPassword_("1234")
+, observer_(observer)
 {TRACE
 }
 
@@ -133,6 +133,20 @@ void BOPatternLockAlgorithm::processNode(CNodeContext* c, Evas_Event_Mouse_Move*
   observer_.didEnterInsideHotspot(mouse, *c);
 }
 
+//if line intersects middle node, and middle not is not highlighted already, then highlight middle node
+//and also the edges
+bool BOPatternLockAlgorithm::checkLineRectIntersection(int lineX1, int lineY1, int lineX2, int lineY2, Evas_Event_Mouse_Move* mouse)
+{TRACE
+  bool intersects = true;
+  //XXX: use line clip algorithm here
+  
+  if (intersects)
+  {
+  }
+  
+  return intersects;
+}
+
 void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
 {TRACE
   for (vector<CNodeContext*>::iterator it = hotspots_.begin();
@@ -143,7 +157,7 @@ void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
     BO_ASSERT(c != NULL);
     if (!c) 
       {
-      break;  
+      return;  
       }
       
     if (isScanned(c))
@@ -156,39 +170,36 @@ void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
     {
       continue;
     }
-    
-//    c->show();
-//    highlightedNodes_.insert(c);
-//    int index = c->index();
-//    enteredPassword_ << index;
-//    string p = enteredPassword_.str();
-//    DBG("enteredPassword_ is [%s], index is [%d]\n", p.c_str(), index);
-    
-//    observer_.didEnterInsideHotspot(mouse, *c);
 
     prev_ = curr_;
     curr_ = c;
 
     if (prev_ != curr_)
     {
-      bool highlightedNodesEmpty = highlightedNodes_.empty();
-      if (highlightedNodesEmpty)
-      {
-        processNode(c, mouse);
-        return;
-      }
-      
-      bool edgeExists = highLightEdge(prev_, curr_);
-      if (edgeExists) //some edge was highlighted
-      {
-        processNode(c, mouse);
-        return;
-      } 
+      higlight(c, mouse);
     }
 
-    break;
+//    return;
   } //end for
 }
+
+void BOPatternLockAlgorithm::higlight(CNodeContext* c, Evas_Event_Mouse_Move* mouse)
+{TRACE
+  bool highlightedNodesEmpty = highlightedNodes_.empty();
+  if (highlightedNodesEmpty)
+  {
+    processNode(c, mouse);
+    return;
+  }
+  
+  bool edgeExists = highLightEdge(prev_, curr_);
+  if (edgeExists) //some edge was highlighted
+  {
+    processNode(c, mouse);
+    return;
+  } 
+}
+
 
 static bool isValidNodeNumber(int nodeNumber)
 {TRACE
@@ -240,3 +251,5 @@ bool BOPatternLockAlgorithm::highLightEdge(CNodeContext* prev, CNodeContext* cur
   }
   return false;
 }
+
+

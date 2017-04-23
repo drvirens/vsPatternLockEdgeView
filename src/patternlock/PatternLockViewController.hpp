@@ -72,7 +72,7 @@ class PatternLockViewController : public IPatternLockViewController,
   int _get_draw_area_top();
   BOImageTable& table() const;
   void tableGeometry(int& x, int& y, int& w, int& h);
-  void _update_line_item(int& lineX2, int& lineY2);
+  void _update_line_item(int& lineX1, int& lineY1, int& lineX2, int& lineY2);
   
  private:
   Evas_Object* parent_;

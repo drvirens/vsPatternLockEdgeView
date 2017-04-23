@@ -27,7 +27,10 @@ class BOPatternLockAlgorithm
  public:
   static BOPatternLockAlgorithm* newL(vector<CNodeContext*>& hotspots, BOPatternLockAlgorithmObserver& observer);
   virtual ~BOPatternLockAlgorithm();
+  
   void scan(int x, int y, Evas_Event_Mouse_Move* mouse);
+  bool checkLineRectIntersection(int lineX1, int lineY1, int lineX2, int lineY2, Evas_Event_Mouse_Move* mouse);
+  
   bool isPasswordCorrect();
   void decorate(EHotspotColor color);
   
@@ -40,6 +43,7 @@ class BOPatternLockAlgorithm
   void decorateHighlightedNodes(EHotspotColor color);
   void decorateHighlightedEdges(EHotspotColor color);
   void processNode(CNodeContext* c, Evas_Event_Mouse_Move* mouse);
+  void higlight(CNodeContext* c, Evas_Event_Mouse_Move* mouse);
   
  private:
   vector<CNodeContext*>& hotspots_;
