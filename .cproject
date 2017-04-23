@@ -123,9 +123,7 @@
 									<listOptionValue builtIn="false" value="DEPRECATION_WARNING"/>
 									<listOptionValue builtIn="false" value="DEBUG"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.preprocessor.undef.135581316" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols">
-									<listOptionValue builtIn="false" value="ENABLE_TABLE_BACKGROUND_FOR_DEBUG"/>
-								</option>
+								<option id="gnu.cpp.compiler.option.preprocessor.undef.135581316" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef" valueType="undefDefinedSymbols"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.540817569" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool command="clang" id="org.tizen.nativecore.tool.sbi.gnu.c.compiler.2116616219" name="C Compiler" superClass="org.tizen.nativecore.tool.sbi.gnu.c.compiler">
@@ -219,9 +217,7 @@
 									<listOptionValue builtIn="false" value="__TIZEN__"/>
 									<listOptionValue builtIn="false" value="DEPRECATION_WARNING"/>
 								</option>
-								<option id="gnu.c.compiler.option.preprocessor.undef.symbol.1100607924" name="Undefined symbols (-U)" superClass="gnu.c.compiler.option.preprocessor.undef.symbol" valueType="undefDefinedSymbols">
-									<listOptionValue builtIn="false" value="ENABLE_TABLE_BACKGROUND_FOR_DEBUG"/>
-								</option>
+								<option id="gnu.c.compiler.option.preprocessor.undef.symbol.1100607924" name="Undefined symbols (-U)" superClass="gnu.c.compiler.option.preprocessor.undef.symbol" valueType="undefDefinedSymbols"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1161781311" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="org.tizen.nativeide.tool.sbi.gnu.c.linker.base.1082602685" name="C Linker" superClass="org.tizen.nativeide.tool.sbi.gnu.c.linker.base"/>
@@ -293,7 +289,7 @@
 								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="sbi.gnu.cpp.compiler.option.debugging.level.core.1599856854" name="Debug level" superClass="sbi.gnu.cpp.compiler.option.debugging.level.core" valueType="enumerated"/>
 								<option defaultValue="false" id="sbi.gnu.cpp.compiler.option.misc.pic.core.444376542" name="-fPIC option" superClass="sbi.gnu.cpp.compiler.option.misc.pic.core" valueType="boolean"/>
 								<option id="sbi.gnu.cpp.compiler.option.1792731501" name="Tizen-Target" superClass="sbi.gnu.cpp.compiler.option" valueType="userObjs">
-									<listOptionValue builtIn="false" value="mobile-2.3-emulator.core_llvm37.i386.core.app"/>
+									<listOptionValue builtIn="false" value="mobile-2.3-device.core_llvm37.armel.core.app"/>
 								</option>
 								<option id="sbi.gnu.cpp.compiler.option.frameworks_inc.core.2040114053" name="Tizen-Frameworks-Include-Path" superClass="sbi.gnu.cpp.compiler.option.frameworks_inc.core" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${SBI_SYSROOT}/usr/include/libxml2&quot;"/>
@@ -361,6 +357,7 @@
 									<listOptionValue builtIn="false" value="${RS_COMPILER_MISC}"/>
 									<listOptionValue builtIn="false" value=" -fPIE"/>
 									<listOptionValue builtIn="false" value="--sysroot=&quot;${SBI_SYSROOT}&quot;"/>
+									<listOptionValue builtIn="false" value="-mthumb"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.2074430507" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/inc}&quot;"/>
@@ -382,6 +379,11 @@
 								<option id="sbi.gnu.cpp.compiler.option.frameworks.core.395214637" name="Tizen-Frameworks" superClass="sbi.gnu.cpp.compiler.option.frameworks.core" valueType="userObjs">
 									<listOptionValue builtIn="false" value="Native_API"/>
 								</option>
+								<option id="sbi.gnu.cpp.compiler.option.preprocessor.def.deprecation.405232807" superClass="sbi.gnu.cpp.compiler.option.preprocessor.def.deprecation" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="TIZEN_DEPRECATION"/>
+									<listOptionValue builtIn="false" value="__TIZEN__"/>
+									<listOptionValue builtIn="false" value="DEPRECATION_WARNING"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.419303159" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool command="clang" id="org.tizen.nativecore.tool.sbi.gnu.c.compiler.305882060" name="C Compiler" superClass="org.tizen.nativecore.tool.sbi.gnu.c.compiler">
@@ -389,7 +391,7 @@
 								<option defaultValue="gnu.c.debugging.level.default" id="sbi.gnu.c.compiler.option.debugging.level.core.466464482" name="Debug level" superClass="sbi.gnu.c.compiler.option.debugging.level.core" valueType="enumerated"/>
 								<option defaultValue="false" id="sbi.gnu.c.compiler.option.misc.pic.core.439873457" name="-fPIC option" superClass="sbi.gnu.c.compiler.option.misc.pic.core" valueType="boolean"/>
 								<option id="sbi.gnu.c.compiler.option.802096662" name="Tizen-Target" superClass="sbi.gnu.c.compiler.option" valueType="userObjs">
-									<listOptionValue builtIn="false" value="mobile-2.3-emulator.core_llvm37.i386.core.app"/>
+									<listOptionValue builtIn="false" value="mobile-2.3-device.core_llvm37.armel.core.app"/>
 								</option>
 								<option id="sbi.gnu.c.compiler.option.frameworks_inc.core.872624236" name="Tizen-Frameworks-Include-Path" superClass="sbi.gnu.c.compiler.option.frameworks_inc.core" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${SBI_SYSROOT}/usr/include/libxml2&quot;"/>
@@ -457,6 +459,7 @@
 									<listOptionValue builtIn="false" value="${RS_COMPILER_MISC}"/>
 									<listOptionValue builtIn="false" value=" -fPIE"/>
 									<listOptionValue builtIn="false" value="--sysroot=&quot;${SBI_SYSROOT}&quot;"/>
+									<listOptionValue builtIn="false" value="-mthumb"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.23554022" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/inc}&quot;"/>
@@ -467,6 +470,11 @@
 								</option>
 								<option id="sbi.gnu.c.compiler.option.frameworks.core.267511252" name="Tizen-Frameworks" superClass="sbi.gnu.c.compiler.option.frameworks.core" valueType="userObjs">
 									<listOptionValue builtIn="false" value="Native_API"/>
+								</option>
+								<option id="sbi.gnu.c.compiler.option.preprocessor.def.symbols.deprecation.1068512846" superClass="sbi.gnu.c.compiler.option.preprocessor.def.symbols.deprecation" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="TIZEN_DEPRECATION"/>
+									<listOptionValue builtIn="false" value="__TIZEN__"/>
+									<listOptionValue builtIn="false" value="DEPRECATION_WARNING"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1894714039" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -491,7 +499,7 @@
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
 							</tool>
-							<tool command="i386-linux-gnueabi-as" id="org.tizen.nativeapp.tool.sbi.gnu.assembler.base.1499978302" name="Assembler" superClass="org.tizen.nativeapp.tool.sbi.gnu.assembler.base">
+							<tool command="arm-linux-gnueabi-as" id="org.tizen.nativeapp.tool.sbi.gnu.assembler.base.1499978302" name="Assembler" superClass="org.tizen.nativeapp.tool.sbi.gnu.assembler.base">
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.49655862" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 							<tool id="org.tizen.nativecore.tool.fnmapgen.1955943028" name="C FN-Map Generator" superClass="org.tizen.nativecore.tool.fnmapgen"/>
