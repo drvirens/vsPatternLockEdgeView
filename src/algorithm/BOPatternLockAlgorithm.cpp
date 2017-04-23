@@ -137,13 +137,42 @@ void BOPatternLockAlgorithm::processNode(CNodeContext* c, Evas_Event_Mouse_Move*
 //and also the edges
 bool BOPatternLockAlgorithm::checkLineRectIntersection(int lineX1, int lineY1, int lineX2, int lineY2, Evas_Event_Mouse_Move* mouse)
 {TRACE
-  bool intersects = true;
+  bool intersects = false;
   //XXX: use line clip algorithm here
   
-  if (intersects)
+  for (vector<CNodeContext*>::iterator it = hotspots_.begin();
+      it != hotspots_.end();
+      ++it) 
   {
-  }
-  
+    CNodeContext* c = *it;
+    BO_ASSERT(c != NULL);
+    if (!c) 
+      {
+      return intersects;  
+      }
+      
+    if (isScanned(c))
+    {
+      continue;
+    }
+    
+    bool lineIntersectsHotspot = c->hotspot().intersects(lineX1, lineY1, lineX2, lineY2);
+    if (!lineIntersectsHotspot)
+    {
+      continue;
+    }
+
+    prev_ = curr_;
+    curr_ = c;
+
+    if (prev_ != curr_)
+    {
+      higlight(c, mouse);
+    }
+
+    //return;
+  } //end for
+
   return intersects;
 }
 
@@ -179,7 +208,7 @@ void BOPatternLockAlgorithm::scan(int x, int y, Evas_Event_Mouse_Move* mouse)
       higlight(c, mouse);
     }
 
-//    return;
+    return;
   } //end for
 }
 

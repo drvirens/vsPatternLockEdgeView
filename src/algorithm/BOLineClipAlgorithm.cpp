@@ -42,8 +42,8 @@ float mini(float arr[],int n)
     return m;
 }
 
-void liang_barsky_clipper(float xmin,float ymin, float xmax, float ymax, float x1,float y1, float x2, float y2)
-{
+bool liang_barsky_clipper(float xmin,float ymin, float xmax, float ymax, float x1,float y1, float x2, float y2)
+{TRACE
 
     // defining variables
     float p1 = -(x2-x1);
@@ -66,7 +66,7 @@ void liang_barsky_clipper(float xmin,float ymin, float xmax, float ymax, float x
     if((p1==0 && q1 < 0) || (p3 ==0 && q3 < 0))
     {
             DBG("Line is Parallel to clipping window!");
-            return;
+            return false;
 
     }
     if(p1!=0)
@@ -121,6 +121,6 @@ void liang_barsky_clipper(float xmin,float ymin, float xmax, float ymax, float x
 //    line(x1,467 - y1,xn1,467 - yn1);
 //    line(x2,467 - y2,xn2,467 - yn2);
 
-
+  return true;
 
 }

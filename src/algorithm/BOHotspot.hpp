@@ -25,10 +25,16 @@ class BOHotspot
   int center_x;
   int center_y;
   
+  float xmin_;
+  float ymin_;
+  float xmax_;
+  float ymax_;
+  
  public:
   BOHotspot();
   void computeCenterPoint();
   bool lies(int x, int y); //does this point lies in this hotspot or what?
+  bool intersects(int lineX1, int lineY1, int lineX2, int lineY2);
 };
 
 #endif /* BOHotspot_hpp */

@@ -157,7 +157,8 @@ void PatternLockViewController::handleMouseMove(Evas_Event_Mouse_Move* mouse)
     
     _update_line_item(lineX1, lineY1, lineX2, lineY2);
     
-    bool intersectsrect = algorithm_->checkLineRectIntersection(lineX1, lineY1, lineX2, lineY2, mouse);
+    bool intersectsrect = false;
+    //intersectsrect = algorithm_->checkLineRectIntersection(lineX1, lineY1, lineX2, lineY2, mouse);
     if (intersectsrect)
     {
       DBG("line segment did intersect some rectangle that was not highlighted");
