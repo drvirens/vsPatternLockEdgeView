@@ -14,6 +14,13 @@
 #include "bo_clean_tizen_window_always_top.hpp"
 #include "trace.hpp"
 
+
+
+//below is used for actual screen lock app that should get launched by service when display on/off occurs monitored via dbus
+//#define USE_LOCK_SCREEN_ALWAYS_ON_TOP_WINDOW 1
+
+ 
+
 extern Evas_Object* __tizen_lock_window_create(void) 
 {TRACE
   //int x = 0, y = 0, w = 0, h = 0;
@@ -21,6 +28,19 @@ extern Evas_Object* __tizen_lock_window_create(void)
   Evas_Object* win = NULL;
 
 #if defined __TIZEN__
+
+#if !defined USE_LOCK_SCREEN_ALWAYS_ON_TOP_WINDOW
+
+
+#if !defined(PACKAGE)
+#define PACKAGE "org.example.vspatternlockedgeview"
+#endif
+
+	win = elm_win_util_standard_add(PACKAGE, PACKAGE);
+	elm_win_autodel_set(win, EINA_TRUE);
+  
+#else
+
   win = elm_win_add(NULL, "LOCKSCREEN", ELM_WIN_NOTIFICATION);
   //retv_if(!win, NULL);
 
@@ -42,6 +62,8 @@ extern Evas_Object* __tizen_lock_window_create(void)
   elm_win_resize_object_add(win, bg);
   elm_bg_color_set(bg, 0xf4, 0x59, 0x42); //f45942
   evas_object_show(bg);
+#endif
+
 #endif //__TIZEN__
 
   return win;

@@ -10,7 +10,6 @@
 #include "BOLockScreenWindow.hpp"
 #include "trace.hpp"
 
-
 static BOLockScreenWindow* gBOLockScreenWindow = 0;
 
 extern Evas_Object* wrapper_CreateLockWindow(void)
